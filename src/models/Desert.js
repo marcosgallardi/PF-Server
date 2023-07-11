@@ -1,9 +1,9 @@
 const { DataTypes } = require("sequelize");
-const Pedido = require("./Pedido");
+const Orders = require("./Pedido");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Bebida",
+    "Desert",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
         reference: {
-          model: Pedido,
+          model: Orders,
           key: "name",
         },
       },
