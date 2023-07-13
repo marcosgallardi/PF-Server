@@ -1,5 +1,5 @@
 const { DataTypes } = require("sequelize");
-const Orders = require("./Pedido");
+const Order = require("./Orders");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
         reference: {
-          model: Orders,
+          model: Order,
           key: "name",
         },
       },
