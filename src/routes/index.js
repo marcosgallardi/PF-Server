@@ -7,12 +7,14 @@ const orderRouter = require("./orderRouter");
 const drinkRouter = require("./drinkRouter");
 const sideRouter = require("./sideRouter");
 const mainRouter = Router();
+const desert = require("../Handlers/desert");
+const dishes = require("../Handlers/dishes");
 
 mainRouter.use("/orders", orderRouter);
 mainRouter.use("/dish_side", dish_sideRouter);
 mainRouter.use("/users", userRouter);
 mainRouter.use("/side", sideRouter);
 mainRouter.use("/drink", drinkRouter);
-mainRouter.use("/desert", desertRouter);
-mainRouter.use("/dish", dishRouter);
+mainRouter.use("/desert", desert);
+mainRouter.use("/dish", dishes);
 module.exports = mainRouter;
