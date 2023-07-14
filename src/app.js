@@ -3,7 +3,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mainRouter = require("./routes");
-
+const loadplatos = require("./mocks");
 require("./db.js");
 
 const server = express();
@@ -30,5 +30,5 @@ server.use((err, req, res, next) => {
   console.error(err);
   res.status(status).send(message);
 });
-
+// loadplatos();
 module.exports = server;
