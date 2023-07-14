@@ -1,4 +1,4 @@
-const { DataTypes,UUIDV4 } = require("sequelize");
+const { DataTypes, UUIDV4 } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -14,27 +14,35 @@ module.exports = (sequelize) => {
       idUser: {
         type: DataTypes.UUID,
         allowNull: false,
-        references:{
-            model:'Users',
-            key:'id'
-        }
+        references: {
+          model: "Users",
+          key: "id",
+        },
       },
       idDS: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references:{
-            model:'dish_sides',
-            key:'id'
-        }
+        references: {
+          model: "dish_sides",
+          key: "id",
+        },
       },
-      idDrink:{
+      idDrink: {
         type: DataTypes.INTEGER,
-        allowNull:false,
-        references:{
-            model:'Drinks',
-            key:'id'
-        }
-      }
+        allowNull: false,
+        references: {
+          model: "Drinks",
+          key: "id",
+        },
+      },
+      idDesert: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Deserts",
+          key: "id",
+        },
+      },
     },
     {
       timestamps: false,
