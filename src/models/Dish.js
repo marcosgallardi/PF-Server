@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
         values: ["plato principal", "entrada"],
         allowNull: false,
       },
-      subType: {
+      subtype: {
         type: DataTypes.ENUM,
         values: ["pastas", "ensaladas", "carnes", "pescados y mariscos", "sopas", "minutas", "arroz"],
         allowNull: false,
@@ -50,7 +50,7 @@ module.exports = (sequelize) => {
           isNumeric: true,
         },
       },
-      glutenFree: {
+      glutenfree: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
@@ -60,7 +60,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: false,
       },
-      dailySpecial: {
+      dailyspecial: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
