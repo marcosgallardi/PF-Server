@@ -1,5 +1,5 @@
 const { Router } = require("express");
-
+const createDish = require("../Handlers/createDish");
 const dishRouter = Router();
 
 dishRouter.get("/", (req, res) => {
@@ -10,8 +10,6 @@ dishRouter.get("/:id", (req, res) => {
   res.status(200).send("obtengo el dish de id ");
 });
 
-dishRouter.post("/:id", (req, res) => {
-  res.status(200).send("creo dish");
-});
+dishRouter.post("/", createDish);
 
 module.exports = dishRouter;
