@@ -16,15 +16,6 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
-      type: {
-        type: DataTypes.ENUM,
-        values: ["cerveza", "vino", "agua"],
-        allowNull: false,
-      },
-      alcohol: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-      },
       stock: {
         type: DataTypes.INTEGER,
         allowNull: false,

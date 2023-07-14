@@ -24,15 +24,13 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM,
         values: ["plato principal", "entrada"],
         allowNull: false,
-        /* unique: true, */
       },
       subType: {
         type: DataTypes.ENUM,
-        values: ["pastas", "ensaladas","carnes","pescados y mariscos","sopas","minutas","arroz"],
+        values: ["pastas", "ensaladas", "carnes", "pescados y mariscos", "sopas", "minutas", "arroz"],
         allowNull: false,
-        /* unique: true, */
       },
-      //disabled:true ==> borrado lógico, estando en true, el plato NO se muestra 
+      //disabled:true ==> borrado lógico, estando en true, el plato NO se muestra
       disabled: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
@@ -47,10 +45,10 @@ module.exports = (sequelize) => {
       calories: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
-        validate:{
-            notEmpty:true,
-            isNumeric:true
-          }
+        validate: {
+          notEmpty: true,
+          isNumeric: true,
+        },
       },
       glutenFree: {
         type: DataTypes.BOOLEAN,
@@ -68,7 +66,7 @@ module.exports = (sequelize) => {
         defaultValue: false,
       },
       price: {
-        type: DataTypes.DECIMAL(10,2),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
         defaultValue: 1000,
       },
@@ -77,6 +75,4 @@ module.exports = (sequelize) => {
       timestamps: false,
     }
   );
-
 };
-
