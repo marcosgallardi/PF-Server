@@ -1,5 +1,4 @@
 const { DataTypes } = require("sequelize");
-const Orders = require("./Pedido");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -21,7 +20,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM,
         values: ["Salsa Bolognesa", "Pesto", "Estofado", "Salsa Blanca", "Papas Fritas", "Ensalada", "Puré"],
         allowNull: false,
-        unique: true,
+        /* unique: true, */
       },
       available: {
         type: DataTypes.BOOLEAN,

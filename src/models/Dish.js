@@ -19,19 +19,18 @@ module.exports = (sequelize) => {
       description: {
         type: DataTypes.TEXT,
         allowNull: false,
-        unique: true,
       },
       type: {
         type: DataTypes.ENUM,
         values: ["plato principal", "entrada"],
         allowNull: false,
-        unique: true,
+        /* unique: true, */
       },
       subType: {
         type: DataTypes.ENUM,
         values: ["pastas", "ensaladas","carnes","pescados y mariscos","sopas","minutas","arroz"],
         allowNull: false,
-        unique: true,
+        /* unique: true, */
       },
       //disabled:true ==> borrado lógico, estando en true, el plato NO se muestra 
       disabled: {
@@ -50,7 +49,6 @@ module.exports = (sequelize) => {
         defaultValue: 0,
         validate:{
             notEmpty:true,
-            notNull: true,
             isNumeric:true
           }
       },
@@ -79,4 +77,6 @@ module.exports = (sequelize) => {
       timestamps: false,
     }
   );
+
 };
+

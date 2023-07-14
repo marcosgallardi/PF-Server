@@ -1,9 +1,8 @@
 const { DataTypes } = require("sequelize");
-const Orders = require("./Pedido");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "Drinks",
+    "Drink",
     {
       id: {
         type: DataTypes.INTEGER,
@@ -16,22 +15,17 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        reference: {
-          model: Pedido,
-          key: "name",
-        },
       },
       volume: {
         type: DataTypes.ENUM,
         values: ["250ml", "500ml", "1000ml", "750ml", "355ml", "473ml", "1500ml"],
-
         allowNull: false,
       },
       type: {
         type: DataTypes.ENUM,
         values: ["cerveza", "vino", "agua"],
         allowNull: false,
-        unique: true,
+        /* unique: true, */
       },
       alcohol: {
         type: DataTypes.BOOLEAN,
