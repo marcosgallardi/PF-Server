@@ -9,6 +9,7 @@ const sideRouter = require("./sideRouter");
 const mainRouter = Router();
 const desert = require("../Handlers/desert");
 const dishes = require("../Handlers/dishes");
+const createDish = require("../Handlers/createDish");
 
 mainRouter.use("/orders", orderRouter);
 mainRouter.use("/dish_side", dish_sideRouter);
@@ -16,5 +17,5 @@ mainRouter.use("/users", userRouter);
 mainRouter.use("/side", sideRouter);
 mainRouter.use("/drink", drinkRouter);
 mainRouter.use("/desert", desert);
-mainRouter.use("/dish", dishes);
+mainRouter.use("/dish", createDish);
 module.exports = mainRouter;
