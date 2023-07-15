@@ -1,13 +1,13 @@
 const { Router } = require("express");
-const createDish = require("../Handlers/createDish");
-const dishRouter = Router();
 
-dishRouter.get("/", (req, res) => {
-  res.status(200).send("obtengo dishes");
-});
+const dishRouter = Router();
+const createDish = require("../Handlers/createDish");
+const dishes = require("../Handlers/dishes");
+
+dishRouter.get("/", dishes);
 
 dishRouter.get("/:id", (req, res) => {
-  res.status(200).send("obtengo el dish de id ");
+  res.status(200).send(`Obtener el plato con ID ${req.params.id}`);
 });
 
 dishRouter.post("/", createDish);
