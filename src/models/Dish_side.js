@@ -11,14 +11,14 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       dishId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: "Dishes",
           key: "id",
         },
       },
       sideId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         references: {
           model: "Sides",
           key: "id",

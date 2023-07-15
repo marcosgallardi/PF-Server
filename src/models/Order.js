@@ -8,19 +8,14 @@ module.exports = (sequelize) => {
         type: DataTypes.UUID,
         defaultValue: UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
-        allowNull: false,
-        unique: true,
       },
       idPedido: {
         type: DataTypes.UUID,
         defaultValue: UUIDV4,
-        allowNull: false,
         unique:false,
       },
       idUser: {
         type: DataTypes.UUID,
-        allowNull: false,
         references: {
           model: "Users",
           key: "id",
@@ -28,7 +23,6 @@ module.exports = (sequelize) => {
       },
       idDS: {
         type: DataTypes.UUID,
-        allowNull: false,
         references: {
           model: "dish_sides",
           key: "id",
@@ -36,7 +30,6 @@ module.exports = (sequelize) => {
       },
       idDrink: {
         type: DataTypes.UUID,
-        allowNull: false,
         references: {
           model: "Drinks",
           key: "id",
@@ -49,7 +42,6 @@ module.exports = (sequelize) => {
       },
       idDesert: {
         type: DataTypes.UUID,
-        allowNull: false,
         references: {
           model: "Deserts",
           key: "id",
