@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mainRouter = require("./routes");
 const loadplatos = require("./mocks");
+const fileUpload = require('express-fileupload')
 require("./db.js");
 
 const server = express();
@@ -21,6 +22,12 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
+
+//procesamiento de imagenes del front
+server.use(fileUpload({
+  useTempFiles:true,
+  tempFileDir:'./uploads/'
+}));
 
 server.use(mainRouter);
 

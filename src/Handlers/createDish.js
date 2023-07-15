@@ -1,4 +1,6 @@
 const postDish = require("../Controllers/postDish");
+const uploadImage = require('../config/cloudinary');
+const cleaner = require('../config/cleaner');
 
 const createdDish = async (req, res) => {
   const {
@@ -19,7 +21,16 @@ const createdDish = async (req, res) => {
     // if (!name || !description || !releaseDate || !rating) {
     //   return res.status(400).json({ error: "Missing data" });
     // }
+
+    const result = await uploadImage(req.file.image.tempFilePath);
+    const image = result.secure_url;
+
+    if(image) {
+      cleaner()
+    }
+
     const newDish = await postDish(
+      image,
       name,
       description,
       type,

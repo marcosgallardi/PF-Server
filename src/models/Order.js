@@ -5,11 +5,18 @@ module.exports = (sequelize) => {
     "Order",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: UUIDV4,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
         unique: true,
+      },
+      idPedido: {
+        type: DataTypes.UUID,
+        defaultValue: UUIDV4,
+        allowNull: false,
+        unique:false,
       },
       idUser: {
         type: DataTypes.UUID,
@@ -20,7 +27,7 @@ module.exports = (sequelize) => {
         },
       },
       idDS: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
           model: "dish_sides",
@@ -28,15 +35,20 @@ module.exports = (sequelize) => {
         },
       },
       idDrink: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
           model: "Drinks",
           key: "id",
         },
+        //cantidad de bebidas
+      quantity:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+      }
       },
       idDesert: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
           model: "Deserts",
