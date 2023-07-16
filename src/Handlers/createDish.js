@@ -16,16 +16,15 @@ const createdDish = async (req, res) => {
     dailyspecial,
     price,
   } = req.body;
-  image = "";
-  try {
-    if (req.file) {
-      const result = await uploadImage(req.file.image.tempFilePath);
-      image = result.secure_url;
 
+  try {
+    const result = await uploadImage(req.files.image.tempFilePath);
+    const image = result.secure_url;
+    if (req.files) {
       if (image) {
         cleaner();
       }
-    }
+    } else image = null;
     const newDish = await postDish(
       image,
       name,

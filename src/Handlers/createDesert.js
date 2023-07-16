@@ -4,16 +4,15 @@ const cleaner = require("../config/cleaner");
 
 const createDesert = async (req, res) => {
   const { name, stock, price } = req.body;
-  image = "";
-  try {
-    if (req.file) {
-      const result = await uploadImage(req.file.image.tempFilePath);
-      image = result.secure_url;
 
+  try {
+    const result = await uploadImage(req.files.image.tempFilePath);
+    const image = result.secure_url;
+    if (req.files) {
       if (image) {
         cleaner();
       }
-    }
+    } else image = null;
     const newDesert = await postDesert(name, stock, price, image);
 
     return res.status(201).json(newDesert);

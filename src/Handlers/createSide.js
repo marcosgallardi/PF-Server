@@ -7,6 +7,7 @@ const createSide = async (req, res) => {
     // if (!name || !description || !releaseDate || !rating) {
     //   return res.status(400).json({ error: "Missing data" });
     // }
+
     const newSide = await postSide(name, type, available, price);
 
     return res.status(201).json(newSide);
