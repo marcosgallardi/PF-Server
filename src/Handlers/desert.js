@@ -2,7 +2,7 @@ const getAllDeserts = require("../Controllers/getAllDeserts");
 const getByName = require("../Controllers/getByName");
 
 const desert = async (req, res) => {
-  const name = req.query;
+  const { name } = req.query;
   if (name) {
     try {
       const deserts = await getByName(name);

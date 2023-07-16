@@ -1,7 +1,7 @@
 const getAllDrinks = require("../Controllers/getAllDrinks");
 const getByName = require("../Controllers/getByName");
 const drinks = async (req, res) => {
-  const name = req.query;
+  const { name } = req.query;
   if (name) {
     try {
       const drinks = await getByName(name);

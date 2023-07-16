@@ -2,7 +2,7 @@ const getAllDishes = require("../Controllers/getAllDishes");
 const getByName = require("../Controllers/getByName");
 
 const dishes = async (req, res) => {
-  const name = req.query;
+  const { name } = req.query;
   if (name) {
     try {
       const dishes = await getByName(name);
@@ -10,7 +10,7 @@ const dishes = async (req, res) => {
     } catch (error) {
       res.status(200).json({ error: error.message });
     }
-  } else if (name === undefined) {
+  } else {
     try {
       const dishes = await getAllDishes();
       res.status(200).json(dishes);
