@@ -1,15 +1,14 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes,UUIDV4  } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
     "Side",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         primaryKey: true,
-        autoIncrement: true,
+        defaultValue: UUIDV4,
         allowNull: false,
-        unique: true,
       },
       name: {
         type: DataTypes.STRING,
@@ -32,6 +31,7 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 1000,
       },
+      //agregar imagen NO OBLIGATORIA
     },
     {
       timestamps: false,

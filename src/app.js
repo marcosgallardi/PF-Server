@@ -3,7 +3,8 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mainRouter = require("./routes");
-const loadplatos = require("./mocks");
+const fillDb = require("./mocks");
+const fileUpload = require('express-fileupload')
 require("./db.js");
 
 const server = express();
@@ -22,6 +23,12 @@ server.use((req, res, next) => {
   next();
 });
 
+//procesamiento de imagenes del front
+server.use(fileUpload({
+  useTempFiles:true,
+  tempFileDir:'./uploads/'
+}));
+
 server.use(mainRouter);
 
 server.use((err, req, res, next) => {
@@ -30,5 +37,5 @@ server.use((err, req, res, next) => {
   console.error(err);
   res.status(status).send(message);
 });
-// loadplatos();
+//fillDb();
 module.exports = server;

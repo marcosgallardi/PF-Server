@@ -1,4 +1,4 @@
-const { Dish } = require("./db");
+const { Dish,Drink,Desert,User,Side } = require("./db");
 
 const platos = [
   {
@@ -107,8 +107,132 @@ const platos = [
   },
 ];
 
-const loadplatos = async () => {
+const postres = [
+  {
+      name: "tiramisu",
+      stock: 20,
+      price: 2555
+  },
+  {
+      name: "flan con crema",
+      stock: 15,
+      price: 1500
+  },
+  {
+      name: "torta de chocolinas",
+      stock: 220,
+      price: 2555
+  },
+  {
+      name: "helado",
+      stock: 220,
+      price: 2555
+  },
+  {
+      name: "manzana fea",
+      stock: 220,
+      price: 2555
+  },
+  {
+      name: "naranja seca",
+      stock: 220,
+      price: 2555
+  }
+];
+
+const sides =[
+  {
+      name: "papa fritas con chedar",
+      type: "Papas Fritas",
+      available: true,
+      price: 1500
+  },
+  {
+      name: "pure de calabaza",
+      type: "Puré",
+      available: true,
+      price: 2000
+  }
+];
+
+const drinks =[
+  {
+      name: "coca",
+      volume: "250ml",
+      type: "cerveza",
+      alcohol: true,
+      stock: 299,
+      price: 1500
+  },
+  {
+      name: "coca light",
+      volume: "500ml",
+      type: "cerveza",
+      alcohol: false,
+      stock: 15,
+      price: 2000
+  },
+  {
+      name: "coca zero",
+      volume: "500ml",
+      type: "cerveza",
+      alcohol: false,
+      stock: 15,
+      price: 2000
+  },
+  {
+      name: "agua con gas",
+      volume: "500ml",
+      type: "agua",
+      alcohol: false,
+      stock: 15,
+      price: 2000
+  }
+];
+
+const users =[
+  {
+      name: "lenny",
+      lastName: "cabeza",
+      email: "lennycabeza@henry.com",
+      password: "1234",
+      birthDate: "1999-01-01",
+      phoneNumber: "1166887788"
+  },
+  {
+      name: "tato",
+      lastName: "gallardi",
+      email: "tatogallardi@henry.com",
+      password: "1234",
+      birthDate: "1990-12-31",
+      phoneNumber: "+1234567890"
+  },
+  {
+      name: "tato",
+      lastName: "gallardi",
+      email: "lenny@henry.com",
+      password: "1234",
+      birthDate: "1990-12-31",
+      phoneNumber: "+1234567890"
+  },
+  {
+      name: "usuario",
+      lastName: "usuario1",
+      email: "usuario1@henry.com",
+      password: "1234",
+      birthDate: "1990-12-31",
+      phoneNumber: "+1234567890"
+  }
+]
+
+
+
+const fillDb = async () => {
   await Dish.bulkCreate(platos);
+  await Drink.bulkCreate(drinks);
+  await Desert.bulkCreate(postres);
+  await Side.bulkCreate(sides);
+  await User.bulkCreate(users);
 };
 
-module.exports = loadplatos;
+module.exports = fillDb;

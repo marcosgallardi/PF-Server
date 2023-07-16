@@ -1,7 +1,7 @@
 const { Desert } = require("../db");
 const { Op } = require("sequelize");
 
-const postDish = async (name, stock, price) => {
+const postDish = async (name, stock, price,image) => {
   const existingDesert = await Desert.findOne({
     where: {
       name: {
@@ -17,6 +17,7 @@ const postDish = async (name, stock, price) => {
     name,
     stock,
     price,
+    image,
   });
   console.log(newDesert);
   return newDesert;

@@ -12,7 +12,8 @@ const postDish = async (
   glutenfree,
   vegetarian,
   dailyspecial,
-  price
+  price,
+  image
 ) => {
   const existingDish = await Dish.findOne({
     where: {
@@ -37,6 +38,7 @@ const postDish = async (
     vegetarian,
     dailyspecial,
     price,
+    image
   });
   //   if (!name || !description || !releaseDate || !rating || !genres || !platforms) {
   //     throw new Error("Todos los campos son requeridos.");

@@ -1,15 +1,14 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes,UUIDV4  } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
     "Dish",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         primaryKey: true,
-        autoIncrement: true,
+        defaultValue: UUIDV4,
         allowNull: false,
-        unique: true,
       },
       name: {
         type: DataTypes.STRING,
@@ -27,6 +26,7 @@ module.exports = (sequelize) => {
       },
       subtype: {
         type: DataTypes.ENUM,
+        //para revision 2 agregar values como array editable
         values: ["pastas", "ensaladas", "carnes", "pescados y mariscos", "sopas", "minutas", "arroz"],
         allowNull: false,
       },
@@ -70,6 +70,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 1000,
       },
+      image:{
+        type:DataTypes.STRING,
+        allowNull:true,
+      }
     },
     {
       timestamps: false,
