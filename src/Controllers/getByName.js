@@ -3,7 +3,6 @@ const { Op } = require("sequelize");
 
 let paquete=[];
 const getByName = async (name) => {
-    console.log(name)
   const drinks = await Drink.findAll({
     where: {
         name: {
