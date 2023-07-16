@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mainRouter = require("./routes");
 const fillDb = require("./mocks");
-const fileUpload = require('express-fileupload')
+const fileUpload = require("express-fileupload");
 require("./db.js");
 
 const server = express();
@@ -16,7 +16,7 @@ server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
@@ -24,10 +24,12 @@ server.use((req, res, next) => {
 });
 
 //procesamiento de imagenes del front
-server.use(fileUpload({
-  useTempFiles:true,
-  tempFileDir:'./uploads/'
-}));
+server.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./uploads/",
+  })
+);
 
 server.use(mainRouter);
 
