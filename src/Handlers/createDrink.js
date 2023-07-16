@@ -4,16 +4,14 @@ const cleaner = require("../config/cleaner");
 const createDrink = async (req, res) => {
   const { name, volume, type, alcohol, stock, price } = req.body;
 
-  image = "";
   try {
-    if (req.file) {
-      const result = await uploadImage(req.file.image.tempFilePath);
-      image = result.secure_url;
-
+    const result = await uploadImage(req.files.image.tempFilePath);
+    const image = result.secure_url;
+    if (req.files) {
       if (image) {
         cleaner();
       }
-    }
+    } else image = null;
 
     const newDrink = await postDrink(name, volume, type, alcohol, stock, price, image);
 
