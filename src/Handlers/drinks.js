@@ -1,8 +1,8 @@
-const getAlldrinks = require("../Controllers/getAlldrinks");
+const getAllDrinks = require("../Controllers/getAllDrinks");
 
 const drinks = async (req, res) => {
   try {
-    const drinks = await getAlldrinks();
+    const drinks = await getAllDrinks();
     res.status(200).json(drinks);
   } catch (error) {
     res.status(200).json({ error: error.message });
