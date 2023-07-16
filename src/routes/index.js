@@ -11,9 +11,9 @@ const mainRouter = Router();
 
 const dishRouter = require("./dishRouter");
 mainRouter.use("/id", gralRouter);
-mainRouter.use("/orders", orderRouter);
+mainRouter.use("/order", orderRouter);
 mainRouter.use("/dish_side", dish_sideRouter);
-mainRouter.use("/users", userRouter);
+mainRouter.use("/user", userRouter);
 
 mainRouter.use("/side", sideRouter);
 
