@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       subtype: {
         type: DataTypes.ENUM,
         //para revision 2 agregar values como array editable
-        values: ["pastas", "ensaladas", "carnes", "pescados y mariscos", "sopas", "minutas", "arroz"],
+        values: ["pastas", "ensaladas", "carnes", "pescados y mariscos", "sopas", "minutas", "arroz", "sandwich"],
         allowNull: false,
       },
       //disabled:true ==> borrado lógico, estando en true, el plato NO se muestra
