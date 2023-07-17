@@ -1,7 +1,7 @@
 const { Desert } = require("../db");
 const { Op } = require("sequelize");
 
-const postDish = async (name, stock, price,image) => {
+const postDish = async ({ name, stock, price, image }) => {
   const existingDesert = await Desert.findOne({
     where: {
       name: {
@@ -9,7 +9,7 @@ const postDish = async (name, stock, price,image) => {
       },
     },
   });
-
+  console.log("image de controller", image);
   if (existingDesert) {
     throw new Error("El nombre del postre ya existe.");
   }

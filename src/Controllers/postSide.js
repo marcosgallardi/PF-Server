@@ -1,7 +1,7 @@
 const { Side } = require("../db");
 const { Op } = require("sequelize");
 
-const postSide = async (name, type, available, price) => {
+const postSide = async ({ name, type, available, price, image }) => {
   const existingSide = await Side.findOne({
     where: {
       name: {
@@ -18,6 +18,7 @@ const postSide = async (name, type, available, price) => {
     type,
     available,
     price,
+    image,
   });
   //   if (!name || !description || !releaseDate || !rating || !genres || !platforms) {
   //     throw new Error("Todos los campos son requeridos.");

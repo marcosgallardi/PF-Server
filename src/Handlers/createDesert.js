@@ -7,13 +7,15 @@ const createDesert = async (req, res) => {
 
   try {
     const result = await uploadImage(req.files.image.tempFilePath);
-    const image = result.secure_url;
+    const imageURL = result.secure_url;
+    console.log(imageURL);
     if (req.files) {
-      if (image) {
+      if (imageURL) {
         cleaner();
       }
-    } else image = null;
-    const newDesert = await postDesert(name, stock, price, image);
+    } else imageURL = null;
+    const desert = { name, stock, price, image: imageURL };
+    const newDesert = await postDesert(desert);
 
     return res.status(201).json(newDesert);
   } catch (error) {

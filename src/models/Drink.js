@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       },
       type: {
         type: DataTypes.ENUM,
-        values: ["cerveza", "vino", "agua"],
+        values: ["cerveza", "vino", "agua", "gaseosa"],
         allowNull: false,
       },
       alcohol: {

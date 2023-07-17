@@ -1,4 +1,4 @@
-const { DataTypes,UUIDV4  } = require("sequelize");
+const { DataTypes, UUIDV4 } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
       },
       type: {
         type: DataTypes.ENUM,
-        values: ["Salsa Bolognesa", "Pesto", "Estofado", "Salsa Blanca", "Papas Fritas", "Ensalada", "Puré"],
+        values: ["salsa bolognesa", "pesto", "estofado", "salsa blanca", "papas fritas", "ensalada", "pure"],
         allowNull: false,
       },
       available: {
@@ -31,7 +31,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 1000,
       },
-      //agregar imagen NO OBLIGATORIA
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
       timestamps: false,
