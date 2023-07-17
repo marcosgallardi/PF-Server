@@ -19,7 +19,7 @@ const createdDish = async (req, res) => {
 
   try {
     const result = await uploadImage(req.files.image.tempFilePath);
-    const imageURL = result.secure_url;
+    let imageURL = result.secure_url;
 
     if (req.files) {
       if (imageURL) {
