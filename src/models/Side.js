@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
       },
       type: {
         type: DataTypes.ENUM,
-        values: ["salsa bolognesa", "pesto", "estofado", "salsa blanca", "papas fritas", "ensalada", "pure"],
+        values: ["salsa", "acompañamiento"],
         allowNull: false,
       },
       available: {
