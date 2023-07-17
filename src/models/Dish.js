@@ -1,4 +1,4 @@
-const { DataTypes,UUIDV4  } = require("sequelize");
+const { DataTypes, UUIDV4 } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -47,7 +47,6 @@ module.exports = (sequelize) => {
         defaultValue: 0,
         validate: {
           notEmpty: true,
-          isNumeric: true,
         },
       },
       glutenfree: {
@@ -70,10 +69,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 1000,
       },
-      image:{
-        type:DataTypes.STRING,
-        allowNull:true,
-      }
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
     },
     {
       timestamps: false,

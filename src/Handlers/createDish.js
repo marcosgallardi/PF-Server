@@ -8,7 +8,7 @@ const createdDish = async (req, res) => {
     description,
     type,
     subtype,
-    disable,
+    disabled,
     available,
     calories,
     glutenfree,
@@ -19,31 +19,32 @@ const createdDish = async (req, res) => {
 
   try {
     const result = await uploadImage(req.files.image.tempFilePath);
-    const image = result.secure_url;
+    const imageURL = result.secure_url;
+
     if (req.files) {
-      if (image) {
+      if (imageURL) {
         cleaner();
       }
-    } else image = null;
-    const newDish = await postDish(
-      image,
+    } else imageURL = null;
+    const newDish = {
+      image: imageURL,
       name,
       description,
       type,
       subtype,
-      disable,
+      disabled,
       available,
       calories,
       glutenfree,
       vegetarian,
       dailyspecial,
-      price
-    );
+      price,
+    };
+    const newD = await postDish(newDish);
 
-    return res.status(201).json(newDish);
+    return res.status(201).json(newD);
   } catch (error) {
     return res.status(200).json({ error: error.message });
   }
 };
-
 module.exports = createdDish;
