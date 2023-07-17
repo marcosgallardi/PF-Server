@@ -1,20 +1,20 @@
 const { Dish } = require("../db");
 const { Op } = require("sequelize");
 
-const postDish = async (
+const postDish = async ({
   name,
   description,
   type,
   subtype,
-  disable,
+  disabled,
   available,
   calories,
   glutenfree,
   vegetarian,
   dailyspecial,
   price,
-  image
-) => {
+  image,
+}) => {
   const existingDish = await Dish.findOne({
     where: {
       name: {
@@ -22,7 +22,21 @@ const postDish = async (
       },
     },
   });
-
+  console.log(
+    "todo eso",
+    name,
+    description,
+    type,
+    subtype,
+    disabled,
+    available,
+    calories,
+    glutenfree,
+    vegetarian,
+    dailyspecial,
+    price,
+    image
+  );
   if (existingDish) {
     throw new Error("El nombre del plato ya existe.");
   }
@@ -31,15 +45,16 @@ const postDish = async (
     description,
     type,
     subtype,
-    disable,
+    disabled,
     available,
     calories,
     glutenfree,
     vegetarian,
     dailyspecial,
     price,
-    image
+    image,
   });
+
   //   if (!name || !description || !releaseDate || !rating || !genres || !platforms) {
   //     throw new Error("Todos los campos son requeridos.");
   //   }

@@ -14,7 +14,7 @@ const createDrink = async (req, res) => {
     } else image = null;
 
     const newDrink = await postDrink(name, volume, type, alcohol, stock, price, image);
-
+    console.log(newDrink);
     return res.status(201).json(newDrink);
   } catch (error) {
     return res.status(200).json({ error: error.message });
