@@ -3,7 +3,6 @@ const drinks = require("../Handlers/drinks");
 const createDrink = require("../Handlers/createDrink");
 const drinkRouter = Router();
 
-
 /**
  * @swagger
  * components:
@@ -13,7 +12,7 @@ const drinkRouter = Router();
  *      properties:
  *          id:
  *           type: string
- *           format: uuid 
+ *           format: uuid
  *           description: drink id
  *          name:
  *           type: string
@@ -33,7 +32,7 @@ const drinkRouter = Router();
  *          price:
  *           type: integer
  *           description: drink price
- *          image: 
+ *          image:
  *           type: string
  *           description: drink image
  *       required:
@@ -58,7 +57,7 @@ const drinkRouter = Router();
  *  get:
  *    summary: bring drinks by name or all
  *    tags: [Drink]
- *    responses: 
+ *    responses:
  *      200:
  *        description: returns drinks by name or all
  *        content:
@@ -86,7 +85,7 @@ drinkRouter.get("/:id", (req, res) => {
  *        application/json:
  *          schema:
  *            $ref: '#/components/schemas/Drink'
- *    responses: 
+ *    responses:
  *      200:
  *        description: successfully created drink
  */
