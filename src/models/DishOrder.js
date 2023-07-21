@@ -42,9 +42,17 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-    },
+    }, //falta force db para que funcione el multiplicador
     {
       timestamps: true,
+      hooks: {
+        beforeCreate: (dishOrder) => {
+          dishOrder.totalPrice = dishOrder.unitaryPrice * dishOrder.quantity;
+        },
+        beforeUpdate: (dishOrder) => {
+          dishOrder.totalPrice = dishOrder.unitaryPrice * dishOrder.quantity;
+        },
+      },
     }
   );
 };

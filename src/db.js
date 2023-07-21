@@ -62,6 +62,11 @@ const {
 /* Dish.belongsToMany(Side,{ through:'Dish_Side' });
 Side.belongsToMany(Dish,{ through:'Dish_Side' }); */
 CompleteOrder.belongsToMany(DishOrder, { through: "CompleteOrderDishOrders" });
+CompleteOrder.belongsToMany(DishOrder, { through: "CompleteOrder_DishOrder", foreignKey: "orderId" });
+CompleteOrder.belongsToMany(SideOrder, { through: "CompleteOrder_SideOrder", foreignKey: "orderId" });
+CompleteOrder.belongsToMany(DrinkOrder, { through: "CompleteOrder_DrinkOrder", foreignKey: "orderId" });
+CompleteOrder.belongsToMany(DesertOrder, { through: "CompleteOrder_DesertOrder", foreignKey: "orderId" });
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');

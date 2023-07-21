@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         },
       },
       dishid: {
-        type: DataTypes.UUID,
+        type: DataTypes.ARRAY(DataTypes.UUID),
         allowNull: true,
         references: {
           model: "DishOrders",
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
         },
       },
       sideID: {
-        type: DataTypes.UUID,
+        type: DataTypes.ARRAY(DataTypes.UUID),
         allowNull: true,
         references: {
           model: "SideOrders",
@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
         },
       },
       drinkId: {
-        type: DataTypes.UUID,
+        type: DataTypes.ARRAY(DataTypes.UUID),
         allowNull: true,
         references: {
           model: "DrinkOrders",
@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
         },
       },
       desertId: {
-        type: DataTypes.UUID,
+        type: DataTypes.ARRAY(DataTypes.UUID),
         allowNull: false,
         references: {
           model: "DesertOrders",
