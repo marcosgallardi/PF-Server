@@ -1,4 +1,4 @@
-const { DataTypes,UUIDV4  } = require("sequelize");
+const { DataTypes, UUIDV4 } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -19,10 +19,15 @@ module.exports = (sequelize) => {
       },
       sideId: {
         type: DataTypes.UUID,
+        allowNull: true,
         references: {
           model: "Sides",
           key: "id",
         },
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
       },
     },
     {

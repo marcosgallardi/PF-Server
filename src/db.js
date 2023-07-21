@@ -6,14 +6,14 @@ const path = require("path");
 
 const { DB_USER, DB_PASSWORD, DB_HOST, DATABASE_URL } = process.env;
 
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/elfestin`, {
-//   logging: false, // set to console.log to see the raw SQL queries
-//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-// });
-const sequelize = new Sequelize(DATABASE_URL, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/elfestin`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
+// const sequelize = new Sequelize(DATABASE_URL, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DATABASE_URL}/elfestin`, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -38,11 +38,12 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Dish, Drink, Desert, Side, Dish_Side, User, Order } = sequelize.models;
+const { Dish, Drink, Desert, Side, Dish_side, User, Order } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-
+// Dish.belongsToMany(Side, { through: Dish_side, foreignKey: "dishId" });
+// Side.belongsToMany(Dish, { through: Dish_side, foreignKey: "sideId" });
 /* Dish.belongsToMany(Side,{ through:'Dish_Side' });
 Side.belongsToMany(Dish,{ through:'Dish_Side' }); */
 
