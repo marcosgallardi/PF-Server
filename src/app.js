@@ -7,6 +7,27 @@ const fillDb = require("./mocks");
 const fileUpload = require("express-fileupload");
 require("./db.js");
 
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
+const path = require("path")
+
+const swaggerSpec = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title:"Documentacion API Elfestin",
+      version: "1.0.0"
+    },
+    servers:[
+      {
+        url: "https://pf-server-production.up.railway.app"
+      }
+    ]
+  },
+  apis:[`${path.join(__dirname, "./routes/*.js")}`]
+}
+
+
 const server = express();
 
 server.name = "API";
@@ -22,6 +43,10 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
+
+//resApi
+server.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)))
+
 
 //procesamiento de imagenes del front
 server.use(
@@ -39,5 +64,7 @@ server.use((err, req, res, next) => {
   console.error(err);
   res.status(status).send(message);
 });
+
+
 //fillDb();
 module.exports = server;
