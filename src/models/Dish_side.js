@@ -19,10 +19,15 @@ module.exports = (sequelize) => {
       },
       sideId: {
         type: DataTypes.UUID,
+        allowNull: true,
         references: {
           model: "Sides",
           key: "id",
         },
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1,
       },
     },
     {
