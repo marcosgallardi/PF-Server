@@ -66,6 +66,7 @@ const createUser = require("../Handlers/createUser");
 //  *              items:
 //  *                $ref: '#/components/schemas/User'
 //  */
+userRouter.post("/", createUser);
 userRouter.get("/", users);
 
 userRouter.get("/:id", (req, res) => {
@@ -88,6 +89,5 @@ userRouter.get("/:id", (req, res) => {
 //  *      200:
 //  *        description: successfully created User
 //  */
-userRouter.post("/", createUser);
 
 module.exports = userRouter;
