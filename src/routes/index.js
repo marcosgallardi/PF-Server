@@ -10,10 +10,14 @@ const gralRouter = require("./gralRouter");
 const mainRouter = Router();
 
 const dishRouter = require("./dishRouter");
+const mpRouter = require("./mpRouter");
+
 mainRouter.use("/id", gralRouter);
 mainRouter.use("/order", orderRouter);
 mainRouter.use("/dish_side", dish_sideRouter);
 mainRouter.use("/user", userRouter);
+mainRouter.use("/mercadopago", mpRouter);
+
 
 mainRouter.use("/side", sideRouter);
 
