@@ -18,37 +18,22 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
-      dishid: {
-        type: DataTypes.ARRAY(DataTypes.UUID),
+      dishSideId: {
+        type: DataTypes.UUID,
         allowNull: true,
         references: {
-          model: "DishOrders",
+          model: "DishSideOrders",
           key: "id",
         },
       },
-      sideID: {
-        type: DataTypes.ARRAY(DataTypes.UUID),
-        allowNull: true,
-        references: {
-          model: "SideOrders",
-          key: "id",
-        },
-      },
+
       drinkId: {
-        type: DataTypes.ARRAY(DataTypes.UUID),
+        type: DataTypes.ARRAY(DataTypes.UUID), // Tipo de datos ARRAY con UUID
         allowNull: true,
-        references: {
-          model: "DrinkOrders",
-          key: "id",
-        },
       },
       desertId: {
         type: DataTypes.ARRAY(DataTypes.UUID),
         allowNull: false,
-        references: {
-          model: "DesertOrders",
-          key: "id",
-        },
       },
       quantity: {
         type: DataTypes.INTEGER,

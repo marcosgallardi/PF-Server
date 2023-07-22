@@ -18,6 +18,8 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
+      //ver si es dishID
+      //cambiar a dishOrder y Sideorder
       dishid: {
         type: DataTypes.UUID,
         allowNull: true,
