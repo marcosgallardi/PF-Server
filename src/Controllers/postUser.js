@@ -2,7 +2,7 @@ const { User } = require("../db");
 const { Op } = require("sequelize");
 
 //la validacion NO deberia ser con el name, sino con el email
-const postUser = async (name, lastName, email, password, birthDate, phoneNumber) => {
+const postUser = async ({ name, lastName, email, password, birthDate, phoneNumber }) => {
   const existingUser = await User.findOne({
     where: {
       email: {

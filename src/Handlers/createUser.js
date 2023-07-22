@@ -7,7 +7,7 @@ const createUser = async (req, res) => {
     // if (!name || !description || !releaseDate || !rating) {
     //   return res.status(400).json({ error: "Missing data" });
     // }
-    const newUser = await postUser(name, lastName, email, password, birthDate, phoneNumber);
+    const newUser = await postUser({ name, lastName, email, password, birthDate, phoneNumber });
 
     return res.status(201).json(newUser);
   } catch (error) {
