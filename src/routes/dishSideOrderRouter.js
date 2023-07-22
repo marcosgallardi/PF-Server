@@ -2,9 +2,9 @@ const { Router } = require("express");
 
 const dishSideOrderRouter = Router();
 const dishSideOrder = require("../Handlers/dishSideOrder");
-const createDish_side = require("../Handlers/createDish_side");
+const createDishSideOrder = require("../Handlers/createDishSideOrder");
 
 dishSideOrderRouter.get("/", dishSideOrder);
-dishSideOrderRouter.post("/", createDish_side);
+dishSideOrderRouter.post("/", createDishSideOrder);
 
 module.exports = dishSideOrderRouter;

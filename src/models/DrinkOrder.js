@@ -18,6 +18,12 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
+      drinkName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique: false,
+      },
+
       drinkId: {
         type: DataTypes.UUID,
         allowNull: true,
@@ -30,12 +36,12 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      unitaryPrice: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-      },
+      // unitaryPrice: {
+      //   type: DataTypes.FLOAT,
+      //   allowNull: false,
+      // },
       totalPrice: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.DECIMAL,
         allowNull: true,
       },
       image: {
@@ -45,14 +51,14 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: true,
-      hooks: {
-        beforeCreate: (drinkOrder) => {
-          drinkOrder.totalPrice = drinkOrder.unitaryPrice * drinkOrder.quantity;
-        },
-        beforeUpdate: (drinkOrder) => {
-          drinkOrder.totalPrice = drinkOrder.unitaryPrice * drinkOrder.quantity;
-        },
-      },
+      // hooks: {
+      //   beforeCreate: (drinkOrder) => {
+      //     drinkOrder.totalPrice = drinkOrder.unitaryPrice * drinkOrder.quantity;
+      //   },
+      //   beforeUpdate: (drinkOrder) => {
+      //     drinkOrder.totalPrice = drinkOrder.unitaryPrice * drinkOrder.quantity;
+      //   },
+      // },
     }
   );
 };

@@ -12,10 +12,17 @@ module.exports = (sequelize) => {
       },
       userId: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "Users",
           key: "id",
+        },
+        userEmail: {
+          type: DataTypes.STRING,
+          allowNull: true,
+          validators: {
+            isEmail: true,
+          },
         },
       },
       dishSideId: {
@@ -26,22 +33,26 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
+      // dishName: { type: DataTypes.STRING },
+      // sideName: { type: DataTypes.STRING },
 
-      drinkId: {
+      // desertName: { type: DataTypes.STRING },
+
+      drinks: {
         type: DataTypes.ARRAY(DataTypes.UUID), // Tipo de datos ARRAY con UUID
-        allowNull: true,
-      },
-      desertId: {
-        type: DataTypes.ARRAY(DataTypes.UUID),
         allowNull: false,
+      },
+      deserts: {
+        type: DataTypes.ARRAY(DataTypes.UUID),
+        allowNull: true,
       },
       quantity: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       unitaryPrice: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       totalPrice: {
         type: DataTypes.FLOAT,

@@ -1,4 +1,4 @@
-const postDesertOrder = require("../Controllers/postDrinkOrder");
+const postDesertOrder = require("../Controllers/postDesertOrder");
 
 const createDesertOrder = async (req, res) => {
   const { userId, desertId, quantity, unitaryPrice, totalPrice } = req.body;
