@@ -1,10 +1,10 @@
 const postCompleteOrder = require("../Controllers/postCompleteOrder");
 const getByIdOrder = require("../Controllers/getByIdOrders");
 const createCompleteOrder = async (req, res) => {
-  const { drinks, deserts, dishSide, userId } = req.body;
+  const { drinks, deserts, dishSide, userId, dishSideId } = req.body;
 
   try {
-    const completeOrder = { drinks, deserts, dishSide, userId };
+    const completeOrder = { drinks, deserts, dishSide, userId, dishSideId };
 
     // console.log(completeOrder.drinks[2]);
     // const order = await getByIdOrder(completeOrder.drinks[0]);

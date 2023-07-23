@@ -7,10 +7,15 @@ const postDrinkOrder = async ({ userId, drinkId, quantity, unitaryPrice, totalPr
   const drinkName = drink.name;
   const drinkPrice = drink.price;
 
-  console.log("precio", drinkPrice);
+  const newDrinkOrder = await DrinkOrder.create({
+    userId,
+    drinkName,
+    drinkId,
+    quantity,
 
-  console.log("name", drinkName);
-  const newDrinkOrder = await DrinkOrder.create({ userId, drinkName, drinkId, quantity, unitaryPrice, totalPrice });
+    unitaryPrice,
+    totalPrice,
+  });
 
   return newDrinkOrder;
 };

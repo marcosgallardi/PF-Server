@@ -48,17 +48,22 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      createdAt: {
+        type: DataTypes.STRING,
+        defaultValue: function () {
+          const now = new Date();
+          const formattedTime = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(
+            2,
+            "0"
+          )}`;
+
+          return formattedTime;
+        },
+        allowNull: false,
+      },
     },
     {
-      timestamps: true,
-      // hooks: {
-      //   beforeCreate: (drinkOrder) => {
-      //     drinkOrder.totalPrice = drinkOrder.unitaryPrice * drinkOrder.quantity;
-      //   },
-      //   beforeUpdate: (drinkOrder) => {
-      //     drinkOrder.totalPrice = drinkOrder.unitaryPrice * drinkOrder.quantity;
-      //   },
-      // },
+      timestamps: false, // Deshabilitamos los timestamps generados por Sequelize
     }
   );
 };
