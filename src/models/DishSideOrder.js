@@ -18,11 +18,13 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
+      //ver si es dishID
+      //cambiar a dishOrder y Sideorder
       dishid: {
         type: DataTypes.UUID,
         allowNull: true,
         references: {
-          model: "Dishes",
+          model: "DishOrders",
           key: "id",
         },
       },
@@ -30,7 +32,7 @@ module.exports = (sequelize) => {
         type: DataTypes.UUID,
         allowNull: true,
         references: {
-          model: "Sides",
+          model: "SideOrders",
           key: "id",
         },
       },

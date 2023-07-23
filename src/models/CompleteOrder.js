@@ -12,51 +12,47 @@ module.exports = (sequelize) => {
       },
       userId: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: "Users",
           key: "id",
         },
+        userEmail: {
+          type: DataTypes.STRING,
+          allowNull: true,
+          validators: {
+            isEmail: true,
+          },
+        },
       },
-      dishid: {
-        type: DataTypes.ARRAY(DataTypes.UUID),
+      dishSideId: {
+        type: DataTypes.UUID,
         allowNull: true,
         references: {
-          model: "DishOrders",
+          model: "DishSideOrders",
           key: "id",
         },
       },
-      sideID: {
-        type: DataTypes.ARRAY(DataTypes.UUID),
-        allowNull: true,
-        references: {
-          model: "SideOrders",
-          key: "id",
-        },
-      },
-      drinkId: {
-        type: DataTypes.ARRAY(DataTypes.UUID),
-        allowNull: true,
-        references: {
-          model: "DrinkOrders",
-          key: "id",
-        },
-      },
-      desertId: {
-        type: DataTypes.ARRAY(DataTypes.UUID),
+      // dishName: { type: DataTypes.STRING },
+      // sideName: { type: DataTypes.STRING },
+
+      // desertName: { type: DataTypes.STRING },
+
+      drinks: {
+        type: DataTypes.ARRAY(DataTypes.UUID), // Tipo de datos ARRAY con UUID
         allowNull: false,
-        references: {
-          model: "DesertOrders",
-          key: "id",
-        },
+      },
+      deserts: {
+        type: DataTypes.ARRAY(DataTypes.UUID),
+        allowNull: true,
       },
       quantity: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       unitaryPrice: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       totalPrice: {
         type: DataTypes.FLOAT,

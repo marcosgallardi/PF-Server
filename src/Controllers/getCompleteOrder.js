@@ -1,4 +1,5 @@
-const { CompleteOrder } = require("../db");
+const { CompleteOrder, DrinkOrder } = require("../db");
+const getByIdOrders = require("../Controllers/getByIdOrders");
 
 const getCompleteOrder = async () => {
   const completeOrder = await CompleteOrder.findAll();
