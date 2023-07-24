@@ -1,17 +1,17 @@
 const { DishSideOrder } = require("../db");
 const { Op } = require("sequelize");
 
-const postDishSideOrder = async ({ userId, dishid, sideID, quantity, unitaryPrice, totalPrice }) => {
-  const newSideOrder = await DishSideOrder.create({
+const postDishSideOrder = async ({ userId, dishOrderId, sideOrderId, quantity, totalPrice }) => {
+  const newDishSideOrder = await DishSideOrder.create({
     userId,
-    dishid,
-    sideID,
+    dishOrderId,
+    sideOrderId,
     quantity,
-    unitaryPrice,
+
     totalPrice,
   });
 
-  return newSideOrder;
+  return newDishSideOrder.id;
 };
 
 module.exports = postDishSideOrder;

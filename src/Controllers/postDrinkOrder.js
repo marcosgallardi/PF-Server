@@ -17,7 +17,7 @@ const postDrinkOrder = async ({ userId, drinkId, quantity, unitaryPrice, totalPr
     totalPrice,
   });
 
-  return newDrinkOrder;
+  return newDrinkOrder.id;
 };
 
 module.exports = postDrinkOrder;
