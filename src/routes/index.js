@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const userRouter = require("./userRouter");
-
 const desertRouter = require("./desertRouter");
 const dish_sideRouter = require("./dish_sideRouter");
 const orderRouter = require("./orderRouter");
@@ -13,10 +12,11 @@ const sideOrderRouter = require("./sideOrderRouter");
 const dishOrderRouter = require("./dishOrderRouter");
 const dishSideOrderRouter = require("./dishSideOrderRouter");
 const completeOrderRouter = require("./completeOrderRouter");
-const restoreRouter = require("./restoreRouter")
+const restoreRouter = require("./restoreRouter");
+const dishRouter = require("./dishRouter");
 const mainRouter = Router();
 
-const dishRouter = require("./dishRouter");
+
 mainRouter.use("/id", gralRouter);
 mainRouter.use("/order", orderRouter);
 mainRouter.use("/dish_side", dish_sideRouter);

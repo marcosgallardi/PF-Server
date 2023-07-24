@@ -1,6 +1,4 @@
 const { Router } = require("express");
-
-const restoreRouter = Router();
 const {
   handlerRestoredUser,
   handlerRestoredDish,
@@ -9,7 +7,7 @@ const {
   handlerRestoredSide,
   handlerRestoredDishSide,
   handlerRestoredOrder,
-  handlerRestoredDrinkOrder,
+ // handlerRestoredDrinkOrder,
   handlerRestoredDesertOrder,
   handlerRestoredOrderSide,
   handlerRestoredSideOrder,
@@ -17,6 +15,8 @@ const {
   handlerRestoredDishOrder,
   handlerRestoredCompleteOrder,
 } = require("../Handlers/handlersRestore.js");
+const restoreRouter = Router();
+
 
 // Ruta para restaurar un usuario
 restoreRouter.put("/user/:id", handlerRestoredUser);
