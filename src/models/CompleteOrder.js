@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
 
       drinks: {
         type: DataTypes.ARRAY(DataTypes.UUID), // Tipo de datos ARRAY con UUID
-        allowNull: false,
+        allowNull: true,
       },
       deserts: {
         type: DataTypes.ARRAY(DataTypes.UUID),
@@ -50,10 +50,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      unitaryPrice: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
-      },
+      // unitaryPrice: {
+      //   type: DataTypes.FLOAT,
+      //   allowNull: true,
+      // },
       totalPrice: {
         type: DataTypes.FLOAT,
         allowNull: true,
