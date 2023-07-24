@@ -14,10 +14,11 @@ const dishOrderRouter = require("./dishOrderRouter");
 const dishSideOrderRouter = require("./dishSideOrderRouter");
 const completeOrderRouter = require("./completeOrderRouter");
 const nameRouter = require("./namerouter");
-
 const mainRouter = Router();
-
 const dishRouter = require("./dishRouter");
+const mpRouter = require("./mpRouter");
+
+mainRouter.use("/mercadopago", mpRouter);
 mainRouter.use("/search", nameRouter);
 mainRouter.use("/id", gralRouter);
 mainRouter.use("/order", orderRouter);
