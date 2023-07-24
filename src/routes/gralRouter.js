@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const {userDelete, dishDelete, drinkDelete, desertDelete, sideDelete, dishSideDelete, orderDelete, drinkOrderDelete, desertOrderDelete, orderSideDelete, sideOrderDelete, dishSideOrderDelete, dishOrderDelete, completeOrderDelete} = require("../Handlers/handlersDelete.js");
+const {userDelete, dishDelete, drinkDelete, desertDelete, sideDelete, dishSideDelete, orderDelete,/* drinkOrderDelete, */desertOrderDelete, orderSideDelete, sideOrderDelete, dishSideOrderDelete, dishOrderDelete, completeOrderDelete} = require("../Handlers/handlersDelete.js");
 const gralRouter = Router();
 const searchByName = require("../Handlers/searchByName");
 const searchById = require("../Handlers/searchById");
