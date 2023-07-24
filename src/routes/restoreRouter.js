@@ -39,7 +39,7 @@ restoreRouter.put("/dish-side/:id", handlerRestoredDishSide);
 // Ruta para restaurar una orden
 restoreRouter.put("/order/:id", handlerRestoredOrder);
 
-// Ruta para restaurar una bebida en una orden, pero desabilitado por ahora
+// Ruta para restaurar una bebida en una orden, pero desabilitado por ahora.
 // restoreRouter.put("/drink-order/:id", handlerRestoredDrinkOrder); 
 
 // Ruta para restaurar un postre en una orden
