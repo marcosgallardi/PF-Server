@@ -12,11 +12,10 @@ const sideOrderRouter = require("./sideOrderRouter");
 const dishOrderRouter = require("./dishOrderRouter");
 const dishSideOrderRouter = require("./dishSideOrderRouter");
 const completeOrderRouter = require("./completeOrderRouter");
-const restoreRouter = require("./restoreRouter");
-const dishRouter = require("./dishRouter");
+
 const mainRouter = Router();
 
-
+const dishRouter = require("./dishRouter");
 mainRouter.use("/id", gralRouter);
 mainRouter.use("/order", orderRouter);
 mainRouter.use("/dish_side", dish_sideRouter);

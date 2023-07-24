@@ -28,18 +28,22 @@ module.exports = (sequelize) => {
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       birthDate: {
         type: DataTypes.DATEONLY,
-        allowNull: false,
+        allowNull: true,
       },
       phoneNumber: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         validate: {
           is: /^\+?[0-9\-()\s]+$/,
         },
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {

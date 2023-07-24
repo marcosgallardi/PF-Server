@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       },
       //ver si es dishID
       //cambiar a dishOrder y Sideorder
-      dishid: {
+      dishOrderId: {
         type: DataTypes.UUID,
         allowNull: true,
         references: {
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
-      sideID: {
+      sideOrderId: {
         type: DataTypes.UUID,
         allowNull: true,
         references: {
@@ -40,10 +40,10 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      unitaryPrice: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-      },
+      // unitaryPrice: {
+      //   type: DataTypes.FLOAT,
+      //   allowNull: false,
+      // },
       totalPrice: {
         type: DataTypes.FLOAT,
         allowNull: true,
