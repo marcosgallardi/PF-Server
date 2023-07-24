@@ -1,8 +1,9 @@
 const { Router } = require("express");
-
+const {userDelete, dishDelete, drinkDelete, desertDelete, sideDelete, dishSideDelete, orderDelete, drinkOrderDelete, desertOrderDelete, orderSideDelete, sideOrderDelete, dishSideOrderDelete, dishOrderDelete, completeOrderDelete} = require("../Handlers/handlersDelete.js");
 const gralRouter = Router();
 const searchByName = require("../Handlers/searchByName");
 const searchById = require("../Handlers/searchById");
+
 
 // /**
 //  * @swagger
@@ -46,4 +47,37 @@ const searchById = require("../Handlers/searchById");
 
 gralRouter.get("/:id", searchById);
 
+gralRouter.delete("/user/:id", userDelete);
+
+gralRouter.delete("/dish/:id", dishDelete);
+
+gralRouter.delete("/drink/:id", drinkDelete);
+
+gralRouter.delete("/desert/:id", desertDelete);
+
+gralRouter.delete("/side/:id", sideDelete);
+
+gralRouter.delete("/dish-side/:id", dishSideDelete);
+
+gralRouter.delete("/order/:id", orderDelete);
+// desabilitada por ahora
+// gralRouter.delete("/drink-order/:id", drinkOrderDelete);
+
+gralRouter.delete("/desert-order/:id", desertOrderDelete);
+
+gralRouter.delete("/order-side/:id", orderSideDelete);
+
+gralRouter.delete("/side-order/:id", sideOrderDelete);
+
+gralRouter.delete("/dish-side-order/:id", dishSideOrderDelete);
+
+gralRouter.delete("/dish-order/:id", dishOrderDelete);
+
+gralRouter.delete("/complete-order/:id", completeOrderDelete);
+
 module.exports = gralRouter;
+
+
+
+
+

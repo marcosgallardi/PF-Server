@@ -55,6 +55,7 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: true,
+      paranoid: true,
       hooks: {
         beforeCreate: (dishOrder) => {
           dishOrder.totalPrice = dishOrder.unitaryPrice * dishOrder.quantity;

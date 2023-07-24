@@ -45,6 +45,7 @@ module.exports = (sequelize) => {
     }, //falta force db para que funcione el multiplicador
     {
       timestamps: true,
+      paranoid: true,
       hooks: {
         beforeCreate: (dishOrder) => {
           dishOrder.totalPrice = dishOrder.unitaryPrice * dishOrder.quantity;

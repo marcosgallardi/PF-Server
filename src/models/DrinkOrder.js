@@ -63,7 +63,8 @@ module.exports = (sequelize) => {
       },
     },
     {
-      timestamps: false, // Deshabilitamos los timestamps generados por Sequelize
+      timestamps: false, // desabilitado
+      paranoid: true
     }
   );
 };

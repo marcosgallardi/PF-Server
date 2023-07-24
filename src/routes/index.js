@@ -13,7 +13,7 @@ const sideOrderRouter = require("./sideOrderRouter");
 const dishOrderRouter = require("./dishOrderRouter");
 const dishSideOrderRouter = require("./dishSideOrderRouter");
 const completeOrderRouter = require("./completeOrderRouter");
-
+const restoreRouter = require("./restoreRouter")
 const mainRouter = Router();
 
 const dishRouter = require("./dishRouter");
@@ -25,6 +25,7 @@ mainRouter.use("/side", sideRouter);
 mainRouter.use("/drink", drinkRouter);
 mainRouter.use("/desert", desertRouter);
 mainRouter.use("/dish", dishRouter);
+mainRouter.use("/restore", restoreRouter)
 ///modelos order....
 mainRouter.use("/drinkorder", drinkOrderRouter);
 mainRouter.use("/desertorder", desertOrderRouter);
