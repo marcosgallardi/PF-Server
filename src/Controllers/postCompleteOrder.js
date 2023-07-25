@@ -5,6 +5,7 @@ const postDesertOrder = require("./postDesertOrder");
 const postDishOrder = require("./postDishOrder");
 const postSideOrder = require("./postSideOrder");
 const postDishSideOrder = require("./postDishSideOrder");
+const mailCreate = require("../Controllers/mailCreate");
 const getById = require("./getById");
 
 const ticket = [];
@@ -18,6 +19,7 @@ let totalPriceDish = null;
 let totalPriceSide = null;
 
 const postCompleteOrder = async ({ order, userId }) => {
+  mailCreate(order, userId );
   const user = await getById(userId);
   const userEmail = user.email;
   for (i = 0; i < order.length; i++) {
@@ -29,7 +31,13 @@ const postCompleteOrder = async ({ order, userId }) => {
     totalPriceDish = totalPrice;
 
     if (dish !== undefined && dish !== null) {
-      dishOrderId = await postDishOrder({ userId, dishId, quantity, unitaryPrice, totalPrice });
+      dishOrderId = await postDishOrder({
+        userId,
+        dishId,
+        quantity,
+        unitaryPrice,
+        totalPrice,
+      });
     }
     if (garnish !== undefined && garnish !== null) {
       const sideId = garnish.id;
@@ -37,7 +45,13 @@ const postCompleteOrder = async ({ order, userId }) => {
       const unitaryPrice = +garnish.price;
       const totalPrice = unitaryPrice * quantity;
       totalPriceSide = totalPrice;
-      sideOrderId = await postSideOrder({ userId, sideId, quantity, unitaryPrice, totalPrice });
+      sideOrderId = await postSideOrder({
+        userId,
+        sideId,
+        quantity,
+        unitaryPrice,
+        totalPrice,
+      });
     }
 
     if (dishOrderId !== null) {
@@ -57,7 +71,13 @@ const postCompleteOrder = async ({ order, userId }) => {
         let unitaryPrice = drinks[j].price;
         let totalPrice = unitaryPrice * quantity;
 
-        let drinkOrderId = await postDrinkOrder({ userId, drinkId, quantity, unitaryPrice, totalPrice });
+        let drinkOrderId = await postDrinkOrder({
+          userId,
+          drinkId,
+          quantity,
+          unitaryPrice,
+          totalPrice,
+        });
 
         drinksOrdersIds.push(drinkOrderId);
       }
@@ -68,7 +88,13 @@ const postCompleteOrder = async ({ order, userId }) => {
         let quantity = desserts[k].quantity;
         let unitaryPrice = deserts[k].price;
         let totalPrice = unitaryPrice * quantity;
-        let desertOrderId = await postDesertOrder({ userId, desertId, quantity, unitaryPrice, totalPrice });
+        let desertOrderId = await postDesertOrder({
+          userId,
+          desertId,
+          quantity,
+          unitaryPrice,
+          totalPrice,
+        });
         desertsOrdersIds.push(desertOrderId);
       }
     } else desertsOrdersIds === null;
@@ -84,6 +110,7 @@ const postCompleteOrder = async ({ order, userId }) => {
     ticket.push(newCompleteOrder.id);
     return newCompleteOrder;
   }
+  
 };
 
 module.exports = postCompleteOrder;

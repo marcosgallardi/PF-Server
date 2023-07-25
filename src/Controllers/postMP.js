@@ -17,9 +17,9 @@ const postMP = async (title, description, unit_price, quantity) => {
     ],
     back_urls: {
       //a donde va el cliente una vez que la compra finaliza, poner url de railway
-      success: "http://localhost:3000/success",
-      failure: "http://localhost:3000/failure",
-      pending: "http://localhost:3000/pending",
+      success: "http://localhost:3000/home",
+      failure: "http://localhost:3000/home",
+      pending: "http://localhost:3000/home",
     },
     auto_return: "approved",
   };
