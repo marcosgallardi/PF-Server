@@ -7,69 +7,112 @@ const postSideOrder = require("./postSideOrder");
 const postDishSideOrder = require("./postDishSideOrder");
 const getById = require("./getById");
 
-const ticket = [];
+let ticket = [];
 
 let dishOrderId = null;
 let sideOrderId = null;
 let dishSideOrderId = null;
-let drinksOrdersIds = [];
-let desertsOrdersIds = [];
+
 let totalPriceDish = null;
 let totalPriceSide = null;
 
 const postCompleteOrder = async ({ order, userId }) => {
   const user = await getById(userId);
   const userEmail = user.email;
+  console.log('LONGITUD DE ORDER', order.length);
+
   for (i = 0; i < order.length; i++) {
+
+    let drinksOrdersIds = [];
+    let desertsOrdersIds = [];
     const { drinks, desserts, dish, garnish } = order[i];
-    const dishId = dish.id;
-    const quantity = +dish.quantity;
-    const unitaryPrice = +dish.price;
-    const totalPrice = unitaryPrice * quantity;
+
+
+
+    const totalPrice = parseFloat(dish[0].price) * dish[0]?.quantity;
+
     totalPriceDish = totalPrice;
 
-    if (dish !== undefined && dish !== null) {
-      dishOrderId = await postDishOrder({ userId, dishId, quantity, unitaryPrice, totalPrice });
+    const dishObj = {
+      userId, 
+      dishid: dish[0].id, 
+      quantity: dish[0].quantity, 
+      unitaryPrice: parseFloat(dish[0].price),
+      totalPrice 
+    }
+
+    if (dish !== undefined || dish !== null) {
+ 
+      dishOrderId = await postDishOrder(dishObj);
+      
     }
     if (garnish !== undefined && garnish !== null) {
-      const sideId = garnish.id;
-      const quantity = +garnish.quantity;
-      const unitaryPrice = +garnish.price;
-      const totalPrice = unitaryPrice * quantity;
+
+      const totalPrice = garnish[0].price * garnish[0]?.quantity;
+
+      const garnishObj = {
+        userId, 
+        sideId: garnish[0].id, 
+        quantity: garnish[0].quantity, 
+        unitaryPrice: garnish[0].price,
+        totalPrice 
+      }
+
       totalPriceSide = totalPrice;
-      sideOrderId = await postSideOrder({ userId, sideId, quantity, unitaryPrice, totalPrice });
+      sideOrderId = await postSideOrder(garnishObj);
     }
+
 
     if (dishOrderId !== null) {
       dishSideOrderId = await postDishSideOrder({
         userId,
         dishOrderId,
         sideOrderId,
-        quantity,
+        quantity: dish[0].quantity,
         totalPrice: totalPriceDish + totalPriceSide,
       });
     }
 
-    if (drinks !== undefined && drinks !== null) {
-      for (j = 0; j < drinks.length; j++) {
-        let drinkId = drinks[j].id;
-        let quantity = drinks[j].quantity;
-        let unitaryPrice = drinks[j].price;
-        let totalPrice = unitaryPrice * quantity;
+//* HASTA ACA ANDA CHE!
 
-        let drinkOrderId = await postDrinkOrder({ userId, drinkId, quantity, unitaryPrice, totalPrice });
+    if (drinks !== undefined || drinks !== null) {
+      for (j = 0; j < drinks.length; j++) {
+        const drinkObj = {
+          userId, 
+          drinkId: drinks[j].id,
+          quantity: drinks[j].quantity, 
+          unitaryPrice: drinks[j].price,
+          totalPrice: drinks[j].price * drinks[j].quantity
+        }
+
+
+        let drinkOrderId = await postDrinkOrder(drinkObj);
 
         drinksOrdersIds.push(drinkOrderId);
       }
     } else drinksOrdersIds === null;
+
+
     if (desserts !== undefined && desserts !== null) {
-      for (k = 0; k < order[k].desserts.length; k++) {
-        let desertId = desserts[k].id;
-        let quantity = desserts[k].quantity;
-        let unitaryPrice = deserts[k].price;
-        let totalPrice = unitaryPrice * quantity;
-        let desertOrderId = await postDesertOrder({ userId, desertId, quantity, unitaryPrice, totalPrice });
+
+      console.log('DESSERT____', desserts);
+
+      for (k = 0; k < desserts.length; k++) {
+
+        const dessertObj = {
+          userId, 
+          desertId: desserts[k].id,
+          quantity: desserts[k].quantity, 
+          unitaryPrice: desserts[k].price,
+          totalPrice: desserts[k].price * desserts[k].quantity
+        }
+        console.log('DESSERT OBJ____', dessertObj);
+
+        let desertOrderId = await postDesertOrder(dessertObj);
+        console.log('DESSERT ORDER ID____', desertOrderId);
         desertsOrdersIds.push(desertOrderId);
+
+        console.log('DESERT ORDERD ID_____', desertsOrdersIds);
       }
     } else desertsOrdersIds === null;
 
@@ -81,9 +124,18 @@ const postCompleteOrder = async ({ order, userId }) => {
 
       userEmail: userEmail,
     });
+
+    console.log('COMPLETE ORDER____', newCompleteOrder);
+
+  console.log('EMAIL____', userEmail);
+
     ticket.push(newCompleteOrder.id);
-    return newCompleteOrder;
+    
   }
+  console.log('TICKET____', ticket);
+  return ticket;
 };
+
+
 
 module.exports = postCompleteOrder;
