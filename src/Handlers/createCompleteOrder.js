@@ -3,6 +3,10 @@ const getByIdOrder = require("../Controllers/getByIdOrders");
 const createCompleteOrder = async (req, res) => {
   const { order, userId } = req.body;
 
+  // console.log('___________HANDLER CREATE_____________');
+  // console.log("ORDER", order);
+  // console.log("USERID", userId);
+  // console.log("ORDER DESSERT", order[0].desserts);
   try {
     const completeOrder = { order };
     // console.log(completeOrder);
