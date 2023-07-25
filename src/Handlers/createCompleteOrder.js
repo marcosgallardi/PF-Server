@@ -5,12 +5,15 @@ const createCompleteOrder = async (req, res) => {
 
   try {
     const completeOrder = { order };
+    // console.log(completeOrder);
 
     // console.log(completeOrder.drinks[2]);
     // const order = await getByIdOrder(completeOrder.drinks[0]);
     // console.log(order.drinkName);
 
     const newCompleteOrder = await postCompleteOrder({ order, userId });
+
+    console.log('ORDER HANDLER CREATE____', newCompleteOrder);
 
     return res.status(201).json(newCompleteOrder);
   } catch (error) {
