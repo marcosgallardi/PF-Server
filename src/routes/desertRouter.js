@@ -2,6 +2,7 @@ const { Router } = require("express");
 const desert = require("../Handlers/desert");
 const desertRouter = Router();
 const createDesert = require("../Handlers/createDesert");
+const { handlerDesert } = require("../Handlers/handlersPut");
 
 // /**
 //  * @swagger
@@ -53,7 +54,7 @@ const createDesert = require("../Handlers/createDesert");
 //  *                $ref: '#/components/schemas/Desert'
 //  */
 desertRouter.get("/", desert);
-
+desertRouter.put("/:id", handlerDesert);
 desertRouter.get("/:id", (req, res) => {
   res.status(200).send("obtengo el desert de id ");
 });
