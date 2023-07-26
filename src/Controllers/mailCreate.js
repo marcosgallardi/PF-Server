@@ -1,7 +1,7 @@
 const enviarCorreo = require("../Notification/nodemailer");
 const { User } = require("../db");
 
-const mailcreate = async (order, userId) => {
+const mailCreate = async (order, userId) => {
   console.log(order);
 
   const { name, email } = await User.findOne({
@@ -23,4 +23,4 @@ const mailcreate = async (order, userId) => {
   return enviarCorreo(destinatario, asunto, contenido);
 };
 
-module.exports = mailcreate;
+module.exports = mailCreate;

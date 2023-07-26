@@ -1,6 +1,6 @@
 const postDrinkOrder = require("../Controllers/postDrinkOrder");
 
-const mailCreate = require("../Controllers/mailcreate");
+const mailCreate = require("../Controllers/mailCreate");
 
 const createDrinkOrder = async (req, res) => {
   const { userId, drinkId, quantity, unitaryPrice, totalPrice } = req.body;
