@@ -3,6 +3,7 @@ const { Router } = require("express");
 const sideRouter = Router();
 const sides = require("../Handlers/sides");
 const createSide = require("../Handlers/createSide");
+const { handlerSide } = require("../Handlers/handlersPut");
 
 // /**
 //  * @swagger
@@ -62,7 +63,7 @@ const createSide = require("../Handlers/createSide");
 //  *                $ref: '#/components/schemas/Side'
 //  */
 sideRouter.get("/", sides);
-
+sideRouter.put("/", handlerSide);
 sideRouter.get("/:id", (req, res) => {
   res.status(200).send("obtengo el side de id ");
 });

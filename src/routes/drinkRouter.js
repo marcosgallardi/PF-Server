@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const drinks = require("../Handlers/drinks");
 const createDrink = require("../Handlers/createDrink");
+const { handlerDrink } = require("../Handlers/handlersPut");
 const drinkRouter = Router();
 
 // /**
@@ -68,7 +69,7 @@ const drinkRouter = Router();
 //  *                $ref: '#/components/schemas/Drink'
 //  */
 drinkRouter.get("/", drinks);
-
+drinkRouter.put("/:id", handlerDrink);
 drinkRouter.get("/:id", (req, res) => {
   res.status(200).send("obtengo el drink de id ");
 });
