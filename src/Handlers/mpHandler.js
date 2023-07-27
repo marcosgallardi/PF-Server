@@ -1,15 +1,12 @@
 const postMP = require("../Controllers/postMP");
 
 const mpHandler = async (req, res) => {
-  const { title, description, unit_price, quantity } = req.body;
-  console.log(title, description, unit_price, quantity)
+  const {id, title, description,picture_url, unit_price, quantity } = req.body;
+    console.log(req.body)
   try {
-    const response = await postMP(title, description, unit_price, quantity);
-    console.log(response)
-    res.json({
-      id: response.body.id,
-      init_point: response.body.init_point
-    })
+    const response = await postMP(id,title,picture_url, description, unit_price, quantity);
+   
+    return res.status(200).json({response,})
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
