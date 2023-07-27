@@ -17,6 +17,7 @@ const nameRouter = require("./nameRouter");
 const mainRouter = Router();
 const dishRouter = require("./dishRouter");
 const mpRouter = require("./mpRouter");
+const bannerRouter = require("./bannerRouter");
 
 mainRouter.use("/mercadopago", mpRouter);
 mainRouter.use("/search", nameRouter);
@@ -35,5 +36,7 @@ mainRouter.use("/sideorder", sideOrderRouter);
 mainRouter.use("/dishorder", dishOrderRouter);
 mainRouter.use("/dishSideOrder", dishSideOrderRouter);
 mainRouter.use("/completeOrder", completeOrderRouter);
+// Banner route
+mainRouter.use("/banner", bannerRouter);
 
 module.exports = mainRouter;
