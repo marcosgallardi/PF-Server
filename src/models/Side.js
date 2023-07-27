@@ -20,6 +20,11 @@ module.exports = (sequelize) => {
         values: ["salsa", "acompañamiento"],
         allowNull: false,
       },
+      disabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
       available: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
