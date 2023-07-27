@@ -3,7 +3,7 @@ const { Router } = require("express");
 const userRouter = Router();
 const users = require("../Handlers/users");
 const createUser = require("../Handlers/createUser");
-
+const userById = require("../Handlers/userById");
 // /**
 //  * @swagger
 //  * components:
@@ -69,9 +69,7 @@ const createUser = require("../Handlers/createUser");
 userRouter.post("/", createUser);
 userRouter.get("/", users);
 
-userRouter.get("/:id", (req, res) => {
-  res.status(200).send("obtengo user id");
-});
+userRouter.get("/order/:id", userById);
 
 // /**
 //  * @swagger

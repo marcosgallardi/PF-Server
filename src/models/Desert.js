@@ -20,6 +20,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 50,
       },
+      disabled: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
       price: {
         type: DataTypes.INTEGER,
         allowNull: false,
