@@ -48,6 +48,7 @@ const handlerDrink = async(req, res)=>{
         const {  name,
             volume,
            type,
+           disabled,
            alcohol,
            stock,
            price,
@@ -57,6 +58,7 @@ const handlerDrink = async(req, res)=>{
         const drinkUP = await updateDrink(id,  name,
             volume,
            type,
+           disabled,
            alcohol,
            stock,
            price,
@@ -75,12 +77,14 @@ const handlerDesert = async(req, res)=>{
         const {id} = req.params;
         const { name,
             stock,
+            disabled,
            price,
            image} = req.body;
 
 
         const deserthUP = await updateDesert(id, name,
             stock,
+            disabled,
            price,
            image) 
 
@@ -99,6 +103,7 @@ const handlerSide = async(req, res)=>{
         const { name,
             type,
             available,
+            disabled,
             price,
             image} = req.body;
 
@@ -106,6 +111,7 @@ const handlerSide = async(req, res)=>{
         const sideUP = await updateSide(id, name,
             type,
             available,
+            disabled,
             price,
             image) 
 

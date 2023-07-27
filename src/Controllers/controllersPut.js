@@ -47,6 +47,7 @@ const updateDrink = async ( id, name,
    type,
    alcohol,
    stock,
+   disabled,
    price,
    image) => {
 
@@ -63,7 +64,8 @@ const updateDrink = async ( id, name,
     if (name) update.name = name;
     if (volume) update.volume = volume;
     if (type) update.type = type;
-    if (stock) update.stock = stock
+    if (stock) update.stock = stock;
+    if (disabled !== undefined) update.disabled = disabled;
     if (alcohol!== undefined) update.alcohol = alcohol;
     if (price !== undefined) update.price = price;
     if (image) update.image = image;
@@ -75,6 +77,7 @@ const updateDrink = async ( id, name,
 
 const updateDesert = async ( id, name,
     stock,
+    disabled,
    price,
    image) => {
 
@@ -90,6 +93,7 @@ const updateDesert = async ( id, name,
 
         if (name) update.name = name;
     if (stock) update.stock = stock;
+    if (disabled !== undefined) update.disabled = disabled;
     if (price !== undefined) update.price = price;
     if (image) update.image = image;
 
@@ -100,6 +104,7 @@ const updateDesert = async ( id, name,
 
 const updateSide = async ( id, name,
    type,
+   disabled,
    available,
    price,
    image) => {
@@ -116,6 +121,7 @@ const updateSide = async ( id, name,
 
     if (name) update.name = name;
     if (type) update.type = type;
+    if (disabled !== undefined) update.disabled = disabled;
     if (available !== undefined) update.available = available;
     if (price !== undefined) update.price = price;
     if (image) update.image = image;

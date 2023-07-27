@@ -63,7 +63,7 @@ const { handlerSide } = require("../Handlers/handlersPut");
 //  *                $ref: '#/components/schemas/Side'
 //  */
 sideRouter.get("/", sides);
-sideRouter.put("/", handlerSide);
+sideRouter.put("/:id", handlerSide);
 sideRouter.get("/:id", (req, res) => {
   res.status(200).send("obtengo el side de id ");
 });
