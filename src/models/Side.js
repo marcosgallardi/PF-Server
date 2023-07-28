@@ -30,6 +30,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: true,
       },
+      category: {
+        type: DataTypes.STRING,
+        defaultValue: "side",
+      },
 
       price: {
         type: DataTypes.INTEGER,

@@ -15,6 +15,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
+      category: {
+        type: DataTypes.STRING,
+        defaultValue: "drink",
+      },
       volume: {
         type: DataTypes.ENUM,
         values: ["250ml", "500ml", "1000ml", "750ml", "355ml", "473ml", "1500ml"],
