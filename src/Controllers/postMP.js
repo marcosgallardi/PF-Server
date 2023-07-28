@@ -1,6 +1,6 @@
 const mercadopago = require("mercadopago");
 
-const postMP = async (id,picture_url,title, description, unit_price, quantity) => {
+const postMP = async ( title, description, picture_url, unit_price, quantity) => {
   mercadopago.configure({
     access_token:
       "TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523",
@@ -9,10 +9,9 @@ const postMP = async (id,picture_url,title, description, unit_price, quantity) =
   const preference = {
     items: [
       {
-        id,
-        title,
-        description,
-        picture_url,
+        title: title,
+        description: description,
+        picture_url: picture_url,
         unit_price: Number(unit_price),
         quantity: Number(quantity),
       },
