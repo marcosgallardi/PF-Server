@@ -15,6 +15,12 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
+
+      category: {
+        type: DataTypes.STRING,
+        defaultValue: "dish",
+      },
+
       description: {
         type: DataTypes.TEXT,
         allowNull: false,

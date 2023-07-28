@@ -20,6 +20,11 @@ module.exports = (sequelize) => {
         values: ["salsa", "acompañamiento"],
         allowNull: false,
       },
+
+      category: {
+        type: DataTypes.STRING,
+        defaultValue: "side",
+      },
       disabled: {
         type: DataTypes.BOOLEAN,
         allowNull: false,

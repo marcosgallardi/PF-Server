@@ -55,20 +55,31 @@ const {
   CompleteOrder,
   Banner,
   Ticket,
+  Comment,
 } = sequelize.models;
 
 // Aca vendrian las relaciones
-// Product.hasMany(Reviews);
-// Dish.belongsToMany(Side, { through: Dish_side, foreignKey: "dishId" });
-// Side.belongsToMany(Dish, { through: Dish_side, foreignKey: "sideId" });
-/* Dish.belongsToMany(Side,{ through:'Dish_Side' });
-Side.belongsToMany(Dish,{ through:'Dish_Side' }); */
-// CompleteOrder.belongsToMany(DishOrder, { through: "CompleteOrderDishOrders" });
-// CompleteOrder.belongsToMany(DishOrder, { through: "CompleteOrder_DishOrder", foreignKey: "orderId" });
-// CompleteOrder.belongsToMany(SideOrder, { through: "CompleteOrder_SideOrder", foreignKey: "orderId" });
-// CompleteOrder.belongsToMany(DrinkOrder, { through: "CompleteOrder_DrinkOrder", foreignKey: "orderId" });
-// CompleteOrder.belongsToMany(DesertOrder, { through: "CompleteOrder_DesertOrder", foreignKey: "orderId" });
 
+Comment.associate = () => {
+  Comment.belongsTo(Dish);
+  Comment.belongsTo(User);
+};
+Dish.associate = () => {
+  Dish.hasMany(Comment);
+};
+
+Dish.prototype.calculateAverageRating = async function () {
+  const ratings = await Comment.findAll({
+    attributes: [[sequelize.fn("AVG", sequelize.col("rating")), "averageRating"]],
+    where: {
+      DishId: this.id,
+    },
+  });
+  return ratings[0].dataValues.averageRating || 0;
+};
+User.associate = () => {
+  User.hasMany(Comment); // Establece una relación de uno a muchos con el modelo "Comment"
+};
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
