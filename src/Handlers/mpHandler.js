@@ -6,7 +6,7 @@ const mpHandler = async (req, res) => {
   try {
     const response = await postMP(id,title,picture_url, description, unit_price, quantity);
    
-    return res.status(200).json({response,})
+    return res.status(200).json({response})
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
