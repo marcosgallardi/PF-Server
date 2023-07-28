@@ -15,6 +15,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
       },
+      category: {
+        type: DataTypes.STRING,
+        defaultValue: "dessert",
+      },
       stock: {
         type: DataTypes.INTEGER,
         allowNull: false,

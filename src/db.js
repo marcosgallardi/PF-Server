@@ -6,13 +6,13 @@ const path = require("path");
 
 const { DB_USER, DB_PASSWORD, DB_HOST, DATABASE_URL } = process.env;
 
-//const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/elfestin`, {
-  //logging: false, // set to console.log to see the raw SQL queries
-  //native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-//});
- const sequelize = new Sequelize(DATABASE_URL, {
-   logging: false, // set to console.log to see the raw SQL queries   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
- });
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/elfestin`, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
+const sequelize = new Sequelize(DATABASE_URL, {
+  logging: false, // set to console.log to see the raw SQL queries   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+});
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DATABASE_URL}/elfestin`, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -58,17 +58,26 @@ const {
 } = sequelize.models;
 
 // Aca vendrian las relaciones
-// Product.hasMany(Reviews);
-// Dish.belongsToMany(Side, { through: Dish_side, foreignKey: "dishId" });
-// Side.belongsToMany(Dish, { through: Dish_side, foreignKey: "sideId" });
-/* Dish.belongsToMany(Side,{ through:'Dish_Side' });
-Side.belongsToMany(Dish,{ through:'Dish_Side' }); */
-// CompleteOrder.belongsToMany(DishOrder, { through: "CompleteOrderDishOrders" });
-// CompleteOrder.belongsToMany(DishOrder, { through: "CompleteOrder_DishOrder", foreignKey: "orderId" });
-// CompleteOrder.belongsToMany(SideOrder, { through: "CompleteOrder_SideOrder", foreignKey: "orderId" });
-// CompleteOrder.belongsToMany(DrinkOrder, { through: "CompleteOrder_DrinkOrder", foreignKey: "orderId" });
-// CompleteOrder.belongsToMany(DesertOrder, { through: "CompleteOrder_DesertOrder", foreignKey: "orderId" });
+Comment.associate = () => {
+  Comment.belongsTo(Dish);
+  Comment.belongsTo(User);
+};
+Dish.associate = () => {
+  Dish.hasMany(Comment);
+};
+User.associate = () => {
+  User.hasMany(Comment); // Establece una relación de uno a muchos con el modelo "Comment"
+};
 
+Dish.prototype.calculateAverageRating = async function () {
+  const ratings = await Comment.findAll({
+    attributes: [[sequelize.fn("AVG", sequelize.col("rating")), "averageRating"]],
+    where: {
+      DishId: this.id,
+    },
+  });
+  return ratings[0].dataValues.averageRating || 0;
+};
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
