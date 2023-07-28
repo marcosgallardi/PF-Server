@@ -1,6 +1,6 @@
 const getAllTicket = require("../Controllers/getAllTicket");
 
-const getTickets = async (req, res) => {
+const getTicket = async (req, res) => {
   try {
     const tickets = await getAllTicket();
 
@@ -10,4 +10,4 @@ const getTickets = async (req, res) => {
   }
 };
 
-module.exports = getTickets;
+module.exports = getTicket;
