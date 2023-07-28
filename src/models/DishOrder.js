@@ -26,6 +26,11 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
+      dishName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique:false,
+      },
       quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,

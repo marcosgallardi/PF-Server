@@ -26,6 +26,11 @@ module.exports = (sequelize) => {
           key: "id",
         },
       },
+      sideName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique:false,
+      },
       quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
