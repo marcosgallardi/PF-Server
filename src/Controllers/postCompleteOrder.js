@@ -5,10 +5,8 @@ const postDesertOrder = require("./postDesertOrder");
 const postDishOrder = require("./postDishOrder");
 const postSideOrder = require("./postSideOrder");
 const postDishSideOrder = require("./postDishSideOrder");
-const postTicket = require('./postTicket')
+const postTicket = require("./postTicket");
 const getById = require("./getById");
-
-
 
 const postCompleteOrder = async ({ order, userId }) => {
   let dishOrderId = null;
@@ -122,11 +120,9 @@ const postCompleteOrder = async ({ order, userId }) => {
       userEmail: userEmail,
     });
 
-
-
     completesOrders.push(newCompleteOrder.id);
   }
-    const ticket = await postTicket(userId,completesOrders)
+  const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
 
   return ticket;
 };
