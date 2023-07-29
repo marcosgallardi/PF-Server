@@ -18,7 +18,12 @@ const handlerDish = async(req, res)=>{
             vegetarian,
             dailyspecial,
             price,
-            image} = req.body;
+            } = req.body;
+
+            let imageFile = null;
+      if (req.files && req.files.image) {
+        imageFile = req.files.image;
+      }
 
 
         const dishUP = await updateDish(id, name,
@@ -32,7 +37,7 @@ const handlerDish = async(req, res)=>{
            vegetarian,
            dailyspecial,
            price,
-           image) 
+           imageFile) 
 
            res.status(200).json(dishUP)
     } catch (error) {
@@ -52,7 +57,12 @@ const handlerDrink = async(req, res)=>{
            alcohol,
            stock,
            price,
-           image} = req.body;
+           } = req.body;
+
+           let imageFile = null;
+      if (req.files && req.files.image) {
+        imageFile = req.files.image;
+      }
 
 
         const drinkUP = await updateDrink(id,  name,
@@ -62,7 +72,7 @@ const handlerDrink = async(req, res)=>{
            alcohol,
            stock,
            price,
-           image) 
+           imageFile) 
 
            res.status(200).json(drinkUP)
     } catch (error) {
@@ -79,14 +89,19 @@ const handlerDesert = async(req, res)=>{
             stock,
             disabled,
            price,
-           image} = req.body;
+           } = req.body;
+
+           let imageFile = null;
+      if (req.files && req.files.image) {
+        imageFile = req.files.image;
+      }
 
 
         const deserthUP = await updateDesert(id, name,
             stock,
             disabled,
            price,
-           image) 
+           imageFile) 
 
            res.status(200).json(deserthUP)
     } catch (error) {
@@ -105,15 +120,19 @@ const handlerSide = async(req, res)=>{
             available,
             disabled,
             price,
-            image} = req.body;
+        } = req.body;
 
+            let imageFile = null;
+            if (req.files && req.files.image) {
+              imageFile = req.files.image;
+            }
 
         const sideUP = await updateSide(id, name,
             type,
             available,
             disabled,
             price,
-            image) 
+            imageFile) 
 
            res.status(200).json(sideUP)
     } catch (error) {

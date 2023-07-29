@@ -55,6 +55,7 @@ const {
   Banner,
   Ticket,
   Comment,
+  Local
 } = sequelize.models;
 
 // Aca vendrian las relaciones

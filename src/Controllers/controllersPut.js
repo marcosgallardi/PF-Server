@@ -12,7 +12,7 @@ const updateDish = async ( id, name,
    vegetarian,
    dailyspecial,
    price,
-   image) => {
+   imageFile) => {
 
     let update = await Dish.findOne({
         where:{
@@ -35,7 +35,10 @@ const updateDish = async ( id, name,
     if (vegetarian !== undefined) update.vegetarian = vegetarian;
     if (dailyspecial !== undefined) update.dailyspecial = dailyspecial;
     if (price !== undefined) update.price = price;
-    if (image) update.image = image;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
 
           await update.save();
           console.log(update);
@@ -49,7 +52,7 @@ const updateDrink = async ( id, name,
    stock,
    disabled,
    price,
-   image) => {
+   imageFile) => {
 
     let update = await Drink.findOne({
         where:{
@@ -68,7 +71,10 @@ const updateDrink = async ( id, name,
     if (disabled !== undefined) update.disabled = disabled;
     if (alcohol!== undefined) update.alcohol = alcohol;
     if (price !== undefined) update.price = price;
-    if (image) update.image = image;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
 
           await update.save();
           console.log(update);
@@ -79,7 +85,7 @@ const updateDesert = async ( id, name,
     stock,
     disabled,
    price,
-   image) => {
+   imageFile) => {
 
     let update = await Desert.findOne({
         where:{
@@ -95,7 +101,10 @@ const updateDesert = async ( id, name,
     if (stock) update.stock = stock;
     if (disabled !== undefined) update.disabled = disabled;
     if (price !== undefined) update.price = price;
-    if (image) update.image = image;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
 
           await update.save();
           console.log(update);
@@ -107,7 +116,7 @@ const updateSide = async ( id, name,
    disabled,
    available,
    price,
-   image) => {
+   imageFile) => {
 
     let update = await Side.findOne({
         where:{
@@ -124,7 +133,10 @@ const updateSide = async ( id, name,
     if (disabled !== undefined) update.disabled = disabled;
     if (available !== undefined) update.available = available;
     if (price !== undefined) update.price = price;
-    if (image) update.image = image;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
 
           await update.save();
           console.log(update);
