@@ -1,6 +1,7 @@
 const { Banner } = require("../db");
 
 const deleteBanner = async (req, res) => {
+  const id = req.params;
   try {
     const banner = await Banner.findByPk(id);
 
