@@ -43,6 +43,12 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: true,
       },
+      //se muestra pero no se habilita
+      available: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
       price: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -55,6 +61,14 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false,
+      hooks: {
+        beforeUpdate: (drink) => {
+          // Verificar si el stock ha llegado a 0
+          if (drink.stock === 0) {
+            drink.disabled = false; // Si el stock es 0, deshabilitar el producto
+          }
+        },
+      },
     }
   );
 };
