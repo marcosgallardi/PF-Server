@@ -14,7 +14,10 @@ const postDrinkOrder = async ({ userId, drinkId, quantity, unitaryPrice, totalPr
     unitaryPrice,
     totalPrice,
   });
-
+  if (drink.stock > 0) {
+    drink.stock -= 1;
+    await drink.save();
+  }
   return newDrinkOrder.id;
 };
 
