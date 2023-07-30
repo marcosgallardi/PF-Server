@@ -7,7 +7,7 @@ const ticketRouter = Router();
 
 ticketRouter.get("/", getTicket);
 
-ticketRouter.get('/:id',findTicketByIdPedido);
+ticketRouter.get("/:id", findTicketByIdPedido);
 
 ticketRouter.get("/user/:id", getTicketByUserId);
 
