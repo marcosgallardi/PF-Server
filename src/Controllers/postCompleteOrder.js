@@ -1,5 +1,4 @@
 const { CompleteOrder } = require("../db");
-const { Op } = require("sequelize");
 const postDrinkOrder = require("./postDrinkOrder");
 const postDesertOrder = require("./postDesertOrder");
 const postDishOrder = require("./postDishOrder");
@@ -35,8 +34,8 @@ const postCompleteOrder = async ({ order, userId }) => {
     const hasDeserts = desserts !== undefined && desserts !== null && desserts.length > 0;
 
     if (hasDish) {
-      const totalPrice = parseFloat(dish[0].price) * dish[0].quantity;
-      totalPriceDish = totalPrice;
+      const totalPrice = dish[0].price * dish[0].quantity;
+      
 
       // const totalPrice = parseFloat(dish[0].price) * dish[0]?.quantity;
 
@@ -46,11 +45,11 @@ const postCompleteOrder = async ({ order, userId }) => {
         userId,
         dishid: dish[0].id,
         quantity: dish[0].quantity,
-        unitaryPrice: parseFloat(dish[0].price),
-        totalPrice,
+        unitaryPrice: +dish[0].price,
+        totalPrice:totalPrice,
       };
-
       dishOrderId = await postDishOrder(dishObj);
+      totalPriceDish = totalPrice
     }
     if (hasGarnish) {
       const totalPrice = garnish[0].price * garnish[0]?.quantity;
@@ -62,19 +61,21 @@ const postCompleteOrder = async ({ order, userId }) => {
         unitaryPrice: garnish[0].price,
         totalPrice,
       };
-
-      totalPriceSide = totalPrice;
       sideOrderId = await postSideOrder(garnishObj);
+      totalPriceSide = totalPrice;
+    }else if (!hasGarnish){
+      sideOrderId = null;
     }
 
     if (dishOrderId !== null) {
-      dishSideOrderId = await postDishSideOrder({
+      const dishSideObj = {
         userId,
         dishOrderId,
         sideOrderId,
         quantity: dish[0].quantity,
-        totalPrice: totalPriceDish + totalPriceSide,
-      });
+        totalPrice: totalPriceDish + totalPriceSide
+      }
+      dishSideOrderId = await postDishSideOrder(dishSideObj);
     }
 
     //* HASTA ACA ANDA CHE!
@@ -111,21 +112,22 @@ const postCompleteOrder = async ({ order, userId }) => {
       }
     } else desertsOrdersIds === null;
 
-    const newCompleteOrder = await CompleteOrder.create({
-      dishSideId: dishSideOrderId,
-      drinks: drinksOrdersIds, //es un array con id de drinksOrders
-      deserts: desertsOrdersIds, //es un array con id de desertsOrders
-      userId: userId,
 
-      userEmail: userEmail,
-    });
+    const completeOrderObj = {
+      dishSideId:dishSideOrderId,
+      drinks:drinksOrdersIds,
+      deserts:desertsOrdersIds,
+      userId,
+      totalPrice: totalPriceDish+totalPriceSide,
+      userEmail
+    }
 
+    const newCompleteOrder = await CompleteOrder.create(completeOrderObj);
     completesOrders.push(newCompleteOrder.id);
   }
 
   const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
-
-  console.log(ticket.idPedido);
+  console.log('codigo del ticket-------------------------------------',ticket.idPedido);
   return ticket;
 };
 
