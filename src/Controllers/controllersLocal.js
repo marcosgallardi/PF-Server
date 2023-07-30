@@ -30,7 +30,7 @@ const getLocalById = async (id)=>{
 const updateLocal = async ( id, name,
     disabled,
     imageFile) => {
- try {
+ 
      let update = await Local.findOne({
          where:{
              id
@@ -51,13 +51,11 @@ const updateLocal = async ( id, name,
            await update.save();
            console.log(update);
          return update;
- } catch (error) {
-    throw new Error(error.message);
- };
-    
+ 
+
  };
 
- const postLocal = async ( name, disabled, image) =>{
+ const postLocal = async ( {name, disabled, image}) =>{
 
     const exists = await Local.findOne({
         where:{
