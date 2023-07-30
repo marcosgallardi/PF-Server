@@ -122,8 +122,10 @@ const postCompleteOrder = async ({ order, userId }) => {
 
     completesOrders.push(newCompleteOrder.id);
   }
+
   const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
 
+  console.log(ticket.idPedido);
   return ticket;
 };
 

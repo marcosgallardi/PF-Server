@@ -17,8 +17,6 @@ const createCompleteOrder = async (req, res) => {
 
     const newCompleteOrder = await postCompleteOrder({ order, userId });
 
-    console.log('ORDER HANDLER CREATE____', newCompleteOrder);
-
     return res.status(201).json(newCompleteOrder);
   } catch (error) {
     return res.status(200).json({ error: error.message });
