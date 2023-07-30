@@ -1,5 +1,5 @@
 const {Drink, Dish, Side, Desert} = require("../db");
-
+const uploadImage = require("../config/cloudinary");
 
 const updateDish = async ( id, name,
     description,
