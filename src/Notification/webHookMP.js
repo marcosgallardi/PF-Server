@@ -1,5 +1,5 @@
 const webHookMP = async(req, res) => {
-  console.log(req.body);
+  console.log('ESTO ES EL REQ.BODY!!!!!!!!!!!!!!',req.body);
   res.status(200).send("ok");
 };
 
