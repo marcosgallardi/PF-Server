@@ -1,6 +1,6 @@
 const { User } = require("../db");
 const { Op } = require("sequelize");
-
+const mailRegister = require("./mailRegister");
 //la validacion NO deberia ser con el name, sino con el email
 const postUser = async ({ name, lastName, email, password, birthDate, phoneNumber, image }) => {
   const existingUser = await User.findOne({
@@ -14,7 +14,8 @@ const postUser = async ({ name, lastName, email, password, birthDate, phoneNumbe
   if (existingUser) {
     throw new Error("el usuario ya existe");
   }
-  const newUser = await User.create({
+
+  const newUser = {
     name,
     lastName,
     email,
@@ -22,12 +23,12 @@ const postUser = async ({ name, lastName, email, password, birthDate, phoneNumbe
     birthDate,
     phoneNumber,
     image,
-  });
-  //   if (!name || !description || !releaseDate || !rating || !genres || !platforms) {
-  //     throw new Error("Todos los campos son requeridos.");
-  //   }
+  }
+  mailRegister(newUser.name,newUser.email)
+  const registerUser = await User.create(newUser);
+  
 
-  return newUser;
+  return registerUser;
 };
 
 module.exports = postUser;
