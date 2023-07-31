@@ -3,7 +3,7 @@ const axios = require("axios");
 const webHookMP = async (req, res) => {
   const mercadopago = require("mercadopago");
   try {
-    const constanteCopada = await axios.getaxios.get(
+    const constanteCopada = await axios.get(
       `https://api.mercadopago.com/v1/payments/${req.body.id}`,
       {
         headers: {
