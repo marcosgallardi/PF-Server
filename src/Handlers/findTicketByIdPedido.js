@@ -2,6 +2,7 @@ const getTicketByIdPedido = require("../Controllers/getTicketByIdPedido");
 
 const findTicketByIdPedido = async (req, res) => {
   const { id } = req.params;
+  console.log("handler-++----------", id);
   try {
     const ticket = await getTicketByIdPedido(id);
 

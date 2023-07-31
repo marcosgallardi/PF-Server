@@ -1,5 +1,5 @@
-const {Drink, Dish, Side, Desert} = require("../db");
-
+const {Drink, Dish, Side, Desert, User} = require("../db");
+const uploadImage = require("../config/cloudinary");
 
 const updateDish = async ( id, name,
     description,
@@ -12,7 +12,7 @@ const updateDish = async ( id, name,
    vegetarian,
    dailyspecial,
    price,
-   image) => {
+   imageFile) => {
 
     let update = await Dish.findOne({
         where:{
@@ -35,7 +35,10 @@ const updateDish = async ( id, name,
     if (vegetarian !== undefined) update.vegetarian = vegetarian;
     if (dailyspecial !== undefined) update.dailyspecial = dailyspecial;
     if (price !== undefined) update.price = price;
-    if (image) update.image = image;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
 
           await update.save();
           console.log(update);
@@ -49,7 +52,7 @@ const updateDrink = async ( id, name,
    stock,
    disabled,
    price,
-   image) => {
+   imageFile) => {
 
     let update = await Drink.findOne({
         where:{
@@ -57,7 +60,7 @@ const updateDrink = async ( id, name,
         } });
 
         if (!update) {
-           throw Error('Plato no encontrado');
+           throw Error('Bebida no encontrado');
           }
       
 
@@ -68,7 +71,10 @@ const updateDrink = async ( id, name,
     if (disabled !== undefined) update.disabled = disabled;
     if (alcohol!== undefined) update.alcohol = alcohol;
     if (price !== undefined) update.price = price;
-    if (image) update.image = image;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
 
           await update.save();
           console.log(update);
@@ -79,7 +85,7 @@ const updateDesert = async ( id, name,
     stock,
     disabled,
    price,
-   image) => {
+   imageFile) => {
 
     let update = await Desert.findOne({
         where:{
@@ -87,7 +93,7 @@ const updateDesert = async ( id, name,
         } });
 
         if (!update) {
-           throw Error('Plato no encontrado');
+           throw Error('Postre no encontrado');
           }
       
 
@@ -95,7 +101,10 @@ const updateDesert = async ( id, name,
     if (stock) update.stock = stock;
     if (disabled !== undefined) update.disabled = disabled;
     if (price !== undefined) update.price = price;
-    if (image) update.image = image;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
 
           await update.save();
           console.log(update);
@@ -107,7 +116,7 @@ const updateSide = async ( id, name,
    disabled,
    available,
    price,
-   image) => {
+   imageFile) => {
 
     let update = await Side.findOne({
         where:{
@@ -115,7 +124,7 @@ const updateSide = async ( id, name,
         } });
 
         if (!update) {
-           throw Error('Plato no encontrado');
+           throw Error('Acompañante no encontrado');
           }
       
 
@@ -124,7 +133,39 @@ const updateSide = async ( id, name,
     if (disabled !== undefined) update.disabled = disabled;
     if (available !== undefined) update.available = available;
     if (price !== undefined) update.price = price;
-    if (image) update.image = image;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
+
+          await update.save();
+          console.log(update);
+        return update;
+};
+
+const updateUser = async ( id, name, lastName, email, password, birthDate, phoneNumber,
+   imageFile) => {
+
+    let update = await User.findOne({
+        where:{
+            id
+        } });
+
+        if (!update) {
+           throw Error('Usuario no encontrado');
+          }
+      
+
+    if (name) update.name = name;
+    if (lastName) update.lastName = lastName;
+    if (email) update.email = email;
+    if (password) update.password = password;
+    if (birthDate) update.birthDate = birthDate;
+    if (phoneNumber) update.phoneNumber = phoneNumber;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
 
           await update.save();
           console.log(update);
@@ -133,4 +174,4 @@ const updateSide = async ( id, name,
 
 
 
-module.exports= {updateDish, updateDesert, updateDrink, updateSide};
+module.exports= {updateDish, updateDesert, updateDrink, updateSide, updateUser};

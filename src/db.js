@@ -55,6 +55,7 @@ const {
   Banner,
   Ticket,
   Comment,
+  Local,
   Cart,
 } = sequelize.models;
 

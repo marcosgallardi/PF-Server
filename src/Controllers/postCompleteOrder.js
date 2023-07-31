@@ -1,14 +1,11 @@
-const { CompleteOrder } = require("../db");
-const { Op } = require("sequelize");
+const { CompleteOrder, DishOrder, Dish, Drink, DrinkOrder } = require("../db");
 const postDrinkOrder = require("./postDrinkOrder");
 const postDesertOrder = require("./postDesertOrder");
 const postDishOrder = require("./postDishOrder");
 const postSideOrder = require("./postSideOrder");
 const postDishSideOrder = require("./postDishSideOrder");
-const postTicket = require('./postTicket')
+const postTicket = require("./postTicket");
 const getById = require("./getById");
-
-
 
 const postCompleteOrder = async ({ order, userId }) => {
 console.log("___________________USER ID_____________________");
@@ -27,7 +24,7 @@ console.log("___________________USER ID_____________________");
   // console.log('___________CONTROLLER CREATE_____________');
   // console.log('LONGITUD DE ORDER', order.length);
 
-  for (i = 0; i < order.length; i++) {
+  for (let i = 0; i < order.length; i++) {
     let drinksOrdersIds = [];
     let desertsOrdersIds = [];
     const { drinks, desserts, dish, garnish } = order[i];
@@ -41,8 +38,7 @@ console.log("___________________USER ID_____________________");
     const hasDeserts = desserts !== undefined && desserts !== null && desserts.length > 0;
 
     if (hasDish) {
-      const totalPrice = parseFloat(dish[0].price) * dish[0].quantity;
-      totalPriceDish = totalPrice;
+      const totalPrice = dish[0].price * dish[0].quantity;
 
       // const totalPrice = parseFloat(dish[0].price) * dish[0]?.quantity;
 
@@ -52,11 +48,15 @@ console.log("___________________USER ID_____________________");
         userId,
         dishid: dish[0].id,
         quantity: dish[0].quantity,
-        unitaryPrice: parseFloat(dish[0].price),
-        totalPrice,
+        unitaryPrice: +dish[0].price,
+        totalPrice: totalPrice,
       };
-
       dishOrderId = await postDishOrder(dishObj);
+      totalPriceDish = totalPrice;
+      const dishOrderToUpdate = await DishOrder.findByPk(dishOrderId);
+      const dishToUpdate = await Dish.findByPk(dishOrderToUpdate.dishid);
+      dishToUpdate.stock = dishToUpdate.stock - 1;
+      await dishToUpdate.save();
     }
     if (hasGarnish) {
       const totalPrice = garnish[0].price * garnish[0]?.quantity;
@@ -68,25 +68,27 @@ console.log("___________________USER ID_____________________");
         unitaryPrice: garnish[0].price,
         totalPrice,
       };
-
-      totalPriceSide = totalPrice;
       sideOrderId = await postSideOrder(garnishObj);
+      totalPriceSide = totalPrice;
+    } else if (!hasGarnish) {
+      sideOrderId = null;
     }
 
     if (dishOrderId !== null) {
-      dishSideOrderId = await postDishSideOrder({
+      const dishSideObj = {
         userId,
         dishOrderId,
         sideOrderId,
         quantity: dish[0].quantity,
         totalPrice: totalPriceDish + totalPriceSide,
-      });
+      };
+      dishSideOrderId = await postDishSideOrder(dishSideObj);
     }
 
     //* HASTA ACA ANDA CHE!
 
     if (hasDrinks) {
-      for (j = 0; j < drinks.length; j++) {
+      for (let j = 0; j < drinks.length; j++) {
         const drinkObj = {
           userId,
           drinkId: drinks[j].id,
@@ -94,15 +96,21 @@ console.log("___________________USER ID_____________________");
           unitaryPrice: drinks[j].price,
           totalPrice: drinks[j].price * drinks[j].quantity,
         };
+        const drinkToUpdate = await Drink.findByPk(drinks[j].id);
 
         let drinkOrderId = await postDrinkOrder(drinkObj);
 
+        drinkToUpdate.stock = drinkToUpdate.stock - drinks[j].quantity;
         drinksOrdersIds.push(drinkOrderId);
+
+        // Restamos el stock
+
+        await drinkToUpdate.save();
       }
     } else drinksOrdersIds === null;
 
     if (hasDeserts) {
-      for (k = 0; k < desserts.length; k++) {
+      for (let k = 0; k < desserts.length; k++) {
         const dessertObj = {
           userId,
           desertId: desserts[k].id,
@@ -117,27 +125,21 @@ console.log("___________________USER ID_____________________");
       }
     } else desertsOrdersIds === null;
 
-    const newCompleteOrder = await CompleteOrder.create({
+    const completeOrderObj = {
       dishSideId: dishSideOrderId,
-      drinks: drinksOrdersIds, //es un array con id de drinksOrders
-      deserts: desertsOrdersIds, //es un array con id de desertsOrders
-      userId: userId,
+      drinks: drinksOrdersIds,
+      deserts: desertsOrdersIds,
+      userId,
+      totalPrice: totalPriceDish + totalPriceSide,
+      userEmail,
+    };
 
-      userEmail: userEmail,
-    });
-
-
-
+    const newCompleteOrder = await CompleteOrder.create(completeOrderObj);
     completesOrders.push(newCompleteOrder.id);
   }
-  const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
-    console.log("TICKET______", ticket);
-    console.log("______________________________________________________");
-    console.log("COMPLETE ORDER______", completesOrders);
-    console.log("______________________________________________________");
-    console.log("USER ID________", userId);
-    console.log("______________________________________________________");
 
+  const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
+  console.log("codigo del ticket-------------------------------------", ticket.idPedido);
   return ticket;
 };
 

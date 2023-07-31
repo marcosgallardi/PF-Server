@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
       disabled: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: true,
+        defaultValue: false,
       },
       available: {
         type: DataTypes.BOOLEAN,
@@ -47,6 +47,14 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false,
+      hooks: {
+        beforeUpdate: (side) => {
+          // Verificar si el stock ha llegado a 0
+          if (side.stock === 0) {
+            side.available = false; // Si el stock es 0, deshabilitar el producto
+          }
+        },
+      },
     }
   );
 };

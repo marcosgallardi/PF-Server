@@ -19,11 +19,6 @@ const dishRouter = require("./dishRouter");
 const mpRouter = require("./mpRouter");
 const bannerRouter = require("./bannerRouter");
 const ticketRouter = require("./ticketRouter");
-const cartRouter = require("./cartRouter");
-const createJWTRouter = require("./JasonWebToken/createJWTRouter");
-const commentRouter = require("./commentRouter");
-
-const authenticateToken = require("../authMiddleware")
 
 mainRouter.use("/mercadopago", mpRouter);
 mainRouter.use("/search", nameRouter);
@@ -45,9 +40,6 @@ mainRouter.use("/dishSideOrder", dishSideOrderRouter);
 // Banner route
 mainRouter.use("/banner", bannerRouter);
 mainRouter.use("/ticket", ticketRouter);
-
-mainRouter.use("/create-jwt", createJWTRouter)
-mainRouter.use("/cart", authenticateToken, cartRouter);
 module.exports = mainRouter;
 
 // mainRouter.use(authenticateToken)

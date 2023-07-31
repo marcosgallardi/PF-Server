@@ -1,7 +1,10 @@
-const { DishSideOrder, DrinkOrder, SideOrder, DesertOrder, DishOrder, completeOrder } = require("../db");
+const { DishSideOrder, DrinkOrder, SideOrder, DesertOrder, DishOrder, CompleteOrder } = require("../db");
 const { Op } = require("sequelize");
 
 const getByIdOrders = async (id) => {
+  if (id === null) {
+    return null;
+  }
   const searchDishOrder = await DishOrder.findOne({
     where: {
       id: id,
@@ -33,11 +36,12 @@ const getByIdOrders = async (id) => {
     },
   });
   if (searchDishSideOrder) return searchDishSideOrder;
-  const searchCompleteOrder = await completeOrder.findOne({
+  const searchCompleteOrder = await CompleteOrder.findOne({
     where: {
       id: id,
     },
   });
+
   if (searchCompleteOrder) return searchCompleteOrder;
   else {
     throw Error("id no encontrada");

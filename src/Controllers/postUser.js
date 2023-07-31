@@ -1,5 +1,6 @@
 const { User } = require("../db");
 const { Op } = require("sequelize");
+const mailRegister = require("./mailRegister");
 
 const jwt = require("jsonwebtoken");
 
@@ -20,7 +21,8 @@ const postUser = async ({ name, lastName, email, password, birthDate, phoneNumbe
   if (existingUser) {
     throw new Error("el usuario ya existe");
   }
-  const newUser = await User.create({
+
+  const newUser = {
     name,
     lastName,
     email,
@@ -28,7 +30,10 @@ const postUser = async ({ name, lastName, email, password, birthDate, phoneNumbe
     birthDate,
     phoneNumber,
     image,
-  });
+  }
+  mailRegister(newUser.name,newUser.email)
+  const registerUser = await User.create(newUser);
+  
   //   if (!name || !description || !releaseDate || !rating || !genres || !platforms) {
   //     throw new Error("Todos los campos son requeridos.");
   //   }
@@ -46,7 +51,7 @@ const postUser = async ({ name, lastName, email, password, birthDate, phoneNumbe
   const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '1h' }); // El token expirará en 1 hora
 
 
-  return { newUser, token};
+  return { registerUser, token};
 };
 
 module.exports = postUser;
