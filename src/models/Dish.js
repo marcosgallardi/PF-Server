@@ -38,13 +38,19 @@ module.exports = (sequelize) => {
       disabled: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: true,
+        defaultValue: false,
       },
       //available:true significa que hay stock del producto != available: false, si bien no hay stock, el plato se muestra igual
       available: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: true,
+      },
+
+      stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 50,
       },
       calories: {
         type: DataTypes.INTEGER,
@@ -73,6 +79,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 1000,
       },
+      salesCount: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
       image: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -80,6 +91,14 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false,
+      hooks: {
+        beforeUpdate: (dish) => {
+          // Verificar si el stock ha llegado a 0
+          if (dish.stock === 0) {
+            dish.available = false; // Si el stock es 0, deshabilitar el producto
+          }
+        },
+      },
     }
   );
 };

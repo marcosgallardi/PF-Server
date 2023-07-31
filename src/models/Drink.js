@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
       disabled: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: true,
+        defaultValue: false,
       },
       //se muestra pero no se habilita
       available: {
@@ -65,7 +65,7 @@ module.exports = (sequelize) => {
         beforeUpdate: (drink) => {
           // Verificar si el stock ha llegado a 0
           if (drink.stock === 0) {
-            drink.disabled = false; // Si el stock es 0, deshabilitar el producto
+            drink.available = false; // Si el stock es 0, deshabilitar el producto
           }
         },
       },

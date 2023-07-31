@@ -27,12 +27,17 @@ module.exports = (sequelize) => {
       disabled: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: true,
+        defaultValue: false,
       },
       price: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 1000,
+      },
+      available: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
       },
       image: {
         type: DataTypes.STRING,
@@ -41,6 +46,14 @@ module.exports = (sequelize) => {
     },
     {
       timestamps: false,
+      hooks: {
+        beforeUpdate: (desert) => {
+          // Verificar si el stock ha llegado a 0
+          if (desert.stock === 0) {
+            desert.available = false; // Si el stock es 0, deshabilitar el producto
+          }
+        },
+      },
     }
   );
 };
