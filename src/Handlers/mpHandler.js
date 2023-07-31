@@ -2,7 +2,7 @@ const postMP = require("../Controllers/postMP");
 
 const mpHandler = async (req, res) => {
   const { title, unit_price, quantity } = req.body;
-    console.log(req.body)
+    // console.log(req.body)
   try {
     const response = await postMP(title, unit_price, quantity);
    

@@ -6,13 +6,13 @@ const path = require("path");
 
 const { DB_USER, DB_PASSWORD, DB_HOST, DATABASE_URL } = process.env;
 
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/elfestin`, {
-//   logging: false, // set to console.log to see the raw SQL queries
-//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-// });
-const sequelize = new Sequelize(DATABASE_URL, {
-  logging: false, // set to console.log to see the raw SQL queries   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pf_elfestin`, {
+  logging: false, // set to console.log to see the raw SQL queries
+  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
+// const sequelize = new Sequelize(DATABASE_URL, {
+//   logging: false, // set to console.log to see the raw SQL queries   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
 // const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DATABASE_URL}/elfestin`, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -55,19 +55,23 @@ const {
   Banner,
   Ticket,
   Comment,
+  Cart,
 } = sequelize.models;
 
+// Establece la asociación de uno a uno (1:1) entre User y Cart
+User.hasOne(Cart); // Un usuario puede tener un carrito
+Cart.belongsTo(User); // Un carrito pertenece a un usuario
+
+
 // Aca vendrian las relaciones
-Comment.associate = () => {
-  Comment.belongsTo(Dish);
-  Comment.belongsTo(User);
-};
-Dish.associate = () => {
-  Dish.hasMany(Comment);
-};
-User.associate = () => {
-  User.hasMany(Comment); // Establece una relación de uno a muchos con el modelo "Comment"
-};
+
+Comment.belongsTo(Dish);
+Comment.belongsTo(User);
+
+Dish.hasMany(Comment);
+
+User.hasMany(Comment); // Establece una relación de uno a muchos con el modelo "Comment"
+
 
 Dish.prototype.calculateAverageRating = async function () {
   const ratings = await Comment.findAll({
@@ -76,8 +80,12 @@ Dish.prototype.calculateAverageRating = async function () {
       DishId: this.id,
     },
   });
-  return ratings[0].dataValues.averageRating || 0;
+  const averageRating = parseFloat(ratings[0].dataValues.averageRating) || 0;
+  const roundedRating = Math.round(averageRating);
+
+  return roundedRating;
 };
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');

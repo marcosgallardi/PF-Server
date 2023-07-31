@@ -11,6 +11,10 @@ const getById = require("./getById");
 
 
 const postCompleteOrder = async ({ order, userId }) => {
+console.log("___________________USER ID_____________________");
+  console.log(userId);
+  console.log("___________________CONTROLLER_____________________");
+
   let dishOrderId = null;
   let sideOrderId = null;
   let dishSideOrderId = null;
@@ -126,7 +130,13 @@ const postCompleteOrder = async ({ order, userId }) => {
 
     completesOrders.push(newCompleteOrder.id);
   }
-    const ticket = await postTicket(userId,completesOrders)
+  const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
+    console.log("TICKET______", ticket);
+    console.log("______________________________________________________");
+    console.log("COMPLETE ORDER______", completesOrders);
+    console.log("______________________________________________________");
+    console.log("USER ID________", userId);
+    console.log("______________________________________________________");
 
   return ticket;
 };
