@@ -1,4 +1,4 @@
-const {Drink, Dish, Side, Desert} = require("../db");
+const {Drink, Dish, Side, Desert, User} = require("../db");
 const uploadImage = require("../config/cloudinary");
 
 const updateDish = async ( id, name,
@@ -60,7 +60,7 @@ const updateDrink = async ( id, name,
         } });
 
         if (!update) {
-           throw Error('Plato no encontrado');
+           throw Error('Bebida no encontrado');
           }
       
 
@@ -93,7 +93,7 @@ const updateDesert = async ( id, name,
         } });
 
         if (!update) {
-           throw Error('Plato no encontrado');
+           throw Error('Postre no encontrado');
           }
       
 
@@ -124,7 +124,7 @@ const updateSide = async ( id, name,
         } });
 
         if (!update) {
-           throw Error('Plato no encontrado');
+           throw Error('Acompañante no encontrado');
           }
       
 
@@ -141,8 +141,37 @@ const updateSide = async ( id, name,
           await update.save();
           console.log(update);
         return update;
+};
+
+const updateUser = async ( id, name, lastName, email, password, birthDate, phoneNumber,
+   imageFile) => {
+
+    let update = await User.findOne({
+        where:{
+            id
+        } });
+
+        if (!update) {
+           throw Error('Usuario no encontrado');
+          }
+      
+
+    if (name) update.name = name;
+    if (lastName) update.lastName = lastName;
+    if (email) update.email = email;
+    if (password) update.password = password;
+    if (birthDate) update.birthDate = birthDate;
+    if (phoneNumber) update.phoneNumber = phoneNumber;
+    if (imageFile){
+        const result = await uploadImage(imageFile.tempFilePath);
+        update.image = result.secure_url;
+     } 
+
+          await update.save();
+          console.log(update);
+        return update;
 }
 
 
 
-module.exports= {updateDish, updateDesert, updateDrink, updateSide};
+module.exports= {updateDish, updateDesert, updateDrink, updateSide, updateUser};
