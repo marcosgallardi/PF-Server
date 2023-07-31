@@ -1,4 +1,4 @@
-const {updateDish, updateDesert, updateDrink, updateSide} = require("../Controllers/controllersPut");
+const {updateDish, updateDesert, updateDrink, updateSide, updateUser} = require("../Controllers/controllersPut");
 
 
 
@@ -139,7 +139,29 @@ const handlerSide = async(req, res)=>{
         res.status(200).json({ error: error.message });
     }
 
-}
+};
+
+const handlerUser = async(req, res)=>{
+
+    try {
+        const {id} = req.params;
+        const { name, lastName, email, password, birthDate, phoneNumber } = req.body;
+
+            let imageFile = null;
+            if (req.files && req.files.image) {
+              imageFile = req.files.image;
+            }
+
+        const userUP = await updateUser(id, name, lastName, email, password, birthDate, phoneNumber, imageFile) 
+
+           res.status(200).json(userUP)
+    } catch (error) {
+        res.status(200).json({ error: error.message });
+    }
+
+};
 
 
-module.exports = {handlerDish, handlerDesert, handlerDrink, handlerSide};
+
+
+module.exports = {handlerDish, handlerDesert, handlerDrink, handlerSide, handlerUser};

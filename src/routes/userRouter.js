@@ -4,6 +4,7 @@ const userRouter = Router();
 const users = require("../Handlers/users");
 const createUser = require("../Handlers/createUser");
 const userById = require("../Handlers/userById");
+const { handlerUser } = require("../Handlers/handlersPut");
 // /**
 //  * @swagger
 //  * components:
@@ -68,7 +69,7 @@ const userById = require("../Handlers/userById");
 //  */
 userRouter.post("/", createUser);
 userRouter.get("/", users);
-
+userRouter.put("/:id", handlerUser)
 userRouter.get("/order/:id", userById);
 
 // /**
