@@ -1,5 +1,8 @@
 const webHookMP = async(req, res) => {
-  
+const mercadopago = require('mercadopago');
+
+mercadopago.configurations.setAccessToken("TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523");
+
   mercadopago.payment.save(payment_data)
   .then(function(response) {
     res.status(response.status).json({
