@@ -7,11 +7,11 @@ const webHookMP = async (req, res) => {
       `https://api.mercadopago.com/v1/payments/${req.body.id}`,
       {
         headers: {
-          Authorization: `Bearer TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523`,
+          'Authorization': `Bearer TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523`,
         },
       }
     );
-    console.log(constanteCopada)
+    console.log(constanteCopada.status)
   } catch (error) {
     console.error("Error:", error.message);
   }
