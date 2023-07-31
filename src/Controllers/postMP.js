@@ -14,6 +14,12 @@ const postMP = async ( title, unit_price, quantity) => {
         quantity: Number(quantity),
       },
     ],
+    back_urls: {
+      //a donde va el cliente una vez que la compra finaliza, poner url de railway
+      success: "https://pf-front-end-grupo3.vercel.app/",
+      failure: "https://pf-front-end-grupo3.vercel.app/home",
+      pending: "https://pf-front-end-grupo3.vercel.app/home",
+    },
     redirect_urls: {
       //a donde va el cliente una vez que la compra finaliza, poner url de railway
       success: "https://pf-front-end-grupo3.vercel.app/",
