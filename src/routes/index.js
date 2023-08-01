@@ -22,6 +22,7 @@ const ticketRouter = require("./ticketRouter");
 const commentRouter = require("./commentRouter");
 const authenticateToken = require("../authMiddleware")
 const createJWTRouter = require("./JsonWebToken/createJWTRouter");
+const cartRouter = require("./cartRouter");
 
 mainRouter.use("/mercadopago", mpRouter);
 mainRouter.use("/search", nameRouter);
@@ -46,6 +47,7 @@ mainRouter.use("/ticket", ticketRouter);
 
 mainRouter.use("/create-jwt", createJWTRouter)
 
+mainRouter.use("/cart", authenticateToken, cartRouter)
 mainRouter.use("/completeOrder", authenticateToken, completeOrderRouter);
 
 mainRouter.use("/comment", commentRouter)
