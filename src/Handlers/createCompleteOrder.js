@@ -1,13 +1,17 @@
 const postCompleteOrder = require("../Controllers/postCompleteOrder");
 const getByIdOrder = require("../Controllers/getByIdOrders");
-
-const getUserIdFromDatabase = require('../functions/getUserIdByEmail')
+const getUserIdFromDatabase = require('../functions/getUserIdByEmail');
+const webHookMP = require('../Notification/webHookMP');
 
 const createCompleteOrder = async (req, res) => {
 
   const { order } = req.body;
 
   try {
+
+    const status = await webHookMP();
+
+    console.log('ESTE ES EL STATUS CORNETAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',status);
 
     let userId = ''
 
@@ -19,11 +23,11 @@ const createCompleteOrder = async (req, res) => {
       res.status(400).json({ error: 'Error al obtener el usuario' });
     }
 
-    console.log("USER ID DB_____", userId);
+    console.log("USER ID DB_", userId);
 
     const newCompleteOrder = await postCompleteOrder({ order, userId });
 
-    // console.log('ORDER HANDLER CREATE____', newCompleteOrder);
+    // console.log('ORDER HANDLER CREATE__', newCompleteOrder);
 
     return res.status(201).json(newCompleteOrder);
   } catch (error) {
