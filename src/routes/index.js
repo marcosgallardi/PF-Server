@@ -19,6 +19,8 @@ const dishRouter = require("./dishRouter");
 const mpRouter = require("./mpRouter");
 const bannerRouter = require("./bannerRouter");
 const ticketRouter = require("./ticketRouter");
+const commentRouter = require("./commentRouter");
+const authenticateToken = require("../authMiddleware")
 
 mainRouter.use("/mercadopago", mpRouter);
 mainRouter.use("/search", nameRouter);

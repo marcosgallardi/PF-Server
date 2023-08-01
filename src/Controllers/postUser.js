@@ -34,15 +34,11 @@ const postUser = async ({ name, lastName, email, password, birthDate, phoneNumbe
   mailRegister(newUser.name,newUser.email)
   const registerUser = await User.create(newUser);
   
-  //   if (!name || !description || !releaseDate || !rating || !genres || !platforms) {
-  //     throw new Error("Todos los campos son requeridos.");
-  //   }
-
    // Crear el payload del token con la información del usuario que quieras incluir
    const payload = {
-    userId: newUser.id,
-    name: newUser.name,
-    email: newUser.email,
+    userId: registerUser.id,
+    name: registerUser.name,
+    email: registerUser.email,
     source: 'database',
     // Puedes incluir más información aquí si lo deseas
   };
