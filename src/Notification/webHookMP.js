@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const webHookMP = async (req, res) => {
   try {
-    const constanteCopada = await axios.get(
+    const mpResponse = await axios.get(
       `https://api.mercadopago.com/v1/payments/${req.body.data.id}`,
       {
         headers: {
@@ -10,7 +10,8 @@ const webHookMP = async (req, res) => {
         },
       }
     );
-    console.log('CONSTANTE COPADAAAAAAAAAAAAA',constanteCopada.data.status)
+    //console.log('CONSTANTE COPADAAAAAAAAAAAAA',mpResponse.data.status)
+    return mpResponse.data.status;
   } catch (error) {
     console.error("Error:", error.message);
   }

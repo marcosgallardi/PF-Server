@@ -1,19 +1,12 @@
 const postCompleteOrder = require("../Controllers/postCompleteOrder");
 const getByIdOrder = require("../Controllers/getByIdOrders");
+const webHookMP = require('../Notification/webHookMP');
 const createCompleteOrder = async (req, res) => {
   const { order, userId } = req.body;
-
-  // console.log('___________HANDLER CREATE_____________');
-  // console.log("ORDER", order);
-  // console.log("USERID", userId);
-  // console.log("ORDER DESSERT", order[0].desserts);
+  const status = await webHookMP();
   try {
+    console.log('statussssssssssssssssssssssssssssssssss',status)
     const completeOrder = { order };
-    // console.log(completeOrder);
-
-    // console.log(completeOrder.drinks[2]);
-    // const order = await getByIdOrder(completeOrder.drinks[0]);
-    // console.log(order.drinkName);
 
     const newCompleteOrder = await postCompleteOrder({ order, userId });
 
