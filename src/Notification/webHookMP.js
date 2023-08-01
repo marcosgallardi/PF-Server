@@ -10,7 +10,7 @@ const webHookMP = async (req, res) => {
         },
       }
     );
-    //console.log('CONSTANTE COPADAAAAAAAAAAAAA',mpResponse.data.status)
+    console.log('CONSTANTE COPADAAAAAAAAAAAAA',mpResponse.data.status)
     return mpResponse.data.status;
   } catch (error) {
     console.error("Error:", error.message);

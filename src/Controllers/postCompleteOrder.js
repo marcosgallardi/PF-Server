@@ -1,4 +1,4 @@
-const { CompleteOrder } = require("../db");
+const { CompleteOrder, DishOrder, Dish, Drink, DrinkOrder } = require("../db");
 const postDrinkOrder = require("./postDrinkOrder");
 const postDesertOrder = require("./postDesertOrder");
 const postDishOrder = require("./postDishOrder");
@@ -8,6 +8,10 @@ const postTicket = require("./postTicket");
 const getById = require("./getById");
 
 const postCompleteOrder = async ({ order, userId }) => {
+console.log("___________________USER ID_____________________");
+  console.log(userId);
+  console.log("___________________CONTROLLER_____________________");
+
   let dishOrderId = null;
   let sideOrderId = null;
   let dishSideOrderId = null;
@@ -20,7 +24,7 @@ const postCompleteOrder = async ({ order, userId }) => {
   // console.log('___________CONTROLLER CREATE_____________');
   // console.log('LONGITUD DE ORDER', order.length);
 
-  for (i = 0; i < order.length; i++) {
+  for (let i = 0; i < order.length; i++) {
     let drinksOrdersIds = [];
     let desertsOrdersIds = [];
     const { drinks, desserts, dish, garnish } = order[i];
@@ -35,7 +39,6 @@ const postCompleteOrder = async ({ order, userId }) => {
 
     if (hasDish) {
       const totalPrice = dish[0].price * dish[0].quantity;
-      
 
       // const totalPrice = parseFloat(dish[0].price) * dish[0]?.quantity;
 
@@ -46,10 +49,14 @@ const postCompleteOrder = async ({ order, userId }) => {
         dishid: dish[0].id,
         quantity: dish[0].quantity,
         unitaryPrice: +dish[0].price,
-        totalPrice:totalPrice,
+        totalPrice: totalPrice,
       };
       dishOrderId = await postDishOrder(dishObj);
-      totalPriceDish = totalPrice
+      totalPriceDish = totalPrice;
+      const dishOrderToUpdate = await DishOrder.findByPk(dishOrderId);
+      const dishToUpdate = await Dish.findByPk(dishOrderToUpdate.dishid);
+      dishToUpdate.stock = dishToUpdate.stock - 1;
+      await dishToUpdate.save();
     }
     if (hasGarnish) {
       const totalPrice = garnish[0].price * garnish[0]?.quantity;
@@ -63,7 +70,7 @@ const postCompleteOrder = async ({ order, userId }) => {
       };
       sideOrderId = await postSideOrder(garnishObj);
       totalPriceSide = totalPrice;
-    }else if (!hasGarnish){
+    } else if (!hasGarnish) {
       sideOrderId = null;
     }
 
@@ -73,15 +80,15 @@ const postCompleteOrder = async ({ order, userId }) => {
         dishOrderId,
         sideOrderId,
         quantity: dish[0].quantity,
-        totalPrice: totalPriceDish + totalPriceSide
-      }
+        totalPrice: totalPriceDish + totalPriceSide,
+      };
       dishSideOrderId = await postDishSideOrder(dishSideObj);
     }
 
     //* HASTA ACA ANDA CHE!
 
     if (hasDrinks) {
-      for (j = 0; j < drinks.length; j++) {
+      for (let j = 0; j < drinks.length; j++) {
         const drinkObj = {
           userId,
           drinkId: drinks[j].id,
@@ -89,15 +96,21 @@ const postCompleteOrder = async ({ order, userId }) => {
           unitaryPrice: drinks[j].price,
           totalPrice: drinks[j].price * drinks[j].quantity,
         };
+        const drinkToUpdate = await Drink.findByPk(drinks[j].id);
 
         let drinkOrderId = await postDrinkOrder(drinkObj);
 
+        drinkToUpdate.stock = drinkToUpdate.stock - drinks[j].quantity;
         drinksOrdersIds.push(drinkOrderId);
+
+        // Restamos el stock
+
+        await drinkToUpdate.save();
       }
     } else drinksOrdersIds === null;
 
     if (hasDeserts) {
-      for (k = 0; k < desserts.length; k++) {
+      for (let k = 0; k < desserts.length; k++) {
         const dessertObj = {
           userId,
           desertId: desserts[k].id,
@@ -112,22 +125,21 @@ const postCompleteOrder = async ({ order, userId }) => {
       }
     } else desertsOrdersIds === null;
 
-
     const completeOrderObj = {
-      dishSideId:dishSideOrderId,
-      drinks:drinksOrdersIds,
-      deserts:desertsOrdersIds,
+      dishSideId: dishSideOrderId,
+      drinks: drinksOrdersIds,
+      deserts: desertsOrdersIds,
       userId,
-      totalPrice: totalPriceDish+totalPriceSide,
-      userEmail
-    }
+      totalPrice: totalPriceDish + totalPriceSide,
+      userEmail,
+    };
 
     const newCompleteOrder = await CompleteOrder.create(completeOrderObj);
     completesOrders.push(newCompleteOrder.id);
   }
 
   const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
-  console.log('codigo del ticket-------------------------------------',ticket.idPedido);
+  console.log("codigo del ticket-------------------------------------", ticket.idPedido);
   return ticket;
 };
 
