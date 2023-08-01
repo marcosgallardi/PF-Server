@@ -8,6 +8,10 @@ const postTicket = require("./postTicket");
 const getById = require("./getById");
 
 const postCompleteOrder = async ({ order, userId }) => {
+console.log("___________________USER ID_____________________");
+  console.log(userId);
+  console.log("___________________CONTROLLER_____________________");
+
   let dishOrderId = null;
   let sideOrderId = null;
   let dishSideOrderId = null;
