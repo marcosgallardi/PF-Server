@@ -12,7 +12,7 @@ const getLocal = async ()=>{
     return localg;
 };
 
-const getLocalById = async (id)=>{
+const getLocalById = async ({id})=>{
 
     let localg = await Local.findOne({
         where:{
@@ -27,9 +27,9 @@ const getLocalById = async (id)=>{
     return localg;
 };
 
-const updateLocal = async ( id, name,
+const updateLocal = async ({ id, name,
     disabled,
-    imageFile) => {
+    imageFile}) => {
  
      let update = await Local.findOne({
          where:{
@@ -79,7 +79,7 @@ const updateLocal = async ( id, name,
     
  };
 
- const deleteLocal = async (id) =>{
+ const deleteLocal = async ({id}) =>{
 
     const localDele = await Local.findOne({ where: { id } });
 

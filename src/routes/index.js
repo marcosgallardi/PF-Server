@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const userRouter = require("./userRouter");
-
+const localRouter = require("./localRouter")
 const desertRouter = require("./desertRouter");
 const dish_sideRouter = require("./dish_sideRouter");
 const orderRouter = require("./orderRouter");
@@ -45,6 +45,7 @@ mainRouter.use("/dishSideOrder", dishSideOrderRouter);
 mainRouter.use("/banner", bannerRouter);
 mainRouter.use("/ticket", ticketRouter);
 
+mainRouter.use("/local", localRouter);
 mainRouter.use("/create-jwt", createJWTRouter)
 
 mainRouter.use("/cart", authenticateToken, cartRouter)

@@ -65,14 +65,14 @@ const handlerDrink = async(req, res)=>{
       }
 
 
-        const drinkUP = await updateDrink(id,  name,
+        const drinkUP = await updateDrink({id,  name,
             volume,
            type,
            disabled,
            alcohol,
            stock,
            price,
-           imageFile) 
+           imageFile}) 
 
            res.status(200).json(drinkUP)
     } catch (error) {
@@ -97,11 +97,11 @@ const handlerDesert = async(req, res)=>{
       }
 
 
-        const deserthUP = await updateDesert(id, name,
+        const deserthUP = await updateDesert({id, name,
             stock,
             disabled,
            price,
-           imageFile) 
+           imageFile}) 
 
            res.status(200).json(deserthUP)
     } catch (error) {
@@ -127,12 +127,12 @@ const handlerSide = async(req, res)=>{
               imageFile = req.files.image;
             }
 
-        const sideUP = await updateSide(id, name,
+        const sideUP = await updateSide({id, name,
             type,
             available,
             disabled,
             price,
-            imageFile) 
+            imageFile}) 
 
            res.status(200).json(sideUP)
     } catch (error) {
@@ -152,7 +152,7 @@ const handlerUser = async(req, res)=>{
               imageFile = req.files.image;
             }
 
-        const userUP = await updateUser(id, name, lastName, email, password, birthDate, phoneNumber, imageFile) 
+        const userUP = await updateUser({id, name, lastName, email, password, birthDate, phoneNumber, imageFile}) 
 
            res.status(200).json(userUP)
     } catch (error) {

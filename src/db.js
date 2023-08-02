@@ -6,7 +6,7 @@ const path = require("path");
 
 const { DB_USER, DB_PASSWORD, DB_HOST, DATABASE_URL } = process.env;
 
-// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pf_elfestin`, {
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/elfestin`, {
 //   logging: false, // set to console.log to see the raw SQL queries
 //   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 // });
@@ -63,7 +63,6 @@ const {
 User.hasOne(Cart); // Un usuario puede tener un carrito
 Cart.belongsTo(User); // Un carrito pertenece a un usuario
 
-
 // Aca vendrian las relaciones
 
 Comment.belongsTo(Dish);
@@ -72,7 +71,6 @@ Comment.belongsTo(User);
 Dish.hasMany(Comment);
 
 User.hasMany(Comment); // Establece una relación de uno a muchos con el modelo "Comment"
-
 
 Dish.prototype.calculateAverageRating = async function () {
   const ratings = await Comment.findAll({
