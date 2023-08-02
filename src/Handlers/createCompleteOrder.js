@@ -8,7 +8,8 @@ const createCompleteOrder = async (req, res) => {
 
   try {
     // const status = await webHookMP();
-
+    const status = await webHookMP();
+    console.log("STATUS _______________________", status);
     let userId = "";
 
     if (req.user.source === "firebase") {
@@ -18,8 +19,6 @@ const createCompleteOrder = async (req, res) => {
     } else {
       res.status(400).json({ error: "Error al obtener el usuario" });
     }
-
-    console.log("USER ID DB_", userId);
 
     const newCompleteOrder = await postCompleteOrder({ order, userId });
 

@@ -8,10 +8,6 @@ const postTicket = require("./postTicket");
 const getById = require("./getById");
 
 const postCompleteOrder = async ({ order, userId }) => {
-  console.log("___________________USER ID_____________________");
-  console.log(order);
-  console.log("puta ORDERRRRRRRRR");
-
   let dishOrderId = null;
   let sideOrderId = null;
   let dishSideOrderId = null;
@@ -20,9 +16,6 @@ const postCompleteOrder = async ({ order, userId }) => {
   let completesOrders = [];
   const user = await getById(userId);
   const userEmail = user.email;
-
-  // console.log('___________CONTROLLER CREATE_____________');
-  // console.log('LONGITUD DE ORDER', order.length);
 
   for (let i = 0; i < order.length; i++) {
     let drinksOrdersIds = [];
@@ -138,7 +131,6 @@ const postCompleteOrder = async ({ order, userId }) => {
     const newCompleteOrder = await CompleteOrder.create(completeOrderObj);
     completesOrders.push(newCompleteOrder.id);
   }
-  console.log("Completeorders------------------", completesOrders);
 
   const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
   console.log("codigo del ticket-------------------------------------", ticket.idPedido);

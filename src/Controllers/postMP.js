@@ -30,7 +30,7 @@ const postMP = async (title, unit_price, quantity) => {
 
   try {
     let response = await mercadopago.preferences.create(preference);
-    // console.log("RESPONSEEEEEE", response);
+
     return response;
   } catch (error) {
     console.log("ERRORRRRRRR", error);
