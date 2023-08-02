@@ -6,6 +6,7 @@ const postSideOrder = require("./postSideOrder");
 const postDishSideOrder = require("./postDishSideOrder");
 const postTicket = require("./postTicket");
 const getById = require("./getById");
+const webHookMP = require("../Notification/webHookMP");
 
 const postCompleteOrder = async ({ order, userId }) => {
   let dishOrderId = null;
@@ -134,6 +135,9 @@ const postCompleteOrder = async ({ order, userId }) => {
 
   const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
   console.log("codigo del ticket-------------------------------------", ticket.idPedido);
+  const status = await webHookMP();
+  console.log("status de webhook_________________________", status);
+
   return ticket;
 };
 
