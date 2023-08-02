@@ -69,11 +69,8 @@ module.exports = (sequelize) => {
           } else {
             drink.available = true;
           }
-          else{
-            drink.available = true;
-          }
         },
-      },
+      }
     }
   );
 };
