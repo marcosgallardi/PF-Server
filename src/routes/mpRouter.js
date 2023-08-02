@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const mpHandler = require("../Handlers/mpHandler");
-const webHookMP = require("../Handlers/createCompleteOrder");
+const webHookMP = require("../Notification/webHookMP");
 const mpRouter = Router();
 
 mpRouter.post("/", mpHandler);
