@@ -11,20 +11,21 @@ const createCompleteOrder = async (req, res) => {
     const status = await webHookMP();
     console.log("STATUS _______________________", status);
     let userId = "";
+    if (status === "approved") {
+      if (req.user.source === "firebase") {
+        userId = await getUserIdFromDatabase(req.user.email);
+      } else if (req.user.source === "database") {
+        userId = req.user.userId;
+      } else {
+        res.status(400).json({ error: "Error al obtener el usuario" });
+      }
 
-    if (req.user.source === "firebase") {
-      userId = await getUserIdFromDatabase(req.user.email);
-    } else if (req.user.source === "database") {
-      userId = req.user.userId;
-    } else {
-      res.status(400).json({ error: "Error al obtener el usuario" });
+      const newCompleteOrder = await postCompleteOrder({ order, userId });
+
+      // console.log('ORDER HANDLER CREATE__', newCompleteOrder);
+
+      return res.status(201).json(newCompleteOrder);
     }
-
-    const newCompleteOrder = await postCompleteOrder({ order, userId });
-
-    // console.log('ORDER HANDLER CREATE__', newCompleteOrder);
-
-    return res.status(201).json(newCompleteOrder);
   } catch (error) {
     return res.status(200).json({ error: error.message });
   }
