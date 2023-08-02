@@ -1,7 +1,7 @@
 const {Drink, Dish, Side, Desert, User} = require("../db");
 const uploadImage = require("../config/cloudinary");
 
-const updateDish = async ( id, name,
+const updateDish = async ( {id, name,
     description,
    type,
    subtype,
@@ -12,7 +12,7 @@ const updateDish = async ( id, name,
    vegetarian,
    dailyspecial,
    price,
-   imageFile) => {
+   imageFile}) => {
 
     let update = await Dish.findOne({
         where:{
@@ -45,14 +45,16 @@ const updateDish = async ( id, name,
         return update;
 }
 
-const updateDrink = async ( id, name,
+const updateDrink = async ( {id, name,
     volume,
+    category,
    type,
    alcohol,
    stock,
+   available,
    disabled,
    price,
-   imageFile) => {
+   imageFile}) => {
 
     let update = await Drink.findOne({
         where:{
@@ -66,10 +68,12 @@ const updateDrink = async ( id, name,
 
     if (name) update.name = name;
     if (volume) update.volume = volume;
+    if (category) update.category = category;
     if (type) update.type = type;
-    if (stock) update.stock = stock;
+    if (stock !== undefined) update.stock = stock;
     if (disabled !== undefined) update.disabled = disabled;
     if (alcohol!== undefined) update.alcohol = alcohol;
+    if (available !== undefined) update.available = available;
     if (price !== undefined) update.price = price;
     if (imageFile){
         const result = await uploadImage(imageFile.tempFilePath);
@@ -81,11 +85,11 @@ const updateDrink = async ( id, name,
         return update;
 }
 
-const updateDesert = async ( id, name,
+const updateDesert = async ( {id, name,
     stock,
     disabled,
    price,
-   imageFile) => {
+   imageFile}) => {
 
     let update = await Desert.findOne({
         where:{
@@ -111,12 +115,12 @@ const updateDesert = async ( id, name,
         return update;
 }
 
-const updateSide = async ( id, name,
+const updateSide = async ( {id, name,
    type,
    disabled,
    available,
    price,
-   imageFile) => {
+   imageFile}) => {
 
     let update = await Side.findOne({
         where:{
@@ -143,8 +147,8 @@ const updateSide = async ( id, name,
         return update;
 };
 
-const updateUser = async ( id, name, lastName, email, password, birthDate, phoneNumber,
-   imageFile) => {
+const updateUser = async ({ id, name, lastName, email, password, birthDate, phoneNumber,
+   imageFile}) => {
 
     let update = await User.findOne({
         where:{
