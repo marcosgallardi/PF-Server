@@ -7,7 +7,7 @@ const getAllDishes = async () => {
       attributes: ['id', 'content', 'createdAt', 'rating'], // Especificamos qué atributos de Comment queremos obtener
       include: {
         model: User, // Incluimos el modelo User en la consulta de Comment
-        attributes: ['id', 'name'], // Especificamos qué atributos de User queremos obtener
+        attributes: ['id', 'name', 'image'], // Especificamos qué atributos de User queremos obtener
       },
     },
   });
