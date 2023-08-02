@@ -67,6 +67,9 @@ module.exports = (sequelize) => {
           if (drink.stock === 0) {
             drink.available = false; // Si el stock es 0, deshabilitar el producto
           }
+          else{
+            drink.available = true;
+          }
         },
       },
     }

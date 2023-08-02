@@ -16,7 +16,7 @@ const handlerGetLocal = async (req, res) =>{
 const handlerGetLocalById = async (req, res) =>{
     try {
         let {id} = req.params
-        let localGet = await getLocalById(id);
+        let localGet = await getLocalById({id});
 
         res.status(200).json(localGet)
     } catch (error) {
@@ -34,7 +34,7 @@ const handlerUpLocal = async (req, res) => {
         imageFile = req.files.image;
       }
   
-      const upLocal = await updateLocal(id, name, disabled, imageFile);
+      const upLocal = await updateLocal({id, name, disabled, imageFile});
   
       res.status(200).json(upLocal);
     } catch (error) {
@@ -56,7 +56,7 @@ const handlerUpLocal = async (req, res) => {
         }
       } else imageURL = null;
       const localImg = { name, disabled, image: imageURL };
-      const newLocal = await postLocal(localImg);
+      const newLocal = await postLocal({localImg});
   
      res.status(201).json(newLocal);
     } catch (error) {
@@ -68,7 +68,7 @@ const handlerUpLocal = async (req, res) => {
   const handlerDeleLocal = async (req, res) =>{
     try {
         const {id} = req.params
-        const localDele = await deleteLocal(id);
+        const localDele = await deleteLocal({id});
 
         res.status(201).json(localDele);
     } catch (error) {
