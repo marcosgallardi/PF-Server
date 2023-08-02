@@ -6,7 +6,7 @@ const axios = require("axios");
 let mpresponse = null;
 
 const webHookMP = async (req, res) => {
-  const { id } = req.body.data;
+  const { id } = req?.body.data;
   try {
     mpresponse = await axios.get(`https://api.mercadopago.com/v1/payments/${id}`, {
       headers: {
