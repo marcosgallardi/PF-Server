@@ -64,8 +64,10 @@ module.exports = (sequelize) => {
       hooks: {
         beforeUpdate: (drink) => {
           // Verificar si el stock ha llegado a 0
-          if (drink.stock === 0) {
+          if (drink.stock < 1) {
             drink.available = false; // Si el stock es 0, deshabilitar el producto
+          } else {
+            drink.available = true;
           }
         },
       },

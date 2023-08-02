@@ -1,29 +1,24 @@
 const postCompleteOrder = require("../Controllers/postCompleteOrder");
 const getByIdOrder = require("../Controllers/getByIdOrders");
-const getUserIdFromDatabase = require('../functions/getUserIdByEmail');
-const webHookMP = require('../Notification/webHookMP');
+const getUserIdFromDatabase = require("../functions/getUserIdByEmail");
+const webHookMP = require("../Notification/webHookMP");
 
 const createCompleteOrder = async (req, res) => {
-
   const { order } = req.body;
 
   try {
-
+    // const status = await webHookMP();
     const status = await webHookMP();
+    console.log("STATUS _______________________", status);
+    let userId = "";
 
-    console.log('ESTE ES EL STATUS CORNETAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',status);
-
-    let userId = ''
-
-    if (req.user.source === 'firebase') {
+    if (req.user.source === "firebase") {
       userId = await getUserIdFromDatabase(req.user.email);
-    } else if (req.user.source === 'database') {
+    } else if (req.user.source === "database") {
       userId = req.user.userId;
     } else {
-      res.status(400).json({ error: 'Error al obtener el usuario' });
+      res.status(400).json({ error: "Error al obtener el usuario" });
     }
-
-    console.log("USER ID DB_", userId);
 
     const newCompleteOrder = await postCompleteOrder({ order, userId });
 

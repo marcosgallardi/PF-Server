@@ -1,4 +1,4 @@
-const { CompleteOrder, DishOrder, Dish, Drink, DrinkOrder } = require("../db");
+const { CompleteOrder, DishOrder, Dish, Drink, DrinkOrder, Desert } = require("../db");
 const postDrinkOrder = require("./postDrinkOrder");
 const postDesertOrder = require("./postDesertOrder");
 const postDishOrder = require("./postDishOrder");
@@ -8,10 +8,6 @@ const postTicket = require("./postTicket");
 const getById = require("./getById");
 
 const postCompleteOrder = async ({ order, userId }) => {
-console.log("___________________USER ID_____________________");
-  console.log(userId);
-  console.log("___________________CONTROLLER_____________________");
-
   let dishOrderId = null;
   let sideOrderId = null;
   let dishSideOrderId = null;
@@ -20,9 +16,6 @@ console.log("___________________USER ID_____________________");
   let completesOrders = [];
   const user = await getById(userId);
   const userEmail = user.email;
-
-  // console.log('___________CONTROLLER CREATE_____________');
-  // console.log('LONGITUD DE ORDER', order.length);
 
   for (let i = 0; i < order.length; i++) {
     let drinksOrdersIds = [];
@@ -118,10 +111,11 @@ console.log("___________________USER ID_____________________");
           unitaryPrice: desserts[k].price,
           totalPrice: desserts[k].price * desserts[k].quantity,
         };
-
+        const dessertToUpdate = await Desert.findByPk(desserts[k].id);
         let desertOrderId = await postDesertOrder(dessertObj);
-
+        dessertToUpdate.stock = dessertToUpdate.stock - desserts[k].quantity;
         desertsOrdersIds.push(desertOrderId);
+        await dessertToUpdate.save();
       }
     } else desertsOrdersIds === null;
 
