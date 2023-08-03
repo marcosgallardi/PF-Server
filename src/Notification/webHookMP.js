@@ -31,9 +31,9 @@ const webHookMP = async (req, res) => {
         Authorization: `Bearer TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523`,
       },
     });
-    const userEmail = mpResponse.data.payer.email;
+    const description = mpResponse.data.description;
     console.log("DATAAAAAAAAAAAAAAAAAAAAA", mpResponse.data);
-    console.log("USEREMAIL_______________", userEmail);
+    console.log("description____________________", description);
     // const userId = await getUserIdFromDatabase(userEmail);
     // console.log("USER_________________", userId);
     // if (!userId) {
