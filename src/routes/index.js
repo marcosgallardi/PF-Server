@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const userRouter = require("./userRouter");
-const localRouter = require("./localRouter")
+const localRouter = require("./localRouter");
 const desertRouter = require("./desertRouter");
 const dish_sideRouter = require("./dish_sideRouter");
 const orderRouter = require("./orderRouter");
@@ -20,11 +20,11 @@ const mpRouter = require("./mpRouter");
 const bannerRouter = require("./bannerRouter");
 const ticketRouter = require("./ticketRouter");
 const commentRouter = require("./commentRouter");
-const authenticateToken = require("../authMiddleware")
+const authenticateToken = require("../authMiddleware");
 const createJWTRouter = require("./JsonWebToken/createJWTRouter");
 const cartRouter = require("./cartRouter");
 
-mainRouter.use("/mercadopago", mpRouter);
+mainRouter.use("/mercadopago", authenticateToken, mpRouter);
 mainRouter.use("/search", nameRouter);
 mainRouter.use("/id", gralRouter);
 mainRouter.use("/order", orderRouter);
@@ -46,11 +46,11 @@ mainRouter.use("/banner", bannerRouter);
 mainRouter.use("/ticket", ticketRouter);
 
 mainRouter.use("/local", localRouter);
-mainRouter.use("/create-jwt", createJWTRouter)
+mainRouter.use("/create-jwt", createJWTRouter);
 
-mainRouter.use("/cart", authenticateToken, cartRouter)
+mainRouter.use("/cart", authenticateToken, cartRouter);
 mainRouter.use("/completeOrder", authenticateToken, completeOrderRouter);
 
-mainRouter.use("/comment", commentRouter)
+mainRouter.use("/comment", commentRouter);
 
 module.exports = mainRouter;
