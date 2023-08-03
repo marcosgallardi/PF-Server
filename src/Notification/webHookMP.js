@@ -2,6 +2,7 @@ const axios = require("axios");
 const ticketUpdate = require("../Controllers/putPedido");
 const { User, Ticket } = require("../db");
 const ticketByUserId = require("../Controllers/ticketByUserId");
+const getUserIdFromDatabase = require("../functions/getUserIdByEmail");
 
 const webHookMP = async (req, res) => {
   const { id } = req.body.data;
@@ -11,12 +12,14 @@ const webHookMP = async (req, res) => {
         Authorization: `Bearer TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523`,
       },
     });
-    const userId = mpResponse.data.payer.id;
-    const user = await ticketByUserId(userId);
-    if (!user) {
+    const userEmail = mpResponse.data.payer.email;
+    const userId = await getUserIdFromDatabase(userEmail);
+    console.log("USER_________________", userId);
+    if (!userId) {
       throw new Error(`User not found`);
     } else {
-      await Ticket.update({ status: mpResponse.data.status }, { where: { idPedido: user[0].idPedido } });
+      const tickets = await ticketByUserId(userId);
+      await Ticket.update({ status: mpResponse.data.status }, { where: { idPedido: tickets[0].idPedido } });
     }
     // console.log('CONSTANTE COPADAAAAAAAAAAAAA',mpResponse.data.status)
     ticketUpdate();
