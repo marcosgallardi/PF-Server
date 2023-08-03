@@ -33,8 +33,12 @@ const webHookMP = async (req, res) => {
     });
     const idPedido = mpResponse.data.description.split("-")[1];
     const ticketUpdate = await Ticket.findOne({ where: { idPedido: idPedido } });
+    if (mpResponse.data.status === "approved") {
+      ticketUpdate.status = "Aprobado";
+    } else if (mpResponse.data.status === "rejected") {
+      ticketUpdate.status = "Rechazado";
+    }
 
-    ticketUpdate.status = mpResponse.data.status;
     await ticketUpdate.save();
 
     console.log("CONSTANTE COPADAAAAAAAAAAAAA", mpResponse.data.status, "", mpResponse.data.payer);
