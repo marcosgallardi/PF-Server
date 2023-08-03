@@ -1,32 +1,37 @@
 const mercadopago = require("mercadopago");
-const { User } = require("../db");
-const postMP = async (title, unit_price, quantity, userId) => {
-  const user = await User.findByPk(userId);
+
+const postMP = async (title, unit_price, quantity) => {
+  mercadopago.configure({
+    access_token: "TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523",
+  });
+  console.log(mercadopago);
+
+  const preference = {
+    items: [
+      {
+        title: title,
+        unit_price: Number(unit_price),
+        quantity: Number(quantity),
+      },
+    ],
+    back_urls: {
+      //a donde va el cliente una vez que la compra finaliza, poner url de railway
+      success: "https://pf-front-end-grupo3.vercel.app/",
+      failure: "https://pf-front-end-grupo3.vercel.app/home",
+      pending: "https://pf-front-end-grupo3.vercel.app/home",
+    },
+    redirect_urls: {
+      //a donde va el cliente una vez que la compra finaliza, poner url de railway
+      success: "https://pf-front-end-grupo3.vercel.app/",
+      failure: "https://pf-front-end-grupo3.vercel.app/home",
+      pending: "https://pf-front-end-grupo3.vercel.app/home",
+    },
+    auto_return: "approved",
+  };
+
   try {
-    mercadopago.configure({
-      access_token: "TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523",
-    });
-
-    const preference = {
-      items: [{ title: title, unit_price: Number(unit_price), quantity: Number(quantity) }],
-      payer: { email: user.email },
-      back_urls: {
-        //a donde va el cliente una vez que la compra finaliza, poner url de railway
-        success: "https://pf-front-end-grupo3.vercel.app/",
-        failure: "https://pf-front-end-grupo3.vercel.app/home",
-        pending: "https://pf-front-end-grupo3.vercel.app/home",
-      },
-      redirect_urls: {
-        //a donde va el cliente una vez que la compra finaliza, poner url de railway
-        success: "https://pf-front-end-grupo3.vercel.app/",
-        failure: "https://pf-front-end-grupo3.vercel.app/home",
-        pending: "https://pf-front-end-grupo3.vercel.app/home",
-      },
-      auto_return: "approved",
-    };
-    console.log("USERID DE POSTMP_________________________________  ", preference.payer);
     let response = await mercadopago.preferences.create(preference);
-
+    console.log("RESPONSEEEEEE", response);
     return response;
   } catch (error) {
     console.log("ERRORRRRRRR", error);
