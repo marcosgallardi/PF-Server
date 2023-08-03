@@ -32,18 +32,20 @@ const webHookMP = async (req, res) => {
       },
     });
     const userEmail = mpResponse.data.payer.email;
-    const userId = await getUserIdFromDatabase(userEmail);
-    console.log("USER_________________", userId);
-    if (!userId) {
-      throw new Error(`User not found`);
-    } else {
-      const tickets = await ticketByUserId(userId);
-      await Ticket.update(
-        { status: mpResponse.data.status },
-        { where: { idPedido: tickets[tickets.length - 1].idPedido } }
-      );
-    }
-    console.log("CONSTANTE COPADAAAAAAAAAAAAA", mpResponse.data.status, "PAYERRRRRRRR", mpResponse.data.payer);
+    console.log("DATAAAAAAAAAAAAAAAAAAAAA", mpResponse.data);
+    console.log("USEREMAIL_______________", userEmail);
+    // const userId = await getUserIdFromDatabase(userEmail);
+    // console.log("USER_________________", userId);
+    // if (!userId) {
+    //   throw new Error(`User not found`);
+    // } else {
+    //   const tickets = await ticketByUserId(userId);
+    //   await Ticket.update(
+    //     { status: mpResponse.data.status },
+    //     { where: { idPedido: tickets[tickets.length - 1].idPedido } }
+    //   );
+    // }
+    console.log("CONSTANTE COPADAAAAAAAAAAAAA", mpResponse.data.status, "", mpResponse.data.payer);
   } catch (error) {
     console.error("Error:", error.message);
   }
