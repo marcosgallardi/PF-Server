@@ -24,7 +24,7 @@ const authenticateToken = require("../authMiddleware");
 const createJWTRouter = require("./JsonWebToken/createJWTRouter");
 const cartRouter = require("./cartRouter");
 
-mainRouter.use("/mercadopago", authenticateToken, mpRouter);
+mainRouter.use("/mercadopago", mpRouter);
 mainRouter.use("/search", nameRouter);
 mainRouter.use("/id", gralRouter);
 mainRouter.use("/order", orderRouter);
