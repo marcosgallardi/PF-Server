@@ -19,10 +19,12 @@ const webHookMP = async (req, res) => {
       throw new Error(`User not found`);
     } else {
       const tickets = await ticketByUserId(userId);
-      await Ticket.update({ status: mpResponse.data.status }, { where: { idPedido: tickets[0].idPedido } });
+      await Ticket.update(
+        { status: mpResponse.data.status },
+        { where: { idPedido: tickets[tickets.length - 1].idPedido } }
+      );
     }
     // console.log('CONSTANTE COPADAAAAAAAAAAAAA',mpResponse.data.status)
-    ticketUpdate();
   } catch (error) {
     console.error("Error:", error.message);
   }
