@@ -136,7 +136,7 @@ const postCompleteOrder = async ({ order, userId }) => {
   const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
   console.log("codigo del ticket-------------------------------------", ticket.idPedido);
 
-  return ticket;
+  return ticket.idPedido;
 };
 
 module.exports = postCompleteOrder;

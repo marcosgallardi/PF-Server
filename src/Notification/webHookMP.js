@@ -31,6 +31,7 @@ const webHookMP = async (req, res) => {
         Authorization: `Bearer TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523`,
       },
     });
+    console.log("TITULOOOOOOOOOOOOOOOOOO", mpResponse.data.title);
     const idPedido = mpResponse.data.description.split("-")[1];
     const ticketUpdate = await Ticket.findOne({ where: { idPedido: idPedido } });
     if (mpResponse.data.status === "approved") {

@@ -9,7 +9,7 @@ const postMP = async (title, unit_price, quantity) => {
   const preference = {
     items: [
       {
-        title: `${title}-EF01703`,
+        title,
 
         unit_price: Number(unit_price),
         quantity: Number(quantity),
