@@ -1,4 +1,7 @@
 const axios = require("axios");
+const ticketUpdate = require("../Controllers/putPedido");
+const { User, Ticket } = require("../db");
+const ticketByUserId = require("../Controllers/ticketByUserId");
 
 const webHookMP = async (req, res) => {
   const { id } = req.body.data;
@@ -8,8 +11,15 @@ const webHookMP = async (req, res) => {
         Authorization: `Bearer TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523`,
       },
     });
+    const userId = mpResponse.data.payer.id;
+    const user = await ticketByUserId(userId);
+    if (!user) {
+      throw new Error(`User not found`);
+    } else {
+      await Ticket.update({ status: mpResponse.data.status }, { where: { idPedido: user[0].idPedido } });
+    }
     // console.log('CONSTANTE COPADAAAAAAAAAAAAA',mpResponse.data.status)
-    return mpResponse.data.status;
+    ticketUpdate();
   } catch (error) {
     console.error("Error:", error.message);
   }

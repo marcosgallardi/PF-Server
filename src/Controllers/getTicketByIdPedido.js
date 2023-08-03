@@ -2,7 +2,6 @@ const { Ticket } = require("../db");
 const getByIdOrders = require("./getByIdOrders");
 const getById = require("./getById");
 const getTicketByIdPedido = async (idPedido) => {
-
   let ticketForFront = [];
   let ultimatePrice = 0;
   const ticket = await Ticket.findAll({
@@ -10,22 +9,23 @@ const getTicketByIdPedido = async (idPedido) => {
       idPedido: idPedido,
     },
   });
+  console.log(ticket, "TicketCONTROLLER!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
   if (ticket.length > 0) {
     const orders = ticket[0].idsCompleteOrder;
-
 
     const firstOrder = await getByIdOrders(orders[0]); // Obtener la primera orden
     const { userId } = firstOrder; // Obtener el userId de la primera orden
 
     const user = await getById(userId);
-    const { name, lastName, email, phoneNumber } = user;
+    const { name, lastName, email, phoneNumber, idsCompleteOrder } = user;
     const userInfo = {
-      pedido:idPedido,
+      pedido: idPedido,
       name: name,
       lastName: lastName,
       email: email,
       phoneNumber: phoneNumber,
+      idsCompleteOrder: idsCompleteOrder,
     };
     ticketForFront.push(userInfo);
 
@@ -41,9 +41,8 @@ const getTicketByIdPedido = async (idPedido) => {
       let desertsTPrice = 0;
       let dessertsP = [];
       const order = await getByIdOrders(orders[i]); //nos traemos el registro de la orden
-      console.log('ORDERRRRRRRRR===============',orders[i])
+      console.log("ORDERRRRRRRRR===============", orders[i]);
       let { dishSideId, drinks, deserts, totalPrice } = order;
- 
 
       //------------------------------------------------------------------------------------------------------------
       //------------------------------------------------DISHSIDEORDER-----------------------------------------------
@@ -61,14 +60,14 @@ const getTicketByIdPedido = async (idPedido) => {
         dishNameP = dishName; //nos guardamos el nombre del plato
         //buscamos por id dentro de la tabla side
         sideOrder = await getByIdOrders(sideOrderId);
-        
+
         if (sideOrder && sideOrder !== null) {
           const { sideName } = sideOrder;
           sideNameP = sideName;
           sideOrderId = null;
         } //guardamos el nombre del acompañamiento
-      }else if (!sideOrder){
-        sideNameP = null
+      } else if (!sideOrder) {
+        sideNameP = null;
       }
       //------------------------------------------------------------------------------------------------------------
       //------------------------------------------------DRINKORDER--------------------------------------------------
@@ -107,14 +106,16 @@ const getTicketByIdPedido = async (idPedido) => {
         dish: dishNameP,
         garnish: sideNameP,
         quantity: dishSideQuantity,
-        totalPrice:totalPrice,
+        totalPrice: totalPrice,
         drinks: drinksP,
         desserts: dessertsP,
+        orders,
       };
+
       ticketForFront.push(ticketObj);
       ultimatePrice += totalPrice + driksTPrice + desertsTPrice;
     }
-    ticketForFront.push({totalTicketPrice:ultimatePrice});
+    ticketForFront.push({ totalTicketPrice: ultimatePrice });
     return ticketForFront;
   } else throw Error("no hay pedidos con ese identificador");
 };

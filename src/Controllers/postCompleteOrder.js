@@ -133,8 +133,6 @@ const postCompleteOrder = async ({ order, userId }) => {
     completesOrders.push(newCompleteOrder.id);
   }
 
-  const status = await webHookMP();
-  console.log("status de webhook_________________________", status);
   const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
   console.log("codigo del ticket-------------------------------------", ticket.idPedido);
 
