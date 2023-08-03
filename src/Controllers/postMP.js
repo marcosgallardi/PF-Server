@@ -10,13 +10,12 @@ const postMP = async (title, unit_price, quantity) => {
     items: [
       {
         title: title,
+        description: "EF01703",
         unit_price: Number(unit_price),
         quantity: Number(quantity),
       },
     ],
-    payer: {
-      email: "matiasmarensi@gmail.com",
-    },
+
     back_urls: {
       //a donde va el cliente una vez que la compra finaliza, poner url de railway
       success: "https://pf-front-end-grupo3.vercel.app/",
