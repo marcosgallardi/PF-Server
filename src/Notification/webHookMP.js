@@ -1,5 +1,7 @@
 const axios = require("axios");
 const getUserIdFromDatabase = require("../functions/getUserIdByEmail");
+const mailCreate = require("../Controllers/mailCreate");
+const mailRejected = require("../Controllers/mailRejected");
 const { Ticket } = require("../db");
 
 const webHookMP = async (req, res) => {
