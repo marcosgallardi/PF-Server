@@ -1,5 +1,4 @@
 const express = require("express");
-
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -7,6 +6,7 @@ const mainRouter = require("./routes");
 const fillDb = require("./mocks");
 const fileUpload = require("express-fileupload");
 require("./db.js");
+
 
 const cors = require("cors");
 
@@ -41,16 +41,26 @@ server.use(morgan("dev"));
 
 server.use(cors());
 server.use((req, res, next) => {
-  res.setHeader("Set-Cookie", "cross-site-cookie=whatever; SameSite=None; Secure");
+  res.setHeader(
+    "Set-Cookie",
+    "cross-site-cookie=whatever; SameSite=None; Secure"
+  );
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
 
 //resApi
-server.use("/api-doc", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
+server.use(
+  "/api-doc",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerJsDoc(swaggerSpec))
+);
 
 //procesamiento de imagenes del front
 server.use(
@@ -60,10 +70,7 @@ server.use(
   })
 );
 
-
 server.use(mainRouter);
-
-
 
 server.use((err, req, res, next) => {
   const status = err.status || 500;
@@ -72,5 +79,29 @@ server.use((err, req, res, next) => {
   res.status(status).send(message);
 });
 
+server.use(
+  cors({
+    origin: ["http://localhost:3000", "http://localhost:3001"],
+    credentials: true,
+  })
+);
+
+const http = require("http");
+const { Server } = require("socket.io");
+const app = http.createServer(server);
+
+const io = new Server(app, {
+  cors: {
+    origin: "http://localhost:3000", // Permite todas las solicitudes desde cualquier origen
+
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Métodos HTTP permitidos
+    allowedHeaders: "Content-Type,Authorization",
+  },
+});
+
+
+app.listen(5000, () => {
+  console.log("Server on port 5000");
+});
 //fillDb();
-module.exports = server;
+module.exports = { server, io,Server,app };
