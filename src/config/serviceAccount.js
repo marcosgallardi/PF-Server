@@ -1,6 +1,18 @@
 require("dotenv").config();
 
-const { TYPE, PROYECT_ID, PRIVATE_KEY_ID, PRIVATE_KEY, CLIENT_EMAIL, CLIENT_ID, AUTH_URI, TOKEN_URI, AUTH_PROVIDER, CLIENT_CERT_URL, UNIVERSE_DOMAIN } = process.env
+const {
+  TYPE,
+  PROYECT_ID,
+  PRIVATE_KEY_ID,
+  PRIVATE_KEY,
+  CLIENT_EMAIL,
+  CLIENT_ID,
+  AUTH_URI,
+  TOKEN_URI,
+  AUTH_PROVIDER,
+  CLIENT_CERT_URL,
+  UNIVERSE_DOMAIN,
+} = process.env;
 
 const firebaseConfig = {
   type: TYPE,
@@ -16,4 +28,4 @@ const firebaseConfig = {
   universe_domain: UNIVERSE_DOMAIN
 }
 
-module.exports = firebaseConfig
+  module.exports = firebaseConfig

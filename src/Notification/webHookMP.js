@@ -1,4 +1,7 @@
 const axios = require("axios");
+
+const mailCreate = require("../Controllers/mailCreate");
+const mailRejected = require("../Controllers/mailRejected");
 const { Ticket } = require("../db");
 
 const webHookMP = async (req, res) => {
@@ -14,8 +17,12 @@ const webHookMP = async (req, res) => {
     const ticketUpdate = await Ticket.findOne({ where: { idPedido: idPedido } });
     if (mpResponse.data.status === "approved") {
       ticketUpdate.status = "Aprobado";
+
+      await mailCreate(ticketUpdate.idUser, idPedido);
     } else if (mpResponse.data.status === "rejected") {
       ticketUpdate.status = "Rechazado";
+
+      await mailRejected(ticketUpdate.idUser, idPedido);
     }
 
     await ticketUpdate.save();
