@@ -1,7 +1,7 @@
 const postCompleteOrder = require("../Controllers/postCompleteOrder");
 const getByIdOrder = require("../Controllers/getByIdOrders");
 const getUserIdFromDatabase = require("../functions/getUserIdByEmail");
-
+const mailCreate = require("../Controllers/mailCreate");
 
 const createCompleteOrder = async (req, res) => {
   const { order } = req.body;
@@ -12,7 +12,8 @@ const createCompleteOrder = async (req, res) => {
     let userId = "";
 
     if (req.user.source === "firebase") {
-      userId = await getUserIdFromDatabase(req.user.email);
+      const userDB = await getUserIdFromDatabase(req.user.email);
+      userId = userDB.id;
     } else if (req.user.source === "database") {
       userId = req.user.userId;
     } else {

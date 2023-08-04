@@ -26,7 +26,7 @@ const handlerDish = async(req, res)=>{
       }
 
 
-        const dishUP = await updateDish(id, name,
+        const dishUP = await updateDish({id, name,
             description,
            type,
            subtype,
@@ -37,7 +37,7 @@ const handlerDish = async(req, res)=>{
            vegetarian,
            dailyspecial,
            price,
-           imageFile) 
+           imageFile}) 
 
            res.status(200).json(dishUP)
     } catch (error) {
