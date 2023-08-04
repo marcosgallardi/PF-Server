@@ -39,12 +39,13 @@ const postUser = async ({ name, lastName, email, password, birthDate, phoneNumbe
     userId: registerUser.id,
     name: registerUser.name,
     email: registerUser.email,
+    role: registerUser.role,
     source: 'database',
     // Puedes incluir más información aquí si lo deseas
   };
 
   // Firma el token con una clave secreta (puedes cambiar 'mi_clave_secreta' por tu propia clave)
-  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '1h' }); // El token expirará en 1 hora
+  const token = jwt.sign(payload, JWT_SECRET_KEY, { expiresIn: '8h' }); // El token expirará en 1 hora
 
 
   return { registerUser, token};
