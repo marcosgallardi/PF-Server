@@ -6,7 +6,7 @@ const firebaseConfig ={
     type: TYPE,
     project_id: PROYECT_ID,
     private_key_id: PRIVATE_KEY_ID,
-    private_key: PRIVATE_KEY,
+    private_key: PRIVATE_KEY.replace(/\\n/g, '\n'),
     client_email: CLIENT_EMAIL,
     client_id: CLIENT_ID,
     auth_uri: AUTH_URI,

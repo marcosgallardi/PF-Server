@@ -8,7 +8,7 @@ async function getUserIdFromDatabase(email) {
       });
   
       if (user) {
-        return user.id; // Retorna el id de usuario encontrado en la base de datos
+        return user; // Retorna el usuario encontrado en la base de datos
       } else {
         return null; // No se encontró el id de usuario en la base de datos
       }

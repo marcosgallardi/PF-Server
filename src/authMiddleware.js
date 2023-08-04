@@ -6,7 +6,7 @@ const { JWT_SECRET_KEY } = process.env;
 const admin = require("firebase-admin");
 
 // Configura la inicialización de Firebase Admin con las credenciales de servicio de Firebase
-var serviceAccount = require("../src/config/serviceAccount.json");
+const serviceAccount = require("./config/serviceAccount");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

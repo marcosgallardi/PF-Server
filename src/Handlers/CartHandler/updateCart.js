@@ -10,7 +10,8 @@ const updateCart = async (req, res) => {
     let userId = '';
 
     if (req.user.source === 'firebase') {
-      userId = await getUserIdFromDatabase(req.user.email);
+      const userDB = await getUserIdFromDatabase(req.user.email);
+      userId = userDB.id;
     } else if (req.user.source === 'database') {
       userId = req.user.userId;
     } else {
