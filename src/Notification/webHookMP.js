@@ -23,6 +23,8 @@ const ticketUpdate = require("../Controllers/putPedido");
 const { User, Ticket } = require("../db");
 const ticketByUserId = require("../Controllers/ticketByUserId");
 const getUserIdFromDatabase = require("../functions/getUserIdByEmail");
+const mailCreate = require("../Controllers/mailCreate");
+const mailRejected = require("../Controllers/mailRejected");
 
 const webHookMP = async (req, res) => {
   try {
@@ -36,8 +38,12 @@ const webHookMP = async (req, res) => {
     const ticketUpdate = await Ticket.findOne({ where: { idPedido: idPedido } });
     if (mpResponse.data.status === "approved") {
       ticketUpdate.status = "Aprobado";
+      const userId = getUserIdFromDatabase(ticketUpdate.email);
+      await mailCreate(userId, idPedido);
     } else if (mpResponse.data.status === "rejected") {
       ticketUpdate.status = "Rechazado";
+      const userId = getUserIdFromDatabase(ticketUpdate.email);
+      await mailRejected(userId, idPedido);
     }
 
     await ticketUpdate.save();
