@@ -4,7 +4,6 @@ const postMP = async (title, unit_price, quantity) => {
   mercadopago.configure({
     access_token: "TEST-840963076660337-072117-1b995a17b690f7df7a5adf4428a413ac-639906523",
   });
-  console.log(mercadopago);
 
   const preference = {
     items: [
