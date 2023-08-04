@@ -1,7 +1,6 @@
 const axios = require("axios");
-
+const getUserIdFromDatabase = require("../functions/getUserIdByEmail");
 const { Ticket } = require("../db");
-
 
 const webHookMP = async (req, res) => {
   try {
