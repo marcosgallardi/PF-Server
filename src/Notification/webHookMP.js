@@ -35,15 +35,16 @@ const webHookMP = async (req, res) => {
 
     if (mpResponse.data.status === "approved") {
       ticketUpdate.status = "Aprobado";
-      io.emit("ticketCreated",ticketUpdate.status)
       await mailCreate(ticketUpdate.idUser, idPedido);
     } else if (mpResponse.data.status === "rejected") {
       ticketUpdate.status = "Rechazado";
-
+      
       await mailRejected(ticketUpdate.idUser, idPedido);
     }
-
+    
     await ticketUpdate.save();
+    
+    io.emit("ticketCreated",ticketUpdate.status)
 
     /* console.log("CONSTANTE COPADAAAAAAAAAAAAA", mpResponse.data.status); */
   } catch (error) {
