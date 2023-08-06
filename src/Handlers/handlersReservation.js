@@ -6,7 +6,8 @@ const { postReservation, getReservation, getAllReservation } = require("../Contr
 const handlersPostReser = async (req, res) => {
 try {
     const {
-        eventDate, 
+        date,
+        time, 
         decor, 
         quantity, 
         confirmation, 
@@ -19,7 +20,8 @@ try {
 
     const newReser = await postReservation({
         id,
-        eventDate, 
+        date, 
+        time,
         decor, 
         quantity, 
         confirmation, 
