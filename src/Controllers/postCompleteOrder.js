@@ -8,7 +8,8 @@ const postTicket = require("./postTicket");
 const getById = require("./getById");
 const webHookMP = require("../Notification/webHookMP");
 
-const mailCreate = require("./mailCreate");
+//const mailCreate = require("./mailCreate");
+
 
 const postCompleteOrder = async ({ order, userId }) => {
   let dishOrderId = null;
@@ -53,6 +54,7 @@ const postCompleteOrder = async ({ order, userId }) => {
       const dishOrderToUpdate = await DishOrder.findByPk(dishOrderId);
       const dishToUpdate = await Dish.findByPk(dishOrderToUpdate.dishid);
       dishToUpdate.stock = dishToUpdate.stock - 1;
+      dishToUpdate.salesCount = dishToUpdate.salesCount + 1;
       await dishToUpdate.save();
     }
     if (hasGarnish) {
@@ -143,7 +145,7 @@ const postCompleteOrder = async ({ order, userId }) => {
   console.log('ULTIMATE PRICEEEEEEEEEEEEEEE', ultimatePrice)
   const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId, totalPrice:ultimatePrice});
   console.log("codigo del ticket-------------------------------------", ticket.idPedido);
-  console.log('COMPLETE ORDERSSSSSSSSSSSSSSS',completesOrders)
+
   return ticket.idPedido;
 };
 
