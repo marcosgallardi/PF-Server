@@ -11,7 +11,7 @@ const e = require("express");
 
 const handlersPostReser = async (req, res) => {
   try {
-    const { date, time, decor, quantity, confirmation, phoneNumber, zone, honoree } = req.body;
+    const { date, time, decor, quantity, phoneNumber, zone, honoree } = req.body;
     const { id } = req.body;
 
     const newReser = await postReservation({
@@ -20,7 +20,6 @@ const handlersPostReser = async (req, res) => {
       time,
       decor,
       quantity,
-      confirmation,
       phoneNumber,
       zone,
       honoree,
@@ -55,7 +54,7 @@ const handlerGetAllReser = async (req, res) => {
 const handlerUpReser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { date, time, decor, quantity, status, confirmation, phoneNumber, zone, honoree } = req.body;
+    const { date, time, decor, quantity, status, phoneNumber, zone, honoree } = req.body;
 
     const updateReser = await updateReservation({
       id,
@@ -64,7 +63,6 @@ const handlerUpReser = async (req, res) => {
       decor,
       quantity,
       status,
-      confirmation,
       phoneNumber,
       zone,
       honoree,

@@ -17,16 +17,7 @@ const getAllReservation = async () => {
   else return getByDate;
 };
 
-const postReservation = async ({ id, date, time, decor, quantity, confirmation, phoneNumber, zone, honoree }) => {
-  /* let exist = await Reservation.findOne({
-        where: {
-           eventDate
-        }
-    }); */
-
-  /* if (exist){
-        throw Error("Fecha ocupada")
-    } */
+const postReservation = async ({ id, date, time, decor, quantity, phoneNumber, zone, honoree }) => {
 
   let user = await User.findOne({
     where: {
@@ -41,7 +32,6 @@ const postReservation = async ({ id, date, time, decor, quantity, confirmation, 
     time,
     decor,
     quantity,
-    confirmation,
     phoneNumber,
     zone,
     honoree,
@@ -98,6 +88,7 @@ const getReservationByUser = async ({ id }) => {
   if (!getByUser) throw Error("No hay Reservacion para ese usuario");
   else return getByUser;
 };
+
 const deleteReservation = async ({ id }) => {
   const reservation = await Reservation.findOne({
     where: { id },
