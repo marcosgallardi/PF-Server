@@ -9,20 +9,13 @@ module.exports = (sequelize) => {
         defaultValue: UUIDV4,
         primaryKey: true,
       },
-      // idUser: {
-      //   type: DataTypes.UUID,
-      //   references: {
-      //     model: "Users",
-      //     key: "id",
-      //   },
-      // },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       lastName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       quantity: {
         type: DataTypes.INTEGER,
