@@ -50,6 +50,18 @@ module.exports = (sequelize) => {
         },
         allowNull: false,
       },
+      date: {
+        type: DataTypes.STRING,
+        defaultValue: function () {
+          const now = new Date();
+          const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(
+            now.getDate()
+          ).padStart(2, "0")}`;
+
+          return formattedDate;
+        },
+        allowNull: false,
+      },
     },
     {
       timestamps: false, // Deshabilitamos los timestamps generados por Sequelize

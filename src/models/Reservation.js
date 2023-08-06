@@ -35,9 +35,10 @@ module.exports = (sequelize) => {
           is: /^\+?[0-9\-()\s]+$/,
         },
       },
-      confirmation: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+      status: {
+        type: DataTypes.ENUM,
+        values:['Pendiente','Confirmado','Rechazado','Cancelado'],
+        defaultValue: "Pendiente",
       },
       date: {
         type: DataTypes.STRING,
