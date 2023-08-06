@@ -20,7 +20,7 @@ const getAllReservation = async ()=>{
     else return getByDate
 };
 
-const postReservation = async ({ id, date,time, decor,  quantity, confirmation, phoneNumber, zone, honoree})=>{
+const postReservation = async ({ id, date,time, decor,  quantity, status, phoneNumber, zone, honoree})=>{
     /* let exist = await Reservation.findOne({
         where: {
            eventDate
@@ -44,12 +44,12 @@ const postReservation = async ({ id, date,time, decor,  quantity, confirmation, 
         time, 
         decor, 
         quantity, 
-        confirmation, 
+        status, 
         phoneNumber, 
         zone, 
         honoree,
         name: user.name, 
-        lastName: user.lastName
+        lastName: ""
     }
     
       );

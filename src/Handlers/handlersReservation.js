@@ -10,7 +10,7 @@ try {
         time, 
         decor, 
         quantity, 
-        confirmation, 
+        status,
         phoneNumber, 
         zone, 
         honoree
@@ -24,7 +24,7 @@ try {
         time,
         decor, 
         quantity, 
-        confirmation, 
+        status, 
         phoneNumber, 
         zone, 
         honoree,
