@@ -58,7 +58,7 @@ const {
   Comment,
   Local,
   Cart,
-  Reservation
+  Reservation,
 } = sequelize.models;
 
 // Establece la asociación de uno a uno (1:1) entre User y Cart
@@ -66,8 +66,8 @@ User.hasOne(Cart); // Un usuario puede tener un carrito
 Cart.belongsTo(User); // Un carrito pertenece a un usuario
 
 // Aca vendrian las relaciones
- User.hasMany(Reservation);
- Reservation.belongsTo(User);
+User.hasMany(Reservation);
+Reservation.belongsTo(User);
 
 Comment.belongsTo(Dish);
 Comment.belongsTo(User);

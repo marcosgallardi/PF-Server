@@ -7,6 +7,7 @@ const getTicket = async (req, res) => {
 
     for (i = 0; i < tickets.length; i++) {
       const user = await getById(tickets[i].idUser);
+
       const ticket = {
         order: tickets[i].idPedido,
         user: {
@@ -16,7 +17,7 @@ const getTicket = async (req, res) => {
         status: tickets[i].status,
         date: tickets[i].date,
         time: tickets[i].createdAt,
-        price:tickets[i].totalPrice,
+        price: tickets[i].totalPrice,
       };
       respuesta.push(ticket);
 
