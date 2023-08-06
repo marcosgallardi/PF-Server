@@ -148,7 +148,7 @@ const updateSide = async ( {id, name,
 };
 
 const updateUser = async ({ id, name, lastName, email, password, birthDate, phoneNumber,
-   imageFile}) => {
+   imageFile,role}) => {
 
     let update = await User.findOne({
         where:{
@@ -166,6 +166,7 @@ const updateUser = async ({ id, name, lastName, email, password, birthDate, phon
     if (password) update.password = password;
     if (birthDate) update.birthDate = birthDate;
     if (phoneNumber) update.phoneNumber = phoneNumber;
+    if(role) update.role = role
     if (imageFile){
         const result = await uploadImage(imageFile.tempFilePath);
         update.image = result.secure_url;

@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
         values: ["Pendiente", "Aprobado", "Rechazado", "En proceso", "Completo", "Entregado"],
         defaultValue: "Pendiente",
       },
+      totalPrice: {
+        type: DataTypes.INTEGER,
+        allowNull:true,
+      },
       createdAt: {
         type: DataTypes.STRING,
         defaultValue: function () {

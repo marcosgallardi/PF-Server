@@ -17,7 +17,7 @@ const mpHandler = async (req, res) => {
     // }
 
     const response = await postMP(title, unit_price, quantity);
-    console.log("RESPONSE!!!!!!!!!!!!!!!!!!!!", response);
+    /* console.log("RESPONSE!!!!!!!!!!!!!!!!!!!!", response); */
     return res.status(200).json({ response });
   } catch (error) {
     res.status(500).json({ error: error.message });

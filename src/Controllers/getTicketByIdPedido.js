@@ -31,8 +31,8 @@ const getTicketByIdPedido = async (idPedido) => {
 
     //buscamos dentro de la tabla completeOrder por id para traernos los registros
     for (i = 0; i < orders.length; i++) {
-      let dishNameP = null;
-      let sideNameP = null;
+      let completeDish = null;
+      let completeSide = null;
       let sideOrder = null;
       let dishSideQuantity = null;
       let dishSidePrice = null;
@@ -41,7 +41,6 @@ const getTicketByIdPedido = async (idPedido) => {
       let desertsTPrice = 0;
       let dessertsP = [];
       const order = await getByIdOrders(orders[i]); //nos traemos el registro de la orden
-      console.log("ORDERRRRRRRRR===============", orders[i]);
       let { dishSideId, drinks, deserts, totalPrice } = order;
 
       //------------------------------------------------------------------------------------------------------------
@@ -56,14 +55,16 @@ const getTicketByIdPedido = async (idPedido) => {
         dishSidePrice = totalPrice;
         //buscamos por id dentro de side los registros
         const dishOrder = await getByIdOrders(dishOrderId);
-        const { dishName } = dishOrder;
-        dishNameP = dishName; //nos guardamos el nombre del plato
+        const { dishid } = dishOrder;
+        const dishObj = await getById(dishid)
+        completeDish = dishObj; //nos guardamos el nombre del plato
         //buscamos por id dentro de la tabla side
         sideOrder = await getByIdOrders(sideOrderId);
 
         if (sideOrder && sideOrder !== null) {
-          const { sideName } = sideOrder;
-          sideNameP = sideName;
+          const { sideId } = sideOrder;
+          const sideObj = await getById(sideId);
+          completeSide = sideObj;
           sideOrderId = null;
         } //guardamos el nombre del acompañamiento
       } else if (!sideOrder) {
@@ -76,8 +77,10 @@ const getTicketByIdPedido = async (idPedido) => {
         let drinkOrder = drinks[j];
         let drinkObj = {};
         let drink = await getByIdOrders(drinkOrder);
+        let {drinkId} = drink;
+        const completeDrinkObj = await getById(drinkId)
         drinkObj = {
-          name: drink.drinkName,
+          drink: completeDrinkObj,
           quantity: drink.quantity,
           price: +drink.totalPrice,
         };
@@ -93,8 +96,10 @@ const getTicketByIdPedido = async (idPedido) => {
         const desertOrder = deserts[K];
         let desertObj = {};
         const desert = await getByIdOrders(desertOrder);
+        let {desertId} = desert;
+        const completeDesertObj = await getById(desertId);
         desertObj = {
-          name: desert.name,
+          dessert: completeDesertObj,
           quantity: desert.quantity,
           price: desert.totalPrice,
         };
@@ -103,13 +108,12 @@ const getTicketByIdPedido = async (idPedido) => {
       }
 
       const ticketObj = {
-        dish: dishNameP,
-        garnish: sideNameP,
+        dish: completeDish,
+        garnish: completeSide,
         quantity: dishSideQuantity,
         totalPrice: totalPrice,
         drinks: drinksP,
         desserts: dessertsP,
-        orders,
       };
 
       ticketForFront.push(ticketObj);
