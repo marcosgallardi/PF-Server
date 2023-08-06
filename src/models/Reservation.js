@@ -9,24 +9,17 @@ module.exports = (sequelize) => {
         defaultValue: UUIDV4,
         primaryKey: true,
       },
-      // idUser: {
-      //   type: DataTypes.UUID,
-      //   references: {
-      //     model: "Users",
-      //     key: "id",
-      //   },
-      // },
-      name:{
+      name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
-      lastName:{
+      lastName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true,
       },
-      quantity:{
-        type:DataTypes.INTEGER,
-        allowNull:false,
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
       phoneNumber: {
         type: DataTypes.STRING,
@@ -34,34 +27,36 @@ module.exports = (sequelize) => {
         validate: {
           is: /^\+?[0-9\-()\s]+$/,
         },
+      },
+      status: {
+        type: DataTypes.ENUM,
+        values:['Pendiente','Confirmado','Rechazado','Cancelado'],
+        defaultValue: "Pendiente",
+      },
+      date: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      time: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      zone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      decor: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      honoree: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
-    confirmation: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
-},
-      eventDate: {
-            type: DataTypes.DATE, 
-            allowNull: false,
-          },
-        zone: {
-            type: DataTypes.STRING,
-        allowNull: false
-        }, 
-        decor: {
-            type: DataTypes.STRING,
-        allowNull: false
-        }, 
-        honoree: {
-            type: DataTypes.STRING,
-        allowNull: false
-        }, 
 
-    },
-  
     {
-
       timestamps: false,
     }
-
   );
 };

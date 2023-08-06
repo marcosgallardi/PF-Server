@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
         values: ["Pendiente", "Aprobado", "Rechazado", "En proceso", "Completo", "Entregado"],
         defaultValue: "Pendiente",
       },
+      totalPrice: {
+        type: DataTypes.INTEGER,
+        allowNull:true,
+      },
       createdAt: {
         type: DataTypes.STRING,
         defaultValue: function () {
@@ -43,6 +47,18 @@ module.exports = (sequelize) => {
           )}`;
 
           return formattedTime;
+        },
+        allowNull: false,
+      },
+      date: {
+        type: DataTypes.STRING,
+        defaultValue: function () {
+          const now = new Date();
+          const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(
+            now.getDate()
+          ).padStart(2, "0")}`;
+
+          return formattedDate;
         },
         allowNull: false,
       },

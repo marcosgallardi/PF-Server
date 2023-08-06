@@ -145,14 +145,14 @@ const handlerUser = async(req, res)=>{
 
     try {
         const {id} = req.params;
-        const { name, lastName, email, password, birthDate, phoneNumber } = req.body;
+        const { name, lastName, email, password, birthDate, phoneNumber,role } = req.body;
 
             let imageFile = null;
             if (req.files && req.files.image) {
               imageFile = req.files.image;
             }
 
-        const userUP = await updateUser({id, name, lastName, email, password, birthDate, phoneNumber, imageFile}) 
+        const userUP = await updateUser({id, name, lastName, email, password, birthDate, phoneNumber, imageFile,role}) 
 
            res.status(200).json(userUP)
     } catch (error) {

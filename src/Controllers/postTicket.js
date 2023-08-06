@@ -8,8 +8,8 @@ const io = require("socket.io")(5000, {
 
 //const {alertTicket} = require("../Sockets/socket");
 
-const postTicket = async ({ idUser, idsCompleteOrder }) => {
-  const newTicket = await Ticket.create({ idUser, idsCompleteOrder });
+const postTicket = async ({ idUser, idsCompleteOrder,totalPrice }) => {
+  const newTicket = await Ticket.create({ idUser, idsCompleteOrder,totalPrice });
   console.log(idUser, idsCompleteOrder, "LLEGAN????????????????");
   console.log("ticket del NEWTICKET-------------------------------", newTicket);
   //alertTicket();

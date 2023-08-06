@@ -1,5 +1,4 @@
 const getAllTicket = require("../Controllers/getAllTicket");
-const getTicketByIdPedido = require("../Controllers/getTicketByIdPedido");
 const getById = require("../Controllers/getById");
 const getTicket = async (req, res) => {
   try {
@@ -14,9 +13,10 @@ const getTicket = async (req, res) => {
           name: user.name,
           email: user.email,
         },
-        idsCompleteOrder: tickets[i].idsCompleteOrder,
         status: tickets[i].status,
-        date: tickets[i].createdAt,
+        date: tickets[i].date,
+        time: tickets[i].createdAt,
+        price:tickets[i].totalPrice,
       };
       respuesta.push(ticket);
 

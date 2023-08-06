@@ -19,7 +19,7 @@ createJWTRouter.post("/", async (req, res) => {
     const user = await getUserIdFromDatabase(decodedToken.email)
 
     const userRole = user.role
-    console.log("________DECODED TOKEN__________", decodedToken);
+   /*  console.log("________DECODED TOKEN__________", decodedToken); */
     // El token es válido, puedes proceder a generar el JWT personalizado
     const customToken = jwt.sign(
       { userId: decodedToken.uid, source: "firebase", role: userRole },

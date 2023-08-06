@@ -2,10 +2,11 @@
 const {User, Reservation} = require("../db")
 
 
-const getReservation = async ({eventDate})=>{
+//esto deberia ser getReservationByDate o byTime, reveer
+const getReservation = async ({date})=>{
     let getByDate = await Reservation.findOne({
         where:{
-            eventDate
+            date
         }
     })
     if(!getByDate) throw Error("No hay Reservacion para esa fecha");
@@ -19,16 +20,16 @@ const getAllReservation = async ()=>{
     else return getByDate
 };
 
-const postReservation = async ({ id, eventDate, decor,  quantity, confirmation, phoneNumber, zone, honoree})=>{
-    let exist = await Reservation.findOne({
+const postReservation = async ({ id, date,time, decor,  quantity, confirmation, phoneNumber, zone, honoree})=>{
+    /* let exist = await Reservation.findOne({
         where: {
            eventDate
         }
-    });
+    }); */
 
-    if (exist){
+    /* if (exist){
         throw Error("Fecha ocupada")
-    }
+    } */
 
     let user = await User.findOne({
         where:{
@@ -39,7 +40,8 @@ const postReservation = async ({ id, eventDate, decor,  quantity, confirmation, 
     console.log(user);
     let newReservation = await Reservation.create({
         UserId: user.id,
-        eventDate, 
+        date,
+        time, 
         decor, 
         quantity, 
         confirmation, 
@@ -55,4 +57,30 @@ const postReservation = async ({ id, eventDate, decor,  quantity, confirmation, 
       return newReservation
 };
 
-module.exports = {getAllReservation, getReservation, postReservation}
+const updateReservation = async ({id, date,time, decor,  quantity, status, confirmation, phoneNumber, zone, honoree}) =>{
+    let reser = await Reservation.findOne({
+        where: {
+            id
+        }
+    });
+
+    if(!reser){
+        throw new Error("No existe esa reservacion");
+    }
+
+    if(date) reser.date = date;
+    if(time) reser.time = time;
+    if(decor) reser.decor = decor;
+    if(quantity) reser.quantity = quantity
+    if(status) reser.status = status;
+    if(confirmation) reser.confirmation = confirmation;
+    if(phoneNumber) reser.phoneNumber = phoneNumber;
+    if(zone) reser.zone = zone;
+    if(honoree) reser.honoree = honoree;
+
+    await reser.save();
+
+    return reser;
+}
+
+module.exports = {getAllReservation, getReservation, postReservation, updateReservation}

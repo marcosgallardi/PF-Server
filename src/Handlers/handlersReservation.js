@@ -1,12 +1,13 @@
 const { async } = require("@firebase/util");
-const { postReservation, getReservation, getAllReservation } = require("../Controllers/controllersReservation")
+const { postReservation, getReservation, getAllReservation, updateReservation } = require("../Controllers/controllersReservation")
 
 
 
 const handlersPostReser = async (req, res) => {
 try {
     const {
-        eventDate, 
+        date,
+        time, 
         decor, 
         quantity, 
         confirmation, 
@@ -19,7 +20,8 @@ try {
 
     const newReser = await postReservation({
         id,
-        eventDate, 
+        date, 
+        time,
         decor, 
         quantity, 
         confirmation, 
@@ -56,6 +58,18 @@ const handlerGetAllReser = async (req, res) =>
     }
 }
 
+const handlerUpReser = async (req, res) =>{
+    try {
+        const {id} = req.params;
+        const {date,time, decor,  quantity, status, confirmation, phoneNumber, zone, honoree} = req.body;
+
+        const updateReser = await updateReservation({id, date,time, decor,  quantity, status, confirmation, phoneNumber, zone, honoree});
+        res.status(200).json(updateReser);
+    } catch (error) {
+        res.status(400).json({ error: error.message }); 
+    }
+}
 
 
-module.exports = {handlersPostReser, handlerGetAllReser, handlerGetReser};
+
+module.exports = {handlersPostReser, handlerGetAllReser, handlerGetReser, handlerUpReser};
