@@ -3,6 +3,23 @@ const axios = require("axios");
 const mailCreate = require("../Controllers/mailCreate");
 const mailRejected = require("../Controllers/mailRejected");
 const { Ticket } = require("../db");
+const { JWT_SECRET_KEY } = process.env;
+const io = require("socket.io")(5000, {
+ cors: {
+   origin: ["http://localhost:3000"],
+  },
+});
+
+io.on("connect", (socket) => {
+  console.log("consolelog del id de socket!!!!!!!!!!!!!!!!!",socket.id);
+  socket.on("authenticate", (token) => {
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET_KEY);
+    } catch (error) {
+      throw error.message
+    }
+  });
+});
 
 const webHookMP = async (req, res) => {
   try {
@@ -15,9 +32,10 @@ const webHookMP = async (req, res) => {
 
     const idPedido = mpResponse.data.description.split("-")[1];
     const ticketUpdate = await Ticket.findOne({ where: { idPedido: idPedido } });
+
     if (mpResponse.data.status === "approved") {
       ticketUpdate.status = "Aprobado";
-
+      io.emit("ticketCreated",ticketUpdate.status)
       await mailCreate(ticketUpdate.idUser, idPedido);
     } else if (mpResponse.data.status === "rejected") {
       ticketUpdate.status = "Rechazado";
