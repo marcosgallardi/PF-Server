@@ -3,7 +3,7 @@ const axios = require("axios");
 const mailCreate = require("../Controllers/mailCreate");
 const mailRejected = require("../Controllers/mailRejected");
 const { Ticket } = require("../db");
-const { JWT_SECRET_KEY } = process.env;
+/*const { JWT_SECRET_KEY } = process.env;
 const io = require("socket.io")(443, {
  cors: {
    origin: ["http://localhost:3000"],
@@ -19,7 +19,7 @@ io.on("connect", (socket) => {
       throw error.message
     }
   });
-});
+});*/
 
 const webHookMP = async (req, res) => {
   try {
@@ -44,7 +44,7 @@ const webHookMP = async (req, res) => {
     
     await ticketUpdate.save();
 
-    io.emit("ticketCreated",ticketUpdate.status)
+    //io.emit("ticketCreated",ticketUpdate.status)
 
     /* console.log("CONSTANTE COPADAAAAAAAAAAAAA", mpResponse.data.status); */
   } catch (error) {
