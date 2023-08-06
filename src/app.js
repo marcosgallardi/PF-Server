@@ -6,6 +6,8 @@ const mainRouter = require("./routes");
 const fillDb = require("./mocks");
 const fileUpload = require("express-fileupload");
 require("./db.js");
+//const http = require("http");
+//const {initializeSocket} = require("./Sockets/socket")
 
 
 const cors = require("cors");
@@ -79,29 +81,20 @@ server.use((err, req, res, next) => {
   res.status(status).send(message);
 });
 
-server.use(
+/*server.use(
   cors({
     origin: ["http://localhost:3000", "http://localhost:3001"],
     credentials: true,
   })
-);
+);*/
 
-const http = require("http");
-const { Server } = require("socket.io");
-const app = http.createServer(server);
 
-const io = new Server(app, {
-  cors: {
-    origin: "http://localhost:3000", // Permite todas las solicitudes desde cualquier origen
+/*const app = http.createServer(server);
 
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Métodos HTTP permitidos
-    allowedHeaders: "Content-Type,Authorization",
-  },
-});
-
+const io = initializeSocket(app);
 
 app.listen(5000, () => {
   console.log("Server on port 5000");
-});
+});*/
 //fillDb();
-module.exports = { server, io,Server,app };
+module.exports =  server ;

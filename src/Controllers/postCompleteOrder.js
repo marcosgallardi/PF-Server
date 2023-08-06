@@ -1,11 +1,4 @@
-const {
-  CompleteOrder,
-  DishOrder,
-  Dish,
-  Drink,
-  DrinkOrder,
-  Desert,
-} = require("../db");
+const { CompleteOrder, DishOrder, Dish, Drink, DrinkOrder, Desert } = require("../db");
 const postDrinkOrder = require("./postDrinkOrder");
 const postDesertOrder = require("./postDesertOrder");
 const postDishOrder = require("./postDishOrder");
@@ -14,14 +7,10 @@ const postDishSideOrder = require("./postDishSideOrder");
 const postTicket = require("./postTicket");
 const getById = require("./getById");
 const webHookMP = require("../Notification/webHookMP");
-<<<<<<< HEAD
-const { Server, app } = require("../app");
-const alertTicket = require("../Sockets/socket");
-=======
 
-const mailCreate = require("./mailCreate");
+//const mailCreate = require("./mailCreate");
 
->>>>>>> 750e2a1183366d3488a690427dda28f5dd4f7bf0
+
 const postCompleteOrder = async ({ order, userId }) => {
   let dishOrderId = null;
   let sideOrderId = null;
@@ -39,14 +28,11 @@ const postCompleteOrder = async ({ order, userId }) => {
 
     const hasDish = dish !== undefined && dish !== null && dish.length > 0;
 
-    const hasGarnish =
-      garnish !== undefined && garnish !== null && garnish.length > 0;
+    const hasGarnish = garnish !== undefined && garnish !== null && garnish.length > 0;
 
-    const hasDrinks =
-      drinks !== undefined && drinks !== null && drinks.length > 0;
+    const hasDrinks = drinks !== undefined && drinks !== null && drinks.length > 0;
 
-    const hasDeserts =
-      desserts !== undefined && desserts !== null && desserts.length > 0;
+    const hasDeserts = desserts !== undefined && desserts !== null && desserts.length > 0;
 
     if (hasDish) {
       const totalPrice = dish[0].price * dish[0].quantity;
@@ -67,6 +53,7 @@ const postCompleteOrder = async ({ order, userId }) => {
       const dishOrderToUpdate = await DishOrder.findByPk(dishOrderId);
       const dishToUpdate = await Dish.findByPk(dishOrderToUpdate.dishid);
       dishToUpdate.stock = dishToUpdate.stock - 1;
+      dishToUpdate.salesCount = dishToUpdate.salesCount + 1;
       await dishToUpdate.save();
     }
     if (hasGarnish) {
@@ -150,27 +137,12 @@ const postCompleteOrder = async ({ order, userId }) => {
     completesOrders.push(newCompleteOrder.id);
   }
 
-  const ticket = await postTicket({
-    idsCompleteOrder: completesOrders,
-    idUser: userId,
-  });
-  console.log(
-    "codigo del ticket-------------------------------------",
-    ticket.idPedido
-  );
+  const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId });
+  console.log("codigo del ticket-------------------------------------", ticket.idPedido);
 
-  const io = new Server(app, {
-    cors: {
-      origin: "http://localhost:3000", // Permite todas las solicitudes desde cualquier origen
 
-      methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Métodos HTTP permitidos
-      allowedHeaders: "Content-Type,Authorization",
-    },
-  });
 
-  if (ticket) {
-    alertTicket(io);
-  }
+    
   return ticket.idPedido;
 };
 
