@@ -57,4 +57,30 @@ const postReservation = async ({ id, date,time, decor,  quantity, confirmation, 
       return newReservation
 };
 
-module.exports = {getAllReservation, getReservation, postReservation}
+const updateReservation = async ({id, date,time, decor,  quantity, status, confirmation, phoneNumber, zone, honoree}) =>{
+    let reser = await Reservation.findOne({
+        where: {
+            id
+        }
+    });
+
+    if(!reser){
+        throw new Error("No existe esa reservacion");
+    }
+
+    if(date) reser.date = date;
+    if(time) reser.time = time;
+    if(decor) reser.decor = decor;
+    if(quantity) reser.quantity = quantity
+    if(status) reser.status = status;
+    if(confirmation) reser.confirmation = confirmation;
+    if(phoneNumber) reser.phoneNumber = phoneNumber;
+    if(zone) reser.zone = zone;
+    if(honoree) reser.honoree = honoree;
+
+    await reser.save();
+
+    return reser;
+}
+
+module.exports = {getAllReservation, getReservation, postReservation, updateReservation}
