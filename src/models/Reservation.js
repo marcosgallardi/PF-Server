@@ -9,6 +9,10 @@ module.exports = (sequelize) => {
         defaultValue: UUIDV4,
         primaryKey: true,
       },
+      UserId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -30,7 +34,7 @@ module.exports = (sequelize) => {
       },
       status: {
         type: DataTypes.ENUM,
-        values:['Pendiente','Confirmado','Rechazado','Cancelado'],
+        values: ["Pendiente", "Confirmado", "Rechazado", "Cancelado"],
         defaultValue: "Pendiente",
       },
       date: {
