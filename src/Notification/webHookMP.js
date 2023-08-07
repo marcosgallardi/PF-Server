@@ -2,7 +2,7 @@ const axios = require("axios");
 const mailCreate = require("../Controllers/mailCreate");
 const mailRejected = require("../Controllers/mailRejected");
 const { Ticket } = require("../db");
-const comunication = require("../sockets/sockets")
+const { io } = require("../app");
 
 const webHookMP = async (req, res) => {
   try {
@@ -30,10 +30,22 @@ const webHookMP = async (req, res) => {
       await mailRejected(ticketUpdate.idUser, idPedido);
     }
 
-    comunication(ticketUpdate.status)
-
+    
     await ticketUpdate.save();
-
+    
+    io.on("connect", (socket) => {
+      console.log("consolelog del id de socket!!!!!!!!!!!!!!!!!", socket.id);
+      socket.on("authenticate", (token) => {
+        try {
+          const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        } catch (error) {
+          throw error.message;
+        }
+      
+      });
+  
+      io.emit("ticketCreated","hola" );
+    });
     /* console.log("CONSTANTE COPADAAAAAAAAAAAAA", mpResponse.data.status); */
   } catch (error) {
     console.error("Error:", error.message);
