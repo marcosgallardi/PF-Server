@@ -1,3 +1,5 @@
+const {io} = require("../app")
+
 const comunication = ( status )=>{
     io.on("connect", (socket) => {
         console.log("consolelog del id de socket!!!!!!!!!!!!!!!!!",socket.id);
