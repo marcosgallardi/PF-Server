@@ -85,9 +85,13 @@ server.use((err, req, res, next) => {
 });
 
 const app = createServer(server);
-
-
+const { Server } = require('socket.io');
+const io = new Server(app, {
+  cors: {
+    origin: ["http://localhost:3000"],
+   },
+ });
  
 
 //fillDb();
-module.exports =  {app};
+module.exports =  {app,io};
