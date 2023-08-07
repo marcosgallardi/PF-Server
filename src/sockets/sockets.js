@@ -1,3 +1,4 @@
+
 const {app} = require("../app")
 const { Server } = require('socket.io');
 
@@ -6,6 +7,8 @@ const io = new Server(app, {
     origin: ["http://localhost:3000"],
    },
  });
+
+
 
 const comunication = ( status )=>{
     io.on("connect", (socket) => {
@@ -19,6 +22,9 @@ const comunication = ( status )=>{
           }
           io.emit("ticketCreated", status);
         });
+
+
+        io.emit("ticketCreated", status);
 
       });
 }
