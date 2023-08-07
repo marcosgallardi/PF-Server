@@ -1,4 +1,14 @@
-const {io} = require("../app")
+
+const {app} = require("../app")
+const { Server } = require('socket.io');
+
+const io = new Server(app, {
+  cors: {
+    origin: ["http://localhost:3000"],
+   },
+ });
+
+
 
 const comunication = ( status )=>{
     io.on("connect", (socket) => {
@@ -10,8 +20,12 @@ const comunication = ( status )=>{
           } catch (error) {
             throw error.message
           }
+          io.emit("ticketCreated", status);
         });
+
+
         io.emit("ticketCreated", status);
+
       });
 }
 
