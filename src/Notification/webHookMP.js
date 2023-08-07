@@ -30,10 +30,10 @@ const webHookMP = async (req, res) => {
       await mailRejected(ticketUpdate.idUser, idPedido);
     }
 
-    comunication(ticketUpdate.status)
+    
 
     await ticketUpdate.save();
-
+comunication(ticketUpdate.status)
     /* console.log("CONSTANTE COPADAAAAAAAAAAAAA", mpResponse.data.status); */
   } catch (error) {
     console.error("Error:", error.message);
