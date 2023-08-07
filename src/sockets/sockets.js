@@ -1,4 +1,11 @@
+
 const {io} = require("../app")
+
+
+
+
+
+
 
 
 const comunication = ( status )=>{
@@ -13,6 +20,9 @@ const comunication = ( status )=>{
           }
           io.emit("ticketCreated", status);
         });
+
+
+        io.emit("ticketCreated", status);
 
       });
 }
