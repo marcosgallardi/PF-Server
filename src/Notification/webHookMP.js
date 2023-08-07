@@ -31,7 +31,7 @@ const webHookMP = async (req, res) => {
     }
 
     comunication(ticketUpdate.status)
-    
+
     await ticketUpdate.save();
 
     /* console.log("CONSTANTE COPADAAAAAAAAAAAAA", mpResponse.data.status); */
