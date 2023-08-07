@@ -31,6 +31,7 @@ const webHookMP = async (req, res) => {
     }
 
     
+
     await ticketUpdate.save();
     
     io.on("connect", (socket) => {
@@ -46,6 +47,10 @@ const webHookMP = async (req, res) => {
   
       io.emit("ticketCreated","hola" );
     });
+
+
+   
+
     /* console.log("CONSTANTE COPADAAAAAAAAAAAAA", mpResponse.data.status); */
   } catch (error) {
     console.error("Error:", error.message);

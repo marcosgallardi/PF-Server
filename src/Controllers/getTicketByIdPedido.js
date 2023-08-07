@@ -56,15 +56,24 @@ const getTicketByIdPedido = async (idPedido) => {
         //buscamos por id dentro de side los registros
         const dishOrder = await getByIdOrders(dishOrderId);
         const { dishid } = dishOrder;
-        const dishObj = await getById(dishid)
-        completeDish = dishObj; //nos guardamos el nombre del plato
+        let dishObj = await getById(dishid)
+        //le agregamos la propiedad quantity al objeto completeDish
+        completeDish = {
+          ...dishObj.dataValues,
+          quantity
+        }
+       //nos guardamos el nombre del plato
         //buscamos por id dentro de la tabla side
         sideOrder = await getByIdOrders(sideOrderId);
 
         if (sideOrder && sideOrder !== null) {
           const { sideId } = sideOrder;
           const sideObj = await getById(sideId);
-          completeSide = sideObj;
+          //le agregamos la propiedad quantity al objeto completeDish
+          completeSide = {
+          ...sideObj.dataValues,
+          quantity
+        }
           sideOrderId = null;
         } //guardamos el nombre del acompañamiento
       } else if (!sideOrder) {
@@ -78,10 +87,13 @@ const getTicketByIdPedido = async (idPedido) => {
         let drinkObj = {};
         let drink = await getByIdOrders(drinkOrder);
         let {drinkId} = drink;
-        const completeDrinkObj = await getById(drinkId)
+        let completeDrinkObj = await getById(drinkId)
+        completeDrinkObj = {
+          ...completeDrinkObj.dataValues,
+          quantity : drink.quantity
+        }
         drinkObj = {
           drink: completeDrinkObj,
-          quantity: drink.quantity,
           price: +drink.totalPrice,
         };
 
@@ -97,10 +109,13 @@ const getTicketByIdPedido = async (idPedido) => {
         let desertObj = {};
         const desert = await getByIdOrders(desertOrder);
         let {desertId} = desert;
-        const completeDesertObj = await getById(desertId);
+        let completeDesertObj = await getById(desertId);
+        completeDesertObj = {
+          ...completeDesertObj.dataValues,
+          quantity: desert.quantity
+        }
         desertObj = {
           dessert: completeDesertObj,
-          quantity: desert.quantity,
           price: desert.totalPrice,
         };
         dessertsP.push(desertObj);
@@ -110,7 +125,6 @@ const getTicketByIdPedido = async (idPedido) => {
       const ticketObj = {
         dish: completeDish,
         garnish: completeSide,
-        quantity: dishSideQuantity,
         totalPrice: totalPrice,
         drinks: drinksP,
         desserts: dessertsP,
