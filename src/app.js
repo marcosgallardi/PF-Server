@@ -6,6 +6,8 @@ const mainRouter = require("./routes");
 const fillDb = require("./mocks");
 const fileUpload = require("express-fileupload");
 require("./db.js");
+const { Server } = require('socket.io');
+const {createServer} = require('http')
 
 
 
@@ -14,6 +16,8 @@ const cors = require("cors");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
 const path = require("path");
+
+
 
 const swaggerSpec = {
   definition: {
@@ -80,8 +84,23 @@ server.use((err, req, res, next) => {
   res.status(status).send(message);
 });
 
+const app = createServer(server);
 
-
+const io = new Server(app, {
+  cors: {
+    origin: ["http://localhost:3000"],
+   },
+ });
+ io.on("connect", (socket) => {
+  console.log("consolelog del id de socket!!!!!!!!!!!!!!!!!",socket.id);
+  socket.on("authenticate", (token) => {
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET_KEY);
+    } catch (error) {
+      throw error.message
+    }
+  });
+});
 
 //fillDb();
-module.exports =  server ;
+module.exports =  {app, io};
