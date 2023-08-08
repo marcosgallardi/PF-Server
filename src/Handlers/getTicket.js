@@ -20,8 +20,6 @@ const getTicket = async (req, res) => {
         price: tickets[i].totalPrice,
       };
       respuesta.push(ticket);
-
-      console.log(ticket);
     }
 
     res.status(200).json(respuesta);

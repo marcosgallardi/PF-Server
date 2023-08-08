@@ -31,7 +31,17 @@ module.exports = (sequelize) => {
       subtype: {
         type: DataTypes.ENUM,
         //para revision 2 agregar values como array editable
-        values: ["pastas", "ensaladas", "carnes", "pescados y mariscos", "sopas", "minutas", "arroz", "sandwich"],
+        values: [
+          "pastas",
+          "ensaladas",
+          "carnes",
+          "pescados y mariscos",
+          "sopas",
+          "minutas",
+          "guisados",
+          "sandwich",
+          "fritos",
+        ],
         allowNull: false,
       },
       //disabled:true ==> borrado lógico, estando en true, el plato NO se muestra
@@ -50,7 +60,6 @@ module.exports = (sequelize) => {
       stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 50,
       },
       calories: {
         type: DataTypes.INTEGER,
