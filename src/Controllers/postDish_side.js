@@ -3,7 +3,7 @@ const { Op } = require("sequelize");
 
 //la validacion NO deberia ser con el name, sino con el email
 const postDish_side = async ({ dishId, sideId, quantity }) => {
-  console.log(dishId, "dish");
+/*   console.log(dishId, "dish"); */
   const newDish_side = await Dish_side.create({
     dishId,
     sideId,

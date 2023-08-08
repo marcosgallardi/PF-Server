@@ -14,7 +14,7 @@ const cartById = async (req, res) => {
       return res.status(400).json({ message: 'Error al obtener el usuario' });
     }
 
-    console.log("USER ID DB_____", userId);
+    // console.log("USER ID DB_____", userId);
     
     const cart = await getCartByUserId(userId);
 
@@ -22,7 +22,7 @@ const cartById = async (req, res) => {
       return res.status(404).json({ message: 'No se encontró el carrito para el usuario' });
     }
 
-    console.log("_____HANDLER_______", cart);
+    // console.log("_____HANDLER_______", cart);
     res.status(200).json(cart);
   } catch (error) {
     res.status(500).json({ error: error.message });

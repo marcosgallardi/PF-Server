@@ -5,7 +5,7 @@ const addToCart = async (req, res) => {
   try {
     const { cartItems } = req.body; 
 
-    console.log("__________________CART ITEMS____________________", cartItems);
+    //console.log("__________________CART ITEMS____________________", cartItems);
 
     let userId = '';
 
@@ -18,11 +18,11 @@ const addToCart = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Error al obtener el usuario' });
     }
 
-    console.log("_____HANDLER___USER ID_____", userId);
-    console.log("_____HANDLER____CART_____", cartItems);
+    // console.log("_____HANDLER___USER ID_____", userId);
+    // console.log("_____HANDLER____CART_____", cartItems);
 
     const newCart = await postCart(userId, cartItems);
-    console.log("_____HANDLER___NEW CART______", newCart);
+    // console.log("_____HANDLER___NEW CART______", newCart);
 
     if (!newCart) {
       return res.status(500).json({ success: false, message: 'Error al guardar el carrito en la base de datos' });

@@ -55,9 +55,7 @@ const postDish = async ({
     image,
   });
 
-  //   if (!name || !description || !releaseDate || !rating || !genres || !platforms) {
-  //     throw new Error("Todos los campos son requeridos.");
-  //   }
+  
 
   return newDish;
 };
