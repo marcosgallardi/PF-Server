@@ -14,7 +14,7 @@ const deleteCartById = async (req, res) => {
       return res.status(400).json({ error: 'Error al obtener el usuario' });
     }
 
-    console.log("USER ID DB_____", userId);
+    // console.log("USER ID DB_____", userId);
 
     const cartDeleted = await deleteCart(userId);
 

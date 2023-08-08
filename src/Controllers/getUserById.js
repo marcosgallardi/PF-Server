@@ -15,8 +15,8 @@ const getUserById = async (id) => {
   });
 
   const ordersIds = orders.map((order) => order.dataValues.id);
-  console.log("user", user);
-  console.log("orders", ordersIds);
+  /* console.log("user", user);
+  console.log("orders", ordersIds); */
   user.dataValues.orders = ordersIds;
   return user;
 };

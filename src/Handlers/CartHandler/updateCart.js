@@ -18,13 +18,13 @@ const updateCart = async (req, res) => {
       return res.status(400).json({ error: 'Error al obtener el usuario' });
     }
 
-    console.log("USER ID DB_____", userId);
+    //console.log("USER ID DB_____", userId);
 
   
     const newCartItems = cartItems
     const updatedCart = await putCart(userId, newCartItems);
 
-    console.log("UPDATE CART_____", updatedCart);
+   // console.log("UPDATE CART_____", updatedCart);
 
     res.status(200).json(updatedCart);
   } catch (error) {

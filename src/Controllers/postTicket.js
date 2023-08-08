@@ -21,7 +21,7 @@ io.on("connect", (socket) => {
 
 const postTicket = async ({ idUser, idsCompleteOrder,totalPrice }) => {
   const newTicket = await Ticket.create({ idUser, idsCompleteOrder,totalPrice });
-  console.log(idUser, idsCompleteOrder, "LLEGAN????????????????");
+ /*  console.log(idUser, idsCompleteOrder, "LLEGAN????????????????"); */
   console.log("ticket del NEWTICKET-------------------------------", newTicket);
  
   //io.emit("ticketCreated",newTicket.status)

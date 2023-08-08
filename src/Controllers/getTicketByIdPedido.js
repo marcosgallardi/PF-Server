@@ -9,7 +9,7 @@ const getTicketByIdPedido = async (idPedido) => {
       idPedido: idPedido,
     },
   });
-  console.log(ticket, "TicketCONTROLLER!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  /* console.log(ticket, "TicketCONTROLLER!!!!!!!!!!!!!!!!!!!!!!!!!!!!"); */
 
   if (ticket.length > 0) {
     const orders = ticket[0].idsCompleteOrder;

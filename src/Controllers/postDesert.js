@@ -19,7 +19,7 @@ const postDish = async ({ name, stock, price, image }) => {
     price,
     image,
   });
-  console.log(newDesert);
+ /*  console.log(newDesert); */
   return newDesert;
 };
 

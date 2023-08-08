@@ -34,7 +34,6 @@ const handlersPostReser = async (req, res) => {
 const handlerGetReser = async (req, res) => {
   try {
     const { date } = req.params;
-    console.log(date, "date____________");
     const getReser = await getReservation({ date });
     res.status(200).json(getReser);
   } catch (error) {

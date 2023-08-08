@@ -41,7 +41,7 @@ const updateDish = async ( {id, name,
      } 
 
           await update.save();
-          console.log(update);
+          /* console.log(update); */
         return update;
 }
 
@@ -81,7 +81,7 @@ const updateDrink = async ( {id, name,
      } 
 
           await update.save();
-          console.log(update);
+         /*  console.log(update); */
         return update;
 }
 
@@ -111,7 +111,7 @@ const updateDesert = async ( {id, name,
      } 
 
           await update.save();
-          console.log(update);
+          /* console.log(update); */
         return update;
 }
 
@@ -143,7 +143,7 @@ const updateSide = async ( {id, name,
      } 
 
           await update.save();
-          console.log(update);
+          /* console.log(update); */
         return update;
 };
 
@@ -173,7 +173,7 @@ const updateUser = async ({ id, name, lastName, email, password, birthDate, phon
      } 
 
           await update.save();
-          console.log(update);
+          /* console.log(update); */
         return update;
 }
 

@@ -45,7 +45,7 @@ const updateLocal = async ({ id, name, disabled, imageFile }) => {
   }
 
   await update.save();
-  console.log(update);
+  /* console.log(update); */
   return update;
 };
 
