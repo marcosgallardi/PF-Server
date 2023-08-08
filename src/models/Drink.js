@@ -36,7 +36,6 @@ module.exports = (sequelize) => {
       stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 50,
       },
       disabled: {
         type: DataTypes.BOOLEAN,
@@ -70,7 +69,7 @@ module.exports = (sequelize) => {
             drink.available = true;
           }
         },
-      }
+      },
     }
   );
 };
