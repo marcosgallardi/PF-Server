@@ -1,5 +1,5 @@
 const { User, Reservation } = require("../db");
-
+const mailReservation = require("../Controllers/MailReservation")
 //esto deberia ser getReservationByDate o byTime, reveer
 const getReservation = async ({ date }) => {
   let getByDate = await Reservation.findOne({
@@ -39,6 +39,7 @@ const postReservation = async ({ id, date, time, decor, quantity, phoneNumber, z
     lastName: user.lastName,
   });
 
+  mailReservation(user)
   return newReservation;
 };
 
