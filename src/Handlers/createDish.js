@@ -6,6 +6,7 @@ const createdDish = async (req, res) => {
   const {
     name,
     description,
+    stock,
     type,
     subtype,
     disabled,
@@ -31,6 +32,7 @@ const createdDish = async (req, res) => {
       name,
       description,
       type,
+      stock,
       subtype,
       disabled,
       available,
