@@ -27,14 +27,15 @@ const postCompleteOrder = async ({ order, userId }) => {
     let drinksOrdersIds = [];
     let desertsOrdersIds = [];
     const { drinks, desserts, dish, garnish } = order[i];
+    //console.log ('ORDER DEL CONTROLER EN POSICION ',i,order[i]);
 
-    const hasDish = dish !== undefined && dish !== null && dish.length > 0;
+    let hasDish = dish !== undefined && dish !== null && dish.length > 0;
 
-    const hasGarnish = garnish !== undefined && garnish !== null && garnish.length > 0;
+    let hasGarnish = garnish !== undefined && garnish !== null && garnish.length > 0;
 
-    const hasDrinks = drinks !== undefined && drinks !== null && drinks.length > 0;
+    let hasDrinks = drinks !== undefined && drinks !== null && drinks.length > 0;
 
-    const hasDeserts = desserts !== undefined && desserts !== null && desserts.length > 0;
+    let hasDeserts = desserts !== undefined && desserts !== null && desserts.length > 0;
 
     if (hasDish) {
       const totalPrice = dish[0].price * dish[0].quantity;
@@ -139,6 +140,12 @@ const postCompleteOrder = async ({ order, userId }) => {
 
     const newCompleteOrder = await CompleteOrder.create(completeOrderObj);
     completesOrders.push(newCompleteOrder.id);
+    //console.log('NEW COMPLETE ORDERRRRRRRRRRRRR',newCompleteOrder);
+    dishOrderId = null;
+    sideOrderId = null;
+    dishSideOrderId = null;
+    totalPriceDish = null;
+    totalPriceSide = null;
   }
 
   
