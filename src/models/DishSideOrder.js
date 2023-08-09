@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
       },
       quantity: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       // unitaryPrice: {
       //   type: DataTypes.FLOAT,
