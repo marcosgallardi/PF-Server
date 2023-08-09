@@ -13,8 +13,10 @@ const pedidoUpdate = async (idPedido, status) => {
 
   ticket.status = status;
 
-  if (ticket.status === "Entregado") {
-     await mailFinishOrder(ticket);
+
+   if (ticket.status === "Completo") {
+      await mailFinishOrder(ticket);
+
    }
   await ticket.save();
  
