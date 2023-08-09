@@ -1,7 +1,7 @@
 const { Side } = require("../db");
 const { Op } = require("sequelize");
 
-const postSide = async ({ name, type, available, price, image }) => {
+const postSide = async ({ name, type, available, price, image, stock }) => {
   const existingSide = await Side.findOne({
     where: {
       name: {
@@ -16,6 +16,7 @@ const postSide = async ({ name, type, available, price, image }) => {
   const newSide = await Side.create({
     name,
     type,
+    stock,
     available,
     price,
     image,

@@ -2,7 +2,7 @@ const postSide = require("../Controllers/postSide");
 const uploadImage = require("../config/cloudinary");
 const cleaner = require("../config/cleaner");
 const createSide = async (req, res) => {
-  const { name, type, available, price } = req.body;
+  const { name, type, available, price, stock } = req.body;
 
   try {
     // if (!name || !description || !releaseDate || !rating) {
@@ -15,7 +15,7 @@ const createSide = async (req, res) => {
         cleaner();
       }
     } else image = null;
-    const newSide = await postSide({ name, type, available, price, image });
+    const newSide = await postSide({ name, type, available, price, image, stock });
 
     return res.status(201).json(newSide);
   } catch (error) {
