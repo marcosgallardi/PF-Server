@@ -31,7 +31,7 @@ async function getUserDataFromFirebase(userId) {
 // Middleware de autenticación con JWT
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
-    console.log(req.headers);
+   /*  console.log(req.headers); */
     // Verificar si el encabezado de autorización está presente y tiene el formato correcto
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.status(401).json({ success: false, message: 'Token no proporcionado' });
@@ -40,14 +40,14 @@ function authenticateToken(req, res, next) {
     // Extraer el token del encabezado de autorización
     const token = authHeader.split(' ')[1];
 
-    console.log("TOKEN", token);
+   /*  console.log("TOKEN", token); */
   
     jwt.verify(token, JWT_SECRET_KEY, async (err, user) => {
       if (err) {
         console.log("ERROR_______:",err);
         return res.status(403).json({ success: false, message: "Token inválido" });
       }
-      console.log("USER__VERIFY___", user);
+      /* console.log("USER__VERIFY___", user); */
 
         // Verificar si la propiedad "source" está presente en el objeto del usuario
       if (!user.source || (user.source !== "firebase" && user.source !== "database")) {
@@ -55,7 +55,7 @@ function authenticateToken(req, res, next) {
       }
 
       const source = user.source;
-      console.log("SOURCE", source);
+      /* console.log("SOURCE", source); */
 
       if (source === "firebase") {
         // Es un token de Firebase
@@ -72,7 +72,7 @@ function authenticateToken(req, res, next) {
         return res.status(403).json({ success: false, message: "Token con fuente desconocida" });
       }
 
-      console.log("MIDDLEWARE___", req.user);
+      /* console.log("MIDDLEWARE___", req.user); */
 
       next();
     });

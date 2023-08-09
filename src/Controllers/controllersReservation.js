@@ -25,7 +25,7 @@ const postReservation = async ({ id, date, time, decor, quantity, phoneNumber, z
     },
   });
 
-  console.log(user);
+
   let newReservation = await Reservation.create({
     UserId: user.id,
     date,
@@ -84,7 +84,7 @@ const getReservationByUser = async ({ id }) => {
       UserId: id,
     },
   });
-  console.log(getByUser, "user");
+
   if (!getByUser) throw Error("No hay Reservacion para ese usuario");
   else return getByUser;
 };

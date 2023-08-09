@@ -9,7 +9,7 @@ const postBanner = async ({ name, disabled, image }) => {
       },
     },
   });
-  console.log("image de controller", image);
+  /* console.log("image de controller", image); */
   if (existingBanner) {
     throw new Error("El nombre del banner ya existe.");
   }
