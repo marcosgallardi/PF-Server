@@ -48,7 +48,7 @@ module.exports = (sequelize) => {
       hooks: {
         beforeUpdate: (desert) => {
           // Verificar si el stock ha llegado a 0
-          if (desert.stock === 0) {
+          if (desert.stock < 1) {
             desert.available = false; // Si el stock es 0, deshabilitar el producto
           }
         },

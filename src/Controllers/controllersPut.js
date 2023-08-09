@@ -117,7 +117,7 @@ const updateDesert = async ({ id, name, stock, disabled, price, imageFile }) => 
   return update;
 };
 
-const updateSide = async ({ id, name, type, disabled, available, price, imageFile }) => {
+const updateSide = async ({ id, name, type, stock, disabled, available, price, imageFile }) => {
   let update = await Side.findOne({
     where: {
       id,
@@ -133,6 +133,8 @@ const updateSide = async ({ id, name, type, disabled, available, price, imageFil
   if (disabled !== undefined) update.disabled = disabled;
   if (available !== undefined) update.available = available;
   if (price !== undefined) update.price = price;
+  if (stock !== undefined) update.stock = stock;
+
   if (imageFile) {
     const result = await uploadImage(imageFile.tempFilePath);
     update.image = result.secure_url;

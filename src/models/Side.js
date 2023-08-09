@@ -30,6 +30,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: true,
       },
+      stock: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       category: {
         type: DataTypes.STRING,
         defaultValue: "side",
@@ -48,10 +52,12 @@ module.exports = (sequelize) => {
     {
       timestamps: false,
       hooks: {
-        beforeUpdate: (side) => {
+        beforeUpdate: (drink) => {
           // Verificar si el stock ha llegado a 0
-          if (side.stock === 0) {
-            side.available = false; // Si el stock es 0, deshabilitar el producto
+          if (drink.stock < 1) {
+            drink.available = false; // Si el stock es 0, deshabilitar el producto
+          } else {
+            drink.available = true;
           }
         },
       },
