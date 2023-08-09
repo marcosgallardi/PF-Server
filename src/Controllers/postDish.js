@@ -11,6 +11,7 @@ const postDish = async ({
   calories,
   glutenfree,
   vegetarian,
+  stock,
   dailyspecial,
   price,
   image,
@@ -30,6 +31,7 @@ const postDish = async ({
     subtype,
     disabled,
     available,
+    stock,
     calories,
     glutenfree,
     vegetarian,
@@ -48,14 +50,13 @@ const postDish = async ({
     disabled,
     available,
     calories,
+    stock,
     glutenfree,
     vegetarian,
     dailyspecial,
     price,
     image,
   });
-
-  
 
   return newDish;
 };
