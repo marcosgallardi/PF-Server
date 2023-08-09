@@ -103,7 +103,7 @@ module.exports = (sequelize) => {
       hooks: {
         beforeUpdate: (dish) => {
           // Verificar si el stock ha llegado a 0
-          if (dish.stock === 0) {
+          if (dish.stock < 1) {
             dish.available = false; // Si el stock es 0, deshabilitar el producto
           }
         },
