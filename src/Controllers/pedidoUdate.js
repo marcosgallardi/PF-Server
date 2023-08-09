@@ -1,4 +1,5 @@
 const { Ticket } = require("../db");
+const mailFinishOrder = require("./mailFinishOrder");
 
 const pedidoUpdate = async (idPedido, status) => {
   const ticket = await Ticket.findOne({
@@ -11,7 +12,12 @@ const pedidoUpdate = async (idPedido, status) => {
   }
 
   ticket.status = status;
+
+ await mailFinishOrder(ticket);
+  // if (ticket.status === "Entregado") {
+  // }
   await ticket.save();
+ 
   return ticket;
 }; //
 
