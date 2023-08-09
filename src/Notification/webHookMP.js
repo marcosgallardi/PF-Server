@@ -2,7 +2,7 @@ const axios = require("axios");
 const mailCreate = require("../Controllers/mailCreate");
 const mailRejected = require("../Controllers/mailRejected");
 const { Ticket } = require("../db");
-const { io } = require("../app");
+
 
 const webHookMP = async (req, res) => {
   try {
