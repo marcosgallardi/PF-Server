@@ -33,7 +33,7 @@ const getAllTicket = async () => {
     });
 
     if (adjustedTickets.length > 0) {
-      console.log(adjustedTickets);
+      // console.log(adjustedTickets);
       return adjustedTickets;
     } else {
       throw new Error("There are no tickets in the database");
