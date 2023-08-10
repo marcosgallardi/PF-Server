@@ -8,10 +8,15 @@ const getAllTicket = async () => {
     const adjustedTickets = tickets.map((ticket) => {
       const [hours, minutes] = ticket.createdAt.split(":");
       let adjustedHours = parseInt(hours, 10) - 2;
-
+      let newDate = "";
       // Manejar las horas negativas
       if (adjustedHours < 0) {
         adjustedHours += 24; // Agregar 24 horas para obtener la hora ajustada positiva
+        let [year, month, day] = ticket.date.split("-");
+        console.log(year, month, day);
+        day = Number(day) - 1;
+        console.log("day extraido", day, typeof day);
+        newDate = `${year}-${month}-${day}`;
       }
 
       const adjustedTime = `${String(adjustedHours).padStart(2, "0")}:${minutes}`;
@@ -19,6 +24,7 @@ const getAllTicket = async () => {
       return {
         ...ticket.toJSON(),
         adjustedCreatedAt: adjustedTime,
+        adjustedDate: newDate,
       };
     });
 

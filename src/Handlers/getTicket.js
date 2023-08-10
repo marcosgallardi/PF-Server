@@ -15,7 +15,7 @@ const getTicket = async (req, res) => {
           email: user.email,
         },
         status: tickets[i].status,
-        date: tickets[i].date,
+        date: tickets[i].adjustedDate !== "" ? tickets[i].adjustedDate : tickets[i].date,
         time: tickets[i].adjustedCreatedAt,
         price: tickets[i].totalPrice,
       };
