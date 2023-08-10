@@ -23,22 +23,22 @@ const postDish = async ({
       },
     },
   });
-  console.log(
-    "todo eso",
-    name,
-    description,
-    type,
-    subtype,
-    disabled,
-    available,
-    stock,
-    calories,
-    glutenfree,
-    vegetarian,
-    dailyspecial,
-    price,
-    image
-  );
+  // console.log(
+  //   "todo eso",
+  //   name,
+  //   description,
+  //   type,
+  //   subtype,
+  //   disabled,
+  //   available,
+  //   stock,
+  //   calories,
+  //   glutenfree,
+  //   vegetarian,
+  //   dailyspecial,
+  //   price,
+  //   image
+  // );
   if (existingDish) {
     throw new Error("El nombre del plato ya existe.");
   }

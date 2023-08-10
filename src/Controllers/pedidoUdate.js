@@ -6,20 +6,18 @@ const pedidoUpdate = async (idPedido, status) => {
     where: { idPedido: idPedido },
   });
 
-  console.log("ticket", ticket);
+  // console.log("ticket", ticket);
   if (!ticket) {
     throw new Error("Ticket no encontrado");
   }
 
   ticket.status = status;
 
-
-   if (ticket.status === "Completo") {
-      await mailFinishOrder(ticket);
-
-   }
+  if (ticket.status === "Completo") {
+    await mailFinishOrder(ticket);
+  }
   await ticket.save();
- 
+
   return ticket;
 }; //
 

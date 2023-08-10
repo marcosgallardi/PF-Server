@@ -6,7 +6,7 @@ const updateTicketHandler = async (req, res) => {
     const { idPedido } = req.params;
     const { status } = req.body;
 
-    console.log("HD", idPedido, status);
+    // console.log("HD", idPedido, status);
 
     const ticketUpdate = await pedidoUdate(idPedido, status);
 

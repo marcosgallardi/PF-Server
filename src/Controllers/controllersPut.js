@@ -45,7 +45,7 @@ const updateDish = async ({
   }
 
   await update.save();
-  console.log(update);
+  // console.log(update);
   return update;
 };
 

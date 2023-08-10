@@ -2,7 +2,7 @@ const postSideOrder = require("../Controllers/postSideOrder");
 
 const createSideOrder = async (req, res) => {
   const { userId, sideId, quantity, unitaryPrice, totalPrice } = req.body;
-  console.log(sideId);
+  // console.log(sideId);
 
   try {
     const sideOrder = { userId, sideId, quantity, unitaryPrice, totalPrice };

@@ -13,14 +13,14 @@ const getAllTicket = async () => {
       if (adjustedHours < 0) {
         adjustedHours += 24; // Agregar 24 horas para obtener la hora ajustada positiva
         let [year, month, day] = ticket.date.split("-");
-        console.log(year, month, day);
+        // console.log(year, month, day);
         day = Number(day) - 1;
-        console.log("day extraido", day, typeof day);
+        // console.log("day extraido", day, typeof day);
         newDate = `${year}-${month}-${day}`;
       }
 
       const adjustedTime = `${String(adjustedHours).padStart(2, "0")}:${minutes}`;
-      console.log(adjustedTime);
+      // console.log(adjustedTime);
       return {
         ...ticket.toJSON(),
         adjustedCreatedAt: adjustedTime,
@@ -29,7 +29,7 @@ const getAllTicket = async () => {
     });
 
     if (adjustedTickets.length > 0) {
-      console.log(adjustedTickets);
+      // console.log(adjustedTickets);
       return adjustedTickets;
     } else {
       throw new Error("There are no tickets in the database");
