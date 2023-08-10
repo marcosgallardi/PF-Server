@@ -7,6 +7,7 @@ const handlerDish = async (req, res) => {
       name,
       description,
       type,
+      stock,
       subtype,
       disabled,
       available,
@@ -25,6 +26,7 @@ const handlerDish = async (req, res) => {
     const dishUP = await updateDish({
       id,
       name,
+      stock,
       description,
       type,
       subtype,
