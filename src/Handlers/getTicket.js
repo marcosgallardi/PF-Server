@@ -16,7 +16,7 @@ const getTicket = async (req, res) => {
         },
         status: tickets[i].status,
         date: tickets[i].date,
-        time: tickets[i].createdAt,
+        time: tickets[i].adjustedCreatedAt,
         price: tickets[i].totalPrice,
       };
       respuesta.push(ticket);
