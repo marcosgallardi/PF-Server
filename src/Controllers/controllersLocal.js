@@ -50,7 +50,7 @@ const updateLocal = async ({ id, name, disabled, imageFile }) => {
 };
 
 const postLocal = async ({ name, disabled, image }) => {
-  console.log(name, "NAMEEEE");
+  // console.log(name, "NAMEEEE");
   const exists = await Local.findOne({
     where: {
       name: {

@@ -8,7 +8,7 @@ const createDesert = async (req, res) => {
   try {
     const result = await uploadImage(req.files.image.tempFilePath);
     const imageURL = result.secure_url;
-    console.log(imageURL);
+    // console.log(imageURL);
     if (req.files) {
       if (imageURL) {
         cleaner();

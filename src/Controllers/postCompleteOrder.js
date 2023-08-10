@@ -10,7 +10,6 @@ const webHookMP = require("../Notification/webHookMP");
 
 //const mailCreate = require("./mailCreate");
 
-
 const postCompleteOrder = async ({ order, userId }) => {
   let dishOrderId = null;
   let sideOrderId = null;
@@ -23,7 +22,6 @@ const postCompleteOrder = async ({ order, userId }) => {
   const userEmail = user.email;
 
   for (let i = 0; i < order.length; i++) {
-    
     let drinksOrdersIds = [];
     let desertsOrdersIds = [];
     const { drinks, desserts, dish, garnish } = order[i];
@@ -40,9 +38,9 @@ const postCompleteOrder = async ({ order, userId }) => {
     if (hasDish) {
       const totalPrice = dish[0].price * dish[0].quantity;
       // const totalPrice = parseFloat(dish[0].price) * dish[0]?.quantity;
-      
+
       // totalPriceDish = totalPrice;
-      
+
       const dishObj = {
         userId,
         dishid: dish[0].id,
@@ -82,7 +80,7 @@ const postCompleteOrder = async ({ order, userId }) => {
         quantity: dish[0].quantity,
         totalPrice: totalPriceDish + totalPriceSide,
       };
-      ultimatePrice = ultimatePrice + totalPriceDish + totalPriceSide
+      ultimatePrice = ultimatePrice + totalPriceDish + totalPriceSide;
       dishSideOrderId = await postDishSideOrder(dishSideObj);
     }
 
@@ -97,7 +95,7 @@ const postCompleteOrder = async ({ order, userId }) => {
           unitaryPrice: drinks[j].price,
           totalPrice: drinks[j].price * drinks[j].quantity,
         };
-        ultimatePrice = ultimatePrice + drinks[j].price * drinks[j].quantity
+        ultimatePrice = ultimatePrice + drinks[j].price * drinks[j].quantity;
         const drinkToUpdate = await Drink.findByPk(drinks[j].id);
 
         let drinkOrderId = await postDrinkOrder(drinkObj);
@@ -120,7 +118,7 @@ const postCompleteOrder = async ({ order, userId }) => {
           unitaryPrice: desserts[k].price,
           totalPrice: desserts[k].price * desserts[k].quantity,
         };
-        ultimatePrice = ultimatePrice + desserts[k].price * desserts[k].quantity
+        ultimatePrice = ultimatePrice + desserts[k].price * desserts[k].quantity;
         const dessertToUpdate = await Desert.findByPk(desserts[k].id);
         let desertOrderId = await postDesertOrder(dessertObj);
         dessertToUpdate.stock = dessertToUpdate.stock - desserts[k].quantity;
@@ -148,9 +146,8 @@ const postCompleteOrder = async ({ order, userId }) => {
     totalPriceSide = null;
   }
 
-  
-  const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId, totalPrice:ultimatePrice});
-  console.log("codigo del ticket-------------------------------------", ticket.idPedido);
+  const ticket = await postTicket({ idsCompleteOrder: completesOrders, idUser: userId, totalPrice: ultimatePrice });
+  // console.log("codigo del ticket-------------------------------------", ticket.idPedido);
 
   return ticket.idPedido;
 };
