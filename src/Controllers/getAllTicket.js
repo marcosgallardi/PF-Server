@@ -15,9 +15,13 @@ const getAllTicket = async () => {
         let [year, month, day] = ticket.date.split("-");
         // console.log(year, month, day);
         day = Number(day) - 1;
+        if (day < 10) {
+          day = `0${day}`;
+        }
         // console.log("day extraido", day, typeof day);
         newDate = `${year}-${month}-${day}`;
       }
+      // si es menor a 10 agregar un 0 al principio
 
       const adjustedTime = `${String(adjustedHours).padStart(2, "0")}:${minutes}`;
       // console.log(adjustedTime);
@@ -29,7 +33,7 @@ const getAllTicket = async () => {
     });
 
     if (adjustedTickets.length > 0) {
-      // console.log(adjustedTickets);
+      console.log(adjustedTickets);
       return adjustedTickets;
     } else {
       throw new Error("There are no tickets in the database");
