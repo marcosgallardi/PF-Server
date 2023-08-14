@@ -76,21 +76,49 @@ La API proporciona varios endpoints para administrar el restaurante. ¡No dudes 
 
 ## Participantes 👏
 
-Agradecemos a los siguientes participantes por su contribución a este proyecto:
+### ¡Nuestro Equipo Genial!
 
-- Gustavo Clemente ([@tatoClemente](https://github.com/tatoclemente)) - [Repositorio](https://github.com/tatoclemente)
+Esto no sería posible sin el increíble trabajo de los siguientes participantes. ¡Estos son nuestros héroes tanto en el backend como en el frontend!
 
-- Jonathan Cesar Aguado ([@jonathanaguado22](https://github.com/jonathanaguado22)) - [Repositorio](https://github.com/jonathanaguado22)
+### Backend
 
-- Mario Enrique Lujan ([@lennycba](https://github.com/lennycba)) - [Repositorio](https://github.com/lennycba)
+💥 Los Maestros del Backend 💥
 
-- Matias Santiago Marensi ([@matiasmarensi](https://github.com/Matiasmarensi)) - [Repositorio](https://github.com/Matiasmarensi)
+- Gustavo Clemente ([@tatoClemente](https://github.com/tatoclemente))
 
-- Marcos Gallardi ([@marcosgallardi](https://github.com/marcosgallardi)) - [Repositorio](https://github.com/marcosgallardi)
+- Jonathan Cesar Aguado ([@jonathanaguado22](https://github.com/jonathanaguado22))
+
+- Mario Enrique Lujan ([@lennycba](https://github.com/lennycba))
+
+- Matias Santiago Marensi ([@matiasmarensi](https://github.com/Matiasmarensi))
+
+- Marcos Gallardi ([@marcosgallardi](https://github.com/marcosgallardi))
+
+### Frontend
+
+🌟 Los Magos del Frontend 🌟
+
+- Marcos Gallardi ([@marcosgallardi](https://github.com/marcosgallardi))
+
+- Gustavo Clemente ([@tatoClemente](https://github.com/tatoclemente))
+
+- Natalia Rodriguez ([@NataliaRoni29](https://github.com/NataliaRoni29))
+
+- Marcos Ramirez ([@MarcosRamirezCarri](https://github.com/MarcosRamirezCarri))
+
+- Fabian Dominguez ([@FabianDom](https://github.com/FabianDom))
 
 ## Reportar Problemas 🐞
 
 Si encuentras algún problema o tienes sugerencias, [aquí](https://github.com/marcosgallardi/PF-Server/issues) puedes crear un issue.
+
+## Repositorio del Frontend 🌐
+
+Si estás interesado en explorar el código del frontend de **El Festín Online**, puedes encontrarlo en el siguiente enlace:
+
+- [Repositorio del Frontend](https://github.com/tatoclemente/PF-Front-End-Grupo3)
+
+¡No dudes en visitar y contribuir al frontend también!
 
 ## ¡Explora y Disfruta! 🎉
 
